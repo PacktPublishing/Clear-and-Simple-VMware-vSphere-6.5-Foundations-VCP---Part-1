@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00.700 --> 00:04.700
+Zoning is a way that we can segment the fiber channel switch fabric.
+
+00:05.110 --> 00:11.980
+Let's say for example you have a storage array that's connected to a fiber channel switch and the storage
+
+00:11.980 --> 00:15.080
+array is dedicated to production data.
+
+00:15.180 --> 00:21.810
+Now hosts that are dedicated to the development team should not be able to access this array.
+
+00:22.350 --> 00:27.330
+So notice at the top left we have a dev ESX host at the bottom left.
+
+00:27.330 --> 00:29.600
+We have a Prod. ESX host.
+
+00:30.000 --> 00:35.910
+Maybe we only want to give the prod ESX host access to this fiber channel array.
+
+00:37.640 --> 00:43.500
+So we'll connect the prod ESX host to a port on the fiber channel switch fabric.
+
+00:43.760 --> 00:45.700
+That's part of the same zone.
+
+00:46.470 --> 00:51.190
+As the port that connects to the Fiber Channel array in this case I made a blue.
+
+00:51.390 --> 00:55.360
+So both the host and the array are connecting to port.
+
+00:55.500 --> 01:01.860
+Let's just call it the Blues-L whereas the dev ESX host is connecting to a port that's in the Green
+
+01:01.860 --> 01:02.810
+Zone.
+
+01:03.660 --> 01:08.450
+That means the VSX I host can't communicate with this fiber channel storage array at all.
+
+01:08.640 --> 01:12.600
+It's kind of like using the lands in an Ethernet switch.
+
+01:12.600 --> 01:19.210
+It's a way that we can logically segment and separate devices that are connected to the same switch.

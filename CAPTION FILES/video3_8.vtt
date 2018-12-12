@@ -1,0 +1,622 @@
+WEBVTT
+
+00:00.090 --> 00:06.810
+In this video demonstrate some of the features of the sphere distributed switch and some of the policies
+
+00:06.810 --> 00:08.140
+that we can configure.
+
+00:08.340 --> 00:15.110
+Now some of these policies are also available on the VSE for standard switch.
+
+00:15.120 --> 00:19.850
+So I'll try to differentiate which features are available on both.
+
+00:20.130 --> 00:26.840
+But right now I'm really going to primarily focus on features that are only available on the VSE for
+
+00:26.850 --> 00:28.550
+distributed switch.
+
+00:28.800 --> 00:30.870
+So here we are.
+
+00:30.970 --> 00:35.830
+And the networking view of the Vee's for web client and I've clicked on my demo.
+
+00:35.840 --> 00:40.500
+For distributed twitch and I can see things like the properties.
+
+00:40.580 --> 00:45.100
+What the empty view is configured for that's an important property.
+
+00:45.100 --> 00:48.450
+What discovery protocol has been configured.
+
+00:48.720 --> 00:54.890
+And right now it's configured for CTP or Cisco discovery protocol.
+
+00:55.420 --> 01:04.300
+Now this is a feature that is available on both the VSE fair distributed and vse for standard virtual
+
+01:04.300 --> 01:05.020
+switches.
+
+01:05.020 --> 01:17.950
+CTP is supported on both and what CTP does for us is it allows us to actually discover and learn information
+
+01:18.370 --> 01:22.650
+about the physical switches that our hosts are connected to.
+
+01:24.260 --> 01:24.460
+Right.
+
+01:24.480 --> 01:31.860
+So this particular environment has to ESX host and each ESX I host has two physical adapters two physical
+
+01:32.030 --> 01:40.150
+even at ports CTP would allow me to look here on the Vee's for web client and see which switch ports
+
+01:41.020 --> 01:42.210
+they're connected to.
+
+01:42.210 --> 01:47.740
+Right and discover information about the physical switch that's supported on a standard switch in a
+
+01:47.740 --> 01:48.940
+distributed switch.
+
+01:49.270 --> 01:55.060
+And that is unique to Cisco switches Cisco discovery protocol is only supported by Cisco.
+
+01:55.450 --> 02:03.610
+If I have some other vendor then I can instead choose to use Lingpa Claire discovery protocol or Al
+
+02:03.630 --> 02:05.620
+LDP.
+
+02:05.690 --> 02:13.470
+Now this is an important one for the exam LDP is only supported by the vees fair distributed switch.
+
+02:13.490 --> 02:14.120
+That's it.
+
+02:15.290 --> 02:21.730
+So I can choose either one of those discovery protocols and enable them on the vees fair distributed
+
+02:21.730 --> 02:23.710
+switch.
+
+02:23.890 --> 02:25.780
+Here we can see my typology.
+
+02:25.780 --> 02:29.580
+I've got one virtual machine and I've got one physical adapter.
+
+02:30.800 --> 02:39.610
+On one host and one physical adapter and another host we can also configure link aggregation control
+
+02:39.610 --> 02:49.390
+protocol or elhi ECP what L.A. C.P. allows us to do is to bond multiple physical connections together
+
+02:49.600 --> 02:55.360
+and basically allow them to act as if they are one big physical connection.
+
+02:55.360 --> 02:59.510
+This is only available with the for distributed switch.
+
+02:59.980 --> 03:03.160
+And it's not available on TVs for standard virtual switch.
+
+03:03.400 --> 03:06.950
+And you can see here it's got all these different load balancing modes.
+
+03:06.970 --> 03:12.440
+How is that going to spread traffic across these physical adapters.
+
+03:12.700 --> 03:17.980
+And so what you'll do is you'll combine the physical adapters together into something called the link
+
+03:18.040 --> 03:26.440
+aggregation group or lag so we'll call it a lag and we're going to put two ports in this link aggregation
+
+03:26.440 --> 03:30.220
+group and we're going to go with a certain mode of LCP.
+
+03:30.220 --> 03:33.620
+Now this has to be supported by a physical switch.
+
+03:33.700 --> 03:40.600
+What you're basically doing is you're taking two or more physical adapters and you're telling your virtual
+
+03:40.600 --> 03:44.650
+switch and your physical switch to treat them as one big pipe.
+
+03:46.700 --> 03:50.560
+And you can see more on that and some of the other videos included with this course.
+
+03:50.690 --> 03:57.360
+But that's how you would go ahead and create a new link aggregation group for al-Asi P Here's our private
+
+03:57.360 --> 04:03.930
+villans again a feature that's only supported by the Vee's fair distributed which we have the ability
+
+04:03.930 --> 04:07.010
+to create a VPN within a violin.
+
+04:07.320 --> 04:14.170
+So here we can see on primary violin one maybe I want to establish some secondary valence right.
+
+04:14.190 --> 04:15.710
+Maybe I'll call this one.
+
+04:15.750 --> 04:24.510
+Secondary violin 101 and secondary V LAN to 0 1 and we'll make one of the community and we'll make one
+
+04:24.510 --> 04:33.180
+of them isolative what we're doing here when we create these private villans is we're basically establishing
+
+04:33.180 --> 04:43.230
+boundaries inside of the land one so I can hook up a bunch of virtual machines to primary Villon one
+
+04:43.350 --> 04:47.180
+secondary VLAN one and they'll all be able to communicate
+
+04:50.630 --> 04:53.050
+and they'll all be able to communicate just fine.
+
+04:53.570 --> 05:01.070
+I can also hook up a bunch of virtual machines to primary violin one secondary violin one to one
+
+05:04.170 --> 05:10.300
+let's add one more let's add secondary VLA and one or two as well which is also a community in
+
+05:12.990 --> 05:13.580
+OK.
+
+05:13.820 --> 05:20.060
+So I could take a bunch of Reems hook them up to primary veel and one secondary violin one to one and
+
+05:20.060 --> 05:21.320
+they'd all be able to communicate.
+
+05:21.560 --> 05:26.750
+I could do the same thing with primary Viola and one secondary violin and one or two.
+
+05:26.750 --> 05:33.350
+Those are community lands meaning anything within that community can talk.
+
+05:33.480 --> 05:38.060
+OK so just to recap what I've created here.
+
+05:38.060 --> 05:43.180
+Primary Villon one secondary veel and one this is promiscuous.
+
+05:43.220 --> 05:50.840
+It means anything that's connected to secondary Villon one can talk to anything else inside of Villon
+
+05:50.840 --> 05:58.810
+one including communities and isolated secondary violence the community villans are allowed to communicate
+
+05:58.960 --> 06:01.740
+with anything inside of their community.
+
+06:02.750 --> 06:12.830
+And anything in that promiscuous secondary Vueling the isolated secondary Villalon means they cannot
+
+06:12.830 --> 06:14.160
+communicate with each other.
+
+06:14.180 --> 06:19.420
+Right I could have 20 of them connected to the secondary isolated.
+
+06:19.550 --> 06:21.230
+They are not allowed to communicate.
+
+06:21.350 --> 06:25.640
+They can only communicate with the promiscuous feeling and that's it.
+
+06:26.780 --> 06:28.720
+So that's my private Vilain.
+
+06:29.170 --> 06:35.890
+And if we take a look at this test V.M. and go ahead and edit settings on it I'll show you how we can
+
+06:35.890 --> 06:44.320
+connect the virtual machine to one of those private villans right so you can see right now my virtual
+
+06:44.320 --> 06:50.350
+machine is connected to the distributed switch port group right which is actually exactly where I've
+
+06:50.350 --> 06:53.610
+just created those private secondary violence.
+
+06:53.920 --> 07:01.800
+And so if I go back to my Vee's for distributed switch I can now go ahead and create myself a Newport
+
+07:01.870 --> 07:11.530
+group which I'm going to call isolated I'll choose next and then I'll choose the and type and I'm going
+
+07:11.530 --> 07:17.770
+to make this support group with one of my private villans and I'm going to choose my isolated secondary
+
+07:17.770 --> 07:18.670
+Villalon.
+
+07:18.910 --> 07:26.830
+And now any virtual machines that I connect to that isolated poor group will not be able to communicate
+
+07:26.830 --> 07:33.650
+to anything other than the promiscuous secondary view in.
+
+07:33.720 --> 07:35.670
+So here is my network adapter.
+
+07:36.000 --> 07:43.220
+I can go ahead and change the network and connected to that isolated secondary violin.
+
+07:43.620 --> 07:47.770
+And now I've configured private violence on my Vee's fair distributed switch.
+
+07:48.800 --> 07:53.670
+OK let's take a look at some of the other settings that we can configure on the VSE for distributed
+
+07:53.670 --> 07:54.040
+switch.
+
+07:54.080 --> 07:56.870
+I can set up Netflix.
+
+07:57.440 --> 08:05.420
+So what net flow is going to do is it's going to allow me to establish an IP address of a net flow collector.
+
+08:05.420 --> 08:10.420
+So I'm going to go ahead and put in an address of an outflow collector in my environment here.
+
+08:10.820 --> 08:17.970
+And I also need to establish an IP address for the VSE fair distributed switch it's self so that it
+
+08:17.970 --> 08:22.470
+has the ability to communicate with the collector.
+
+08:22.640 --> 08:30.860
+And what it's essentially going to do is the Vee's for distributed which is going to send little summaries
+
+08:31.010 --> 08:34.310
+called flows to the net flow collector.
+
+08:34.310 --> 08:40.670
+For example if a virtual machine communicates with an e-mail server on a certain port and sends a certain
+
+08:40.670 --> 08:48.260
+amount of data it's going to summarize that traffic and send a traffic flow to the net flow collector.
+
+08:48.570 --> 08:53.620
+And it will continuously report all of the traffic that's going up.
+
+08:53.920 --> 08:54.310
+Right.
+
+08:54.330 --> 09:03.350
+So that this net flow collector will have a complete comprehensive history of all of these traffic patterns.
+
+09:03.510 --> 09:09.800
+And then I can use that net flow collector to do things like analysis for troubleshooting.
+
+09:09.800 --> 09:16.260
+All right so for example let's say that everybody says hey at o'clock on Monday everything always gets
+
+09:16.260 --> 09:17.140
+really slow.
+
+09:18.060 --> 09:23.490
+Well that's kind of hard to troubleshoot after the fact especially if the issue has gone away.
+
+09:24.030 --> 09:30.570
+But if you have a net flow collector you can go into it and say OK what was going on at two o'clock
+
+09:30.570 --> 09:31.680
+on Monday.
+
+09:31.680 --> 09:34.130
+Was there a lot of traffic happening.
+
+09:34.230 --> 09:37.170
+You know if not maybe it's some other sort of problem.
+
+09:37.650 --> 09:43.760
+So that's net flow and net flow is only available on the Vee's for distributed switch.
+
+09:43.770 --> 09:50.050
+Same with port mirroring port mirroring is only available on the Vee's for distributed switch.
+
+09:50.610 --> 09:58.850
+So here we can see there are a number of different port mirroring session types that you can establish.
+
+09:59.090 --> 10:03.610
+The most basic of which is a distributed port mirroring session.
+
+10:03.890 --> 10:10.160
+So we're a distributed port mirroring session is going to do is it's essentially going to take all of
+
+10:10.160 --> 10:20.540
+the traffic that is going to one of my ports on my virtual switch and mirror all of that traffic to
+
+10:20.540 --> 10:22.140
+a different port.
+
+10:22.160 --> 10:29.480
+So if you wanted to hook up let's say wireshark right and have it sit there and capture all the traffic
+
+10:29.480 --> 10:36.270
+that's going to one specific virtual machine you could do that using port mirroring right will now allow
+
+10:36.270 --> 10:39.930
+normal traffic on the ports that are being mirrored.
+
+10:40.170 --> 10:42.300
+And I'm going to go hadn't hit next here.
+
+10:42.510 --> 10:48.160
+And what we'll now do is just go ahead and choose what is the source port What's the destination port.
+
+10:48.240 --> 10:53.440
+Right now at the moment I've only got one virtual machine hooked up to this Vee's for distributed switch.
+
+10:53.700 --> 10:55.230
+But you can kind of get the idea right.
+
+10:55.230 --> 11:01.230
+I pick my source port here and then I'd go to the destination and I pick another poor.
+
+11:01.230 --> 11:07.980
+And all of this traffic that happened on the source port would be mirrored to the destination port.
+
+11:08.800 --> 11:12.160
+It would receive an identical copy of all that traffic.
+
+11:12.160 --> 11:17.770
+So if I'm using something like wireshark I can capture and analyze all of the traffic that's hitting
+
+11:17.770 --> 11:19.060
+a particular port.
+
+11:19.420 --> 11:19.600
+Right.
+
+11:19.600 --> 11:24.400
+And this is just one of the session types that are available to me.
+
+11:24.490 --> 11:31.120
+I could set up other Portmeirion sessions that can mirror traffic to an uplink port instead of one of
+
+11:31.120 --> 11:38.470
+my distributed ports or I could mirror traffic from a set of violence to a distributed port or it could
+
+11:38.470 --> 11:43.850
+even send my port mirrored traffic to a remote IP address.
+
+11:43.870 --> 11:49.420
+So there's a lot of different options here for those port mirroring Sessions again for the certification
+
+11:49.420 --> 11:50.100
+test.
+
+11:50.110 --> 12:00.570
+Remember allée C.P. private villans net flow port marrying and LDP or link where discovery protocol.
+
+12:00.670 --> 12:09.720
+Those are all only supported by the VSE for distributed switch another feature that is only supported
+
+12:09.720 --> 12:14.190
+by the vees fair distributed switch is health check.
+
+12:14.700 --> 12:17.750
+And by the way this is disabled by default.
+
+12:17.760 --> 12:19.940
+You'll see that it's disabled by default.
+
+12:19.950 --> 12:21.380
+That's a good thing right.
+
+12:21.420 --> 12:29.550
+Health check actually introduces a little bit of security vulnerability into your environment so you
+
+12:29.550 --> 12:37.110
+should only turn this on if you are maybe configuring a new physical switch or setting up a new ESX
+
+12:37.110 --> 12:38.230
+I host.
+
+12:38.310 --> 12:40.090
+And here's what health check is going to do.
+
+12:40.170 --> 12:42.120
+I'm going to go ahead and enable it.
+
+12:42.730 --> 12:51.300
+What health check is going to do is it's going to validate that the land and M2 settings and the teaming
+
+12:51.300 --> 12:59.580
+settings that you've configured on your physical ESX I host are actually compatible with what has been
+
+12:59.580 --> 13:02.450
+configured on the physical Ethernet switch.
+
+13:03.390 --> 13:10.580
+So that's kind of the goal here of of the health check is to basically validate.
+
+13:10.620 --> 13:11.250
+OK.
+
+13:11.400 --> 13:20.010
+You know what we've configured on this particular ESX I host actually matches up to two what we've configured
+
+13:20.630 --> 13:22.960
+on the physical switches self.
+
+13:22.980 --> 13:23.250
+Right.
+
+13:23.250 --> 13:32.180
+So if we look at for example the switch 0 there is going to be settings in here like MT you or there's
+
+13:32.220 --> 13:39.300
+going to be settings on the port groups like for example if you look at VM network it's got a really
+
+13:39.300 --> 13:40.260
+an identifier.
+
+13:40.320 --> 13:45.780
+If those villans don't match what's on the physical switch if the empty you doesn't match what's on
+
+13:45.780 --> 13:47.670
+the physical switch.
+
+13:47.670 --> 13:54.360
+If my nic teaming method isn't a good match for what the physical switches configured for we're going
+
+13:54.360 --> 13:56.740
+to find out about all of that information right here.
+
+13:59.440 --> 14:03.230
+OK so let's go ahead and jump back to our Wii's for distributed switch.
+
+14:03.430 --> 14:07.810
+The final feature that I want to show you here is network IO control.
+
+14:07.810 --> 14:12.330
+So you can see at the moment network IO control is enabled.
+
+14:12.480 --> 14:15.270
+We're running network control version 3.
+
+14:15.490 --> 14:22.580
+And what it's doing is it's basically prioritizing all of the different types of system traffic.
+
+14:22.600 --> 14:23.110
+Right.
+
+14:23.380 --> 14:30.170
+So we've got fault tolerance logging management traffic and a fast virtual machine traffic itself.
+
+14:30.280 --> 14:33.190
+The actual traffic that my venoms are generating.
+
+14:33.190 --> 14:36.760
+I scuzzy right the motion all these different types of traffic.
+
+14:37.270 --> 14:44.950
+And what is essentially doing is it's saying OK you know VM traffic has 100 shares where as I scuzzy
+
+14:44.950 --> 14:47.680
+traffic only has 50.
+
+14:47.730 --> 14:57.310
+So if there is bandwidth contention that's the only time these shares are enforced.
+
+14:57.310 --> 15:04.640
+I mean if my physical adapters are congested if they're running low on bandwidth what will happen is
+
+15:04.640 --> 15:10.950
+network control will give twice as much bandwidth to virtual machine traffic as it will give to ice
+
+15:11.030 --> 15:17.550
+Gussie and I can modify all these and I can say you know what for I scuzzy I want to go ahead and give
+
+15:17.550 --> 15:18.860
+a high number of shares right.
+
+15:18.870 --> 15:19.960
+I want to make it.
+
+15:20.260 --> 15:21.830
+It's really important right.
+
+15:21.840 --> 15:29.080
+Maybe I even want to go as far as reserving 50 megabits per second of bandwidth right.
+
+15:30.080 --> 15:35.750
+And maybe for things like Wii motion traffic or let's let's go these for replication.
+
+15:35.750 --> 15:38.030
+Right maybe for VSE for replication.
+
+15:38.030 --> 15:41.740
+I want to say OK you know what I'm going to set a limit right.
+
+15:41.760 --> 15:42.850
+I have set a limit here.
+
+15:42.860 --> 15:50.210
+I don't want these for replication ever consuming more than 75 megabits per second of bandwidth so I'll
+
+15:50.210 --> 15:56.930
+go ahead and set a limit there and maybe I'll even Also go ahead and edit this and I'll give it a low
+
+15:56.930 --> 15:58.460
+priority.
+
+15:58.460 --> 16:06.530
+So that way if bandwidth contention does occur everything else will be prioritized over the Wii's for
+
+16:06.530 --> 16:09.060
+replication traffic.
+
+16:09.220 --> 16:11.100
+And that's what network IO control is right.
+
+16:11.110 --> 16:21.520
+It's essentially share's limits and reservations that are applied to bandwidth of my actual physical
+
+16:21.560 --> 16:24.140
+VM next.
+
+16:24.390 --> 16:28.050
+And I can also create network resource pools.
+
+16:28.110 --> 16:32.570
+So let's go ahead and create a network resource pool I'm going to call it that work resource pool 1.
+
+16:32.790 --> 16:37.610
+And my description is going to be high priority.
+
+16:38.160 --> 16:40.050
+I'm not going to give it any reservation.
+
+16:40.210 --> 16:44.650
+So now I've created a network resource pool it's called network resource pool 1.
+
+16:44.980 --> 16:53.550
+And what I can do is I can utilize this to control the bandwidth for my distributed poor groups.
+
+16:53.740 --> 17:00.970
+I can go ahead and associate distributed groups with this network resource pool and go ahead and do
+
+17:00.970 --> 17:06.840
+things like Reserve bandwidth for those special distributed groups that are really important.
+
+17:06.850 --> 17:13.360
+So maybe I'll give this network resource pool a reservation of 50 megabits per second and then all the
+
+17:13.360 --> 17:17.600
+associated distributed poorer group with the network resource pool.
+
+17:17.860 --> 17:20.150
+In this case I'm not actually going to do that.
+
+17:20.170 --> 17:24.280
+I'm actually going to delete this network resource pool before I forget it's there.
+
+17:24.550 --> 17:24.960
+OK.
+
+17:24.970 --> 17:30.490
+So that's some of the features that are available on the Vee's for distributed switch and Ulos is other
+
+17:30.490 --> 17:34.030
+lecturers in this course that dig into these topics as well.
+
+17:34.030 --> 17:40.060
+But I wanted to show you a real live demo of how many of these common features are actually configured.

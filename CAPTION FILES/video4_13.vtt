@@ -1,0 +1,133 @@
+WEBVTT
+
+00:01.890 --> 00:08.880
+In this video we'll learn about how the ESX host finds out about the ones that are available on the
+
+00:08.880 --> 00:09.680
+storage right.
+
+00:11.010 --> 00:18.090
+And with eyes because we have a method called Dynamic discovery that it can use to learn about the ones
+
+00:18.510 --> 00:21.100
+that are being presented to it by the storage array.
+
+00:21.540 --> 00:28.810
+So the first step of this process is to configure our ESX host with an IP address.
+
+00:28.830 --> 00:35.520
+We want to provide the host the IP address of the storage array so that it will have the ability to
+
+00:35.520 --> 00:37.560
+query the storage array.
+
+00:38.040 --> 00:40.750
+And this is called the scuzzy target.
+
+00:40.770 --> 00:48.870
+So notice on our ESX host side we have now this black box that's appeared and it specified the ICRC
+
+00:48.990 --> 00:55.420
+target is 10 not one not one to 10 which is the IP address of the storage processor on the array.
+
+00:56.900 --> 01:04.370
+Right so what we're telling our ESX I hosed is when we do a rescanned reach out to the storage array
+
+01:04.430 --> 01:06.290
+and discover new lines.
+
+01:06.430 --> 01:13.880
+Right and that's what a rescan operation does in the ESX I host it generates what's called a send target's
+
+01:13.880 --> 01:15.810
+request.
+
+01:15.990 --> 01:22.460
+And this is basically a request from the ESX I host saying Tell me about your Lund's.
+
+01:22.570 --> 01:29.010
+Would you have available what ones can I use to create a vm a fast data store and the storage array
+
+01:29.010 --> 01:35.720
+will respond with this and Target's response which is essentially just a listing of its Lund's Here's
+
+01:35.760 --> 01:38.310
+all the ones that I now have available.
+
+01:38.670 --> 01:46.850
+So now the ESX host has a list of basically chunks of an formatted disk space.
+
+01:46.860 --> 01:47.060
+Right.
+
+01:47.060 --> 01:48.730
+That's what these lines are.
+
+01:48.780 --> 01:57.180
+These are big chunks of disk space that are available to it that it can connect to and that it can format
+
+01:57.570 --> 02:03.850
+with VM fs so that it can store virtual machine files on them.
+
+02:03.930 --> 02:04.200
+Right.
+
+02:04.280 --> 02:10.560
+And any loans that are currently in use will be automatically filtered out.
+
+02:11.060 --> 02:17.380
+So there's something called Storage filters in the ESX host and it won't actually present you lawn's
+
+02:17.420 --> 02:18.840
+that are already in use.
+
+02:18.860 --> 02:25.480
+So if I now decide hey I want to create a new VM a fast data store and I look at my listing of available
+
+02:25.480 --> 02:31.520
+ones it's only going to show me the ones that don't currently have a data store created on that
+
+02:36.480 --> 02:37.760
+one more side note.
+
+02:37.950 --> 02:41.090
+And this is a good thing to remember for the exam.
+
+02:41.550 --> 02:45.930
+You can configure chap authentication with ice Gazi.
+
+02:46.390 --> 02:50.340
+So what you can do is you can configure even mutual authentication.
+
+02:50.550 --> 02:57.660
+And the purpose of chap is basically when the ESX host wants to connect to the eyes because the storage
+
+02:57.660 --> 03:04.110
+are right it has to send what's called a chap secret basically a password to the scuzzy array.
+
+03:04.100 --> 03:04.350
+Right.
+
+03:04.380 --> 03:10.740
+And that way the I scuzz the storage array can validate that yes this ESX I host is legitimate.
+
+03:10.740 --> 03:17.730
+It's not some fake host that somebody spinning up and then you can also require the scuzzy array to
+
+03:17.730 --> 03:20.960
+actually authenticate with the ESX I host as well.
+
+03:20.970 --> 03:29.460
+This is called mutuel chap authentication and it's a security tool that basically allows the host and
+
+03:29.460 --> 03:37.080
+the storage array to validate that both of those devices are legitimate devices that should be paired
+
+03:37.080 --> 03:38.030
+up with.
+
+03:38.130 --> 03:42.920
+This is the only storage solution that supports chap authentication.
+
+03:42.930 --> 03:48.080
+So that's an important item to keep in mind as you prepare to take your certification exam.

@@ -1,0 +1,589 @@
+WEBVTT
+
+00:00.240 --> 00:07.200
+In this video I'll explain certain attributes of the VSE fair standards which specifically will talk
+
+00:07.200 --> 00:15.000
+about how Nick teaming is performed and how we can configure our VM next our physical adapters to tolerate
+
+00:15.000 --> 00:15.870
+failures.
+
+00:17.740 --> 00:25.810
+So our VM necks are actually the physical adapters of the ESX host itself and each VM neck can only
+
+00:25.810 --> 00:34.610
+be assigned to a single virtual switch our virtual switches can't share VM next so in this slide we
+
+00:34.610 --> 00:40.270
+see a virtual switch with three physical adapters or VM next.
+
+00:40.490 --> 00:42.580
+And our network is in a healthy state.
+
+00:42.830 --> 00:47.570
+So all three of my adapters are connected and have a nice green link light.
+
+00:47.570 --> 00:48.250
+At this moment
+
+00:51.110 --> 00:57.540
+traffic for this virtual machine is currently flowing through the first physical adapter.
+
+00:58.310 --> 01:04.790
+And let's say that something happens like for example let's say we have a new intern and we send him
+
+01:04.790 --> 01:09.680
+into the data center we say go ahead and clean up the cables.
+
+01:09.770 --> 01:14.870
+And he goes in with his scissors and he starts cutting cables and he just so happens to cut the wrong
+
+01:14.870 --> 01:15.330
+cable
+
+01:18.150 --> 01:18.510
+well.
+
+01:18.510 --> 01:24.870
+Now in this situation our nice green link light on that V.M. neck isn't green anymore.
+
+01:25.820 --> 01:33.050
+Now that connection has been physically broken and this is something that's very easy for the ESX I
+
+01:33.050 --> 01:44.570
+host to detect and it'll simply redirect that traffic to another poor that still functional.
+
+01:44.570 --> 01:48.710
+Now let's talk about a more complicated failure.
+
+01:48.830 --> 01:52.820
+And let's assume that that cable that just got cut we fixed it right.
+
+01:52.940 --> 01:55.270
+So now all of my network adapters are connected.
+
+01:55.270 --> 02:02.060
+And again we have a nice green link light on all of those physical V.M. next.
+
+02:02.100 --> 02:06.840
+And in this case our virtual machine traffic is flowing through this third adapter.
+
+02:08.190 --> 02:14.280
+And again we go ahead and we send an intern into the data center and we say OK careful this time but
+
+02:14.280 --> 02:16.940
+go ahead and keep on cleaning up those cables.
+
+02:17.190 --> 02:22.250
+And this time he cuts a cable that interconnects are two physical switches.
+
+02:23.620 --> 02:29.470
+Now this is a little bit different because in this scenario the link state of the Wii Emenike doesn't
+
+02:29.470 --> 02:34.680
+change that nice green link light is going to remain green.
+
+02:35.950 --> 02:41.080
+But if we look at our diagram here traffic from this virtual machine is now flowing into a physical
+
+02:41.080 --> 02:46.990
+switch that's essentially isolated or it doesn't have any connectivity to the other physical switch
+
+02:47.680 --> 02:50.920
+and therefore it doesn't have any connectivity to the Internet.
+
+02:52.300 --> 02:57.260
+So at this moment Adapter 3 is flowing into a dead end.
+
+02:58.960 --> 03:07.850
+This is where beacon probing can be helpful beacon probes our little packets that my VM NICS send out
+
+03:07.850 --> 03:13.080
+to each other to just validate that they're still operating while.
+
+03:13.100 --> 03:20.960
+So here we see the two V.M. next at the top of our screen are able to pass these beacon probes and successfully
+
+03:20.960 --> 03:22.270
+communicate with each other.
+
+03:24.390 --> 03:28.270
+However our third adapter is flowing into a dead end.
+
+03:28.320 --> 03:33.930
+So although those two adapters on the top can communicate the adapter on the bottom is sending these
+
+03:33.930 --> 03:41.070
+beacon probes into a physical switch that the other V.M. necks can't see right now due to this upstream
+
+03:41.100 --> 03:42.380
+network failure.
+
+03:43.660 --> 03:50.050
+So when the host realizes that it's not seeing those beacon probes from the third adapter it'll actually
+
+03:50.050 --> 03:59.130
+remove that third adapter from service and the virtual machine traffic will be moved to another VM NEC.
+
+03:59.130 --> 04:02.490
+Now let's talk about some of our Nick teaming options.
+
+04:03.030 --> 04:09.540
+What we're trying to accomplish here is we have multiple VM next or multiple physical adapters that
+
+04:09.540 --> 04:16.230
+are connected to a virtual switch and we want to ensure that our virtual machine traffic is able to
+
+04:16.230 --> 04:19.450
+utilize all of these physical adapters.
+
+04:19.590 --> 04:25.320
+So we're going to have to configure some sort of nic teaming method to allow those adapters to load
+
+04:25.320 --> 04:26.750
+balance that traffic.
+
+04:26.880 --> 04:33.620
+And the first option is a method called nicknaming by originating virtual port ID now how this works
+
+04:33.890 --> 04:40.040
+is each virtual machine will be connected to a virtual port on our virtual switch.
+
+04:40.040 --> 04:48.380
+And based on the virtual port ID that the VM connects to all of its traffic will flow out one specific
+
+04:48.380 --> 04:49.470
+VM Nic.
+
+04:49.850 --> 04:55.300
+And our second VM maybe connects to a different virtual port ID and therefore its traffic will flow
+
+04:55.430 --> 05:01.890
+a different VM Nic and same thing with our third virtual machine.
+
+05:01.910 --> 05:10.600
+Now in this scenario each VM is essentially tethered to a specific physical adapter and all of that
+
+05:10.610 --> 05:15.760
+virtual machines traffic will flow through that one physical adapter.
+
+05:16.040 --> 05:22.100
+And this is how Nic teaming by originating port ID spreads that workload out across all of these physical
+
+05:22.110 --> 05:24.780
+next.
+
+05:24.800 --> 05:32.000
+Now in this scenario it's important to understand that what we want to do is configure the physical
+
+05:32.000 --> 05:36.360
+switch without port channel without LCP.
+
+05:36.500 --> 05:43.550
+We don't want any of that kind of nic teaming happening at the physical switch side and the physical
+
+05:43.550 --> 05:51.310
+switch has to see these for physical connections as completely independent.
+
+05:51.560 --> 05:55.790
+And that's the same situation when we go to source Mac hash.
+
+05:55.880 --> 05:57.230
+So with source Mac hash.
+
+05:57.230 --> 06:00.820
+It's actually very similar to the method that we just looked at.
+
+06:01.250 --> 06:06.410
+Maybe virtual machine one has a unique MAC address called the Mac one.
+
+06:06.740 --> 06:13.630
+And based on that unique MAC address that VM is going to be associated with a specific VM neck.
+
+06:13.670 --> 06:15.050
+Same thing with VM too.
+
+06:15.200 --> 06:22.610
+And VM 3 based on their Mac addresses they will be tethered to one specific physical adapter and we'll
+
+06:22.610 --> 06:27.810
+use that for all traffic that needs to leave the ESX host.
+
+06:27.840 --> 06:32.270
+Again we don't want to configure LA C.P. either Channel port channel.
+
+06:32.310 --> 06:35.580
+We don't want to configure any of that stuff on the actual physical switch.
+
+06:35.580 --> 06:36.240
+In this case
+
+06:39.270 --> 06:48.070
+now the final Nic teaming method that's supported by the standard virtual switch is one called IP hash.
+
+06:48.190 --> 06:50.070
+Then here is how IP hash works.
+
+06:50.220 --> 06:54.630
+Here you can see we have a virtual machine with IP address one.
+
+06:54.830 --> 07:02.870
+When that virtual machine goes to send some traffic to a particular destination with a unique IP address
+
+07:03.410 --> 07:10.670
+that traffic can flow over a physical adapter and the physical adapter is selected based not only on
+
+07:10.670 --> 07:15.550
+the source IP but on the destination IP as well.
+
+07:15.550 --> 07:22.270
+So now if this same virtual machine happens to be sending traffic to some other destination with a different
+
+07:22.270 --> 07:28.050
+destination IP that traffic can actually flow out of different physical adapter.
+
+07:28.060 --> 07:34.450
+And this is different than the prior to Nic teaming methods that we saw because now my virtual machine
+
+07:34.840 --> 07:40.460
+can actually utilize multiple V.M. next.
+
+07:40.460 --> 07:46.850
+So in this scenario it's important that the physical switch is appropriately configured.
+
+07:46.850 --> 07:53.750
+We want to set up port channel or LCP on the physical switch to bond these physical adapters together.
+
+07:58.690 --> 08:04.390
+Another feature that's supported on the VSE for standard switches something called Traffic shaping what
+
+08:04.390 --> 08:12.400
+traffic shaping does is it applies settings such as peak bandwidth average bandwidth and burst size
+
+08:12.610 --> 08:16.740
+to support group.
+
+08:16.740 --> 08:22.670
+So for example let's say that we have a group of virtual machines connected to a port group and voice
+
+08:22.690 --> 08:24.420
+for a standard switch.
+
+08:24.420 --> 08:32.300
+And sometimes we test new applications on these victims or do something else that's resource intensive.
+
+08:32.550 --> 08:39.840
+And as a result these V.M. tend to dominate the bandwidth of that virtual switch and other victims on
+
+08:39.840 --> 08:43.630
+other groups sometimes can't get the bandwidth they need.
+
+08:44.770 --> 08:51.400
+Well what we can do is we can apply traffic shaping to a port group to essentially say on this particular
+
+08:51.400 --> 08:59.260
+port group each VM will have a peak bandwidth of 100 megabits per second each VM on this port group
+
+08:59.530 --> 09:03.590
+will have an average bandwidth of 50 make bits per second.
+
+09:03.760 --> 09:12.620
+And over time that's what the virtual machines must average out to at a maximum 50 megabits per second.
+
+09:15.220 --> 09:21.790
+So because this particular virtual machine is connected to a group that has this traffic shaping policy
+
+09:21.830 --> 09:26.560
+assigned then this policy will be enforced on this particular VM.
+
+09:28.450 --> 09:36.930
+So under normal circumstances this VM should be averaging 50 megabits per second or less bandwidth usage.
+
+09:36.940 --> 09:44.060
+However let's say there's some large file that we need to upload well for a short period.
+
+09:44.120 --> 09:52.280
+This VM can actually utilize 100 megabits per second or its peak bandwidth rate until it completely
+
+09:52.280 --> 09:55.780
+uses up what we call burst size.
+
+09:55.900 --> 10:01.420
+Right so for this we maybe will say our burst size is 100 megabytes.
+
+10:01.590 --> 10:07.650
+And again that's defined at a port group level not an individual virtual machine level.
+
+10:07.740 --> 10:15.060
+So let's say at the port group level our traffic shaping policy specifies a 100 megabyte burst size
+
+10:16.150 --> 10:24.850
+this VM will be able to transmit at one hundred megabits per second until it uses up that 100 megabyte
+
+10:24.850 --> 10:26.810
+burst size maximum.
+
+10:27.010 --> 10:32.890
+And then the virtual machine will be forced back down to the average band with a 50 make up its per
+
+10:32.890 --> 10:40.150
+second and it will not be able to exceed that until it builds that burst size back up.
+
+10:40.150 --> 10:47.320
+Now how does it build the burst size back up by staying below that 50 megabits per second average for
+
+10:47.440 --> 10:53.850
+enough time to essentially save up 100 megabytes worth of burst size again.
+
+10:54.010 --> 10:59.420
+And so in that way traffic shaping can really help us.
+
+11:00.610 --> 11:06.940
+To ensure that one particular port group doesn't completely overwhelm the physical adapters of an ESX
+
+11:07.090 --> 11:13.830
+host and there may be many port groups with different types of traffic connected to this via first standard
+
+11:13.870 --> 11:21.530
+switch and traffic shaping just gives us that ability to place some limits on how much bandwidth each
+
+11:21.530 --> 11:24.420
+VM within a port group can actually consume.
+
+11:32.730 --> 11:37.380
+We can also configure some security settings on of these fair standard switch.
+
+11:37.470 --> 11:43.460
+These can be configured at either the virtual switch or the port group level.
+
+11:43.980 --> 11:51.020
+Now if we can figure these settings at the virtual switch level those are kind of like our global settings.
+
+11:51.200 --> 11:59.580
+So maybe we Whino enable forged transmits on a virtual switch if we do so at the virtual switch level.
+
+11:59.600 --> 12:06.320
+What this means is that that setting will apply to all porc groups on that virtual switch.
+
+12:06.330 --> 12:14.000
+Now if we go to an individual port group and modify that setting the settings that are created at the
+
+12:14.000 --> 12:25.440
+port group level will override those global virtual switch ride configurations.
+
+12:25.450 --> 12:30.600
+So one of the settings that we can modify is called 4G transmits.
+
+12:30.970 --> 12:36.640
+Let's say you have a virtual machine and for some reason you need to modify the MAC address of that
+
+12:36.640 --> 12:37.890
+virtual machine.
+
+12:38.380 --> 12:44.020
+Maybe it has been converted from a physical machine to a virtual machine and you have some software
+
+12:44.380 --> 12:46.900
+that is licensed based on MAC address.
+
+12:46.900 --> 12:52.990
+So we need to keep the same MAC address that we had and the physical environment that's a good use case
+
+12:53.290 --> 13:01.900
+for Macs spoofing and so in that case when that virtual machine generates traffic it's going to be using
+
+13:02.020 --> 13:07.880
+the Mac address that we've specified in the guest operating system.
+
+13:07.890 --> 13:10.180
+Now the virtual switch isn't going to like that.
+
+13:10.590 --> 13:19.620
+And the virtual switch expects traffic to come on that poor from the MAC address of the virtual neck
+
+13:19.620 --> 13:20.850
+of that VM.
+
+13:20.850 --> 13:29.640
+So if it sees traffic coming in on some other MAC address that's called the 4G transmit and we can choose
+
+13:29.640 --> 13:34.310
+to either accept or reject that traffic.
+
+13:34.740 --> 13:38.610
+By default the virtual switch is configured to accept it.
+
+13:41.090 --> 13:41.350
+Right.
+
+13:41.590 --> 13:49.650
+And by setting this to accept we're going to allow Max spoofing for outbound traffic another security
+
+13:49.650 --> 13:57.060
+setting is mac address changes and MAC address changes are basically the exact same setting for inbound
+
+13:57.060 --> 13:58.400
+traffic.
+
+13:58.410 --> 14:05.880
+So now let's say some traffic is coming towards a virtual machine and the destination MAC is some MAC
+
+14:05.880 --> 14:12.030
+address that we've configured in the guest operating system that is inconsistent with the actual Mac
+
+14:12.030 --> 14:20.500
+of the virtual NEC MAC address changes need to be set to accept to allow this traffic through and by
+
+14:20.500 --> 14:26.400
+default and a virtual switch MAC address changes and for transients are both set to accept.
+
+14:26.750 --> 14:33.730
+Now if you don't need this Mac spoofing capability I recommend you go into those virtual switches and
+
+14:33.730 --> 14:37.470
+change those settings to reject because that will be more secure.
+
+14:41.270 --> 14:47.090
+Finally the third security setting is something called promiscuous mode and promiscuous mode allows
+
+14:47.090 --> 14:50.770
+sniffing of all of the traffic on a virtual will switch.
+
+14:51.500 --> 14:56.660
+This is not a secure option to leave enabled all the time.
+
+14:56.660 --> 15:03.170
+Maybe you need to install sniffer software on a virtual machine and monitor all the traffic on a virtual
+
+15:03.170 --> 15:03.470
+switch.
+
+15:03.470 --> 15:11.330
+For some reason that's a good reason to enable promiscuous mode but you're essentially opening up your
+
+15:11.330 --> 15:13.850
+network and allowing it to be sniffed.
+
+15:13.850 --> 15:19.610
+So of course promiscuous mode isn't something that we want on all the time because it presents a pretty
+
+15:19.610 --> 15:22.580
+serious security risk.
+
+15:22.610 --> 15:28.430
+So the recommendation is turn promiscuous mode on when you need it and when you're done turn it back
+
+15:28.430 --> 15:29.090
+off.
+
+15:34.480 --> 15:41.190
+These fair sex supports multiple TCAP IP stacks.
+
+15:41.220 --> 15:44.380
+So what is a TZP IP stack.
+
+15:44.670 --> 15:48.160
+Well it provides DNS and default gateway.
+
+15:48.630 --> 15:56.750
+So for example the default gateway is used when traffic is bound for some other network.
+
+15:57.060 --> 16:05.330
+Let's say you go into Windows on your machine and you type in w w w dot trainer tests dot com well that
+
+16:05.330 --> 16:13.190
+traffic is bound for some address on the Internet and so therefore that traffic needs to hit something
+
+16:13.190 --> 16:19.280
+in your network that's capable of performing routing to that other network that's your default gateway
+
+16:20.580 --> 16:24.960
+and you may have different machines in your network that need to use different networks for different
+
+16:24.960 --> 16:25.790
+things.
+
+16:27.260 --> 16:31.490
+And in that case you might need multiple default gateways.
+
+16:31.550 --> 16:38.990
+That's part of the TCAP IP stack so built right into your ESX I host is the default TZP IP stack and
+
+16:38.990 --> 16:43.890
+that's used for management traffic and all the types of traffic by default.
+
+16:44.730 --> 16:51.930
+But if you want to you can utilize a separate TCAP IP stack for Wii motion traffic.
+
+16:52.530 --> 16:58.270
+And this is useful if you need to send motion traffic to some other network.
+
+16:58.410 --> 17:05.070
+Let's say for example you plan to do a lot of long distance the motions you might have another network
+
+17:05.760 --> 17:08.800
+that you want to send that via motion traffic over.
+
+17:08.850 --> 17:16.680
+So by giving the motion its own dedicated IP stack you can direct that Wii motion traffic to a different
+
+17:16.680 --> 17:25.880
+default gateway or different DNS server and we can do something similar for provisioning and for cold
+
+17:25.880 --> 17:28.780
+migrations for example cloning snapshots.
+
+17:28.940 --> 17:35.540
+We can send that traffic through its own dedicated TZP IP stack and we can create custom TZP IP stacks
+
+17:35.540 --> 17:36.140
+as well.
+
+17:41.470 --> 17:41.940
+Okay.
+
+17:41.990 --> 17:48.530
+So in this lesson we learned about the following topics we learned about virtual switches and how we
+
+17:48.530 --> 17:58.090
+can protect them from a network interface card failure by using either link state or beacon probing.
+
+17:58.250 --> 18:03.590
+We learned about the different nic teaming methods and how they can be utilized to load balance across
+
+18:03.590 --> 18:06.310
+our VM next or our physical adapters.
+
+18:07.270 --> 18:13.580
+Learned about originating virtual port ID which essentially ties each virtual machine to one VM Nic
+
+18:13.670 --> 18:15.900
+based on the virtual switch port.
+
+18:17.380 --> 18:25.090
+Very similar to that was source Metcash which ties eeds virtual machine to a physical adapter based
+
+18:25.090 --> 18:27.060
+on the mac address.
+
+18:27.260 --> 18:29.180
+And the third method was a little bit different.
+
+18:29.230 --> 18:34.880
+Right IP hash was based on not only the source IP but the destination IP as well.
+
+18:35.060 --> 18:43.860
+And with that method we saw that virtual machines had the ability to utilize multiple physical adapters.
+
+18:43.940 --> 18:50.570
+We talked about traffic shaping and how it can provide bandwidth control on a per virtual machine basis
+
+18:51.110 --> 18:55.710
+and that traffic shaping is going to be configured on a port group.
+
+18:55.780 --> 19:01.990
+And then finally we talked a little bit about the multiple TCAP IP stacks that are included with VSE
+
+19:01.990 --> 19:07.110
+for sex so that we can use different default gateways for different types of traffic.

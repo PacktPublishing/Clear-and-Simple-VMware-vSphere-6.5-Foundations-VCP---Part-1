@@ -1,0 +1,94 @@
+WEBVTT
+
+00:02.000 --> 00:09.820
+In this video I'll explain content libraries and how they can be used to share content such as templates
+
+00:09.850 --> 00:18.580
+and virtual appliances across multiple Center instances content libraries were introduced with the center
+
+00:18.590 --> 00:28.120
+sex and it's basically a repository of things like templates and ISO images as well as virtual appliances
+
+00:28.140 --> 00:30.970
+or Olivier files.
+
+00:31.130 --> 00:37.660
+You can have a content library that is specific to just a single center instance if you'd like.
+
+00:38.090 --> 00:44.120
+So if you're not setting up linked mode or hybrid linked mode and you don't have modal VSAN or instances
+
+00:44.720 --> 00:46.960
+content libraries can still be useful.
+
+00:49.540 --> 00:53.390
+But they can also be published and can be subscribed to.
+
+00:53.440 --> 01:01.600
+So if you create a content library in one sound or server and you put in a bunch of templates then you
+
+01:01.600 --> 01:03.270
+can go to another B center server.
+
+01:03.310 --> 01:10.480
+Subscribe to that content library and have access to that same collection of ISO images templates and
+
+01:10.480 --> 01:11.860
+virtual appliances.
+
+01:13.760 --> 01:21.260
+So this allows us to share a common set of templates ISOs in virtual appliances across multiple be separate
+
+01:21.260 --> 01:22.670
+instances.
+
+01:22.670 --> 01:24.200
+So heres step.
+
+01:24.350 --> 01:34.750
+We will create a content library in one of our V Center inventory's and then optimally will have multiple
+
+01:34.900 --> 01:41.710
+centers and hybrid linked mode even though its not necessarily a requirement in order to share a contact
+
+01:41.710 --> 01:42.380
+library.
+
+01:42.580 --> 01:48.750
+What we'll do is then publish the content library on the source VI Sandersen room.
+
+01:48.990 --> 01:56.490
+And when we do that it will provide us with a link that we can distribute for any other Center instances
+
+01:56.490 --> 02:03.330
+that we want to allow to subscribe to that content library and then we simply go to the destination
+
+02:03.330 --> 02:04.610
+the center server.
+
+02:04.890 --> 02:11.550
+We go ahead and we add a content library and we specify that we want to subscribe to any existing content
+
+02:11.550 --> 02:15.080
+library and provide that you are around.
+
+02:15.310 --> 02:17.330
+And it's really just as simple as that.
+
+02:17.530 --> 02:24.730
+And on each side you'll have a data store that serves as the repository for all of that content.
+
+02:24.970 --> 02:29.620
+So the two sides will synchronize with each other and you'll have an identical collection of templates
+
+02:29.980 --> 02:34.440
+ISO images and virtual appliances at both locations.
+
+02:34.450 --> 02:40.480
+I want to include a demo with this course as well so if you want to see a content library creation in
+
+02:40.480 --> 02:45.340
+action go ahead and watch a demo and that will give you a really good idea of exactly how to create
+
+02:45.340 --> 02:46.290
+these and manage them.

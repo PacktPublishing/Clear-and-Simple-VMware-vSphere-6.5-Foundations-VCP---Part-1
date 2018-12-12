@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00.450 --> 00:06.860
+Here we see a virtual machine with a virtual scuzzy controller in purple on the left.
+
+00:07.060 --> 00:12.600
+And so as our guest operating system generates scuzzy commands they'll flow out of the virtual machine
+
+00:13.620 --> 00:15.760
+through the virtual scuzzy controller.
+
+00:16.290 --> 00:23.400
+And those storage commands once they get to the ESX host we'll hit what we call a storage adapter.
+
+00:23.630 --> 00:30.440
+And the job of the storage adapter is to prepare the storage commands to traverse whatever our storage
+
+00:30.440 --> 00:33.930
+network is.
+
+00:33.930 --> 00:40.080
+So in this case we're using a software I scuzz the initiator and the software scuzz the initiator is
+
+00:40.080 --> 00:47.870
+going to be bound to a VM kernel port the job of the VM kernel port is to act as an entry point into
+
+00:47.870 --> 00:49.450
+the ether NET network.
+
+00:49.790 --> 00:56.330
+So in this case we can see the VM kernel port is named VM K-1 and it's on a virtual switch that has
+
+00:56.360 --> 00:59.960
+a VM Nic or a physical adapter assigned to it.
+
+01:00.410 --> 01:06.170
+So now as my storage commands leave the VM they hit the storage adapter the storage adapter prepares
+
+01:06.170 --> 01:13.220
+them for transmission on a nice Gazi network and relays to the VM kernel port which then provides access
+
+01:13.220 --> 01:14.960
+to the physical network.
+
+01:15.470 --> 01:18.840
+And now our storage traffic can actually reach the storage array.
+
+01:20.070 --> 01:27.570
+So with the software I suppose the initiator we created two software constructs a VM kernel port and
+
+01:27.570 --> 01:33.480
+a software ice because the initiator and this creates some CPQ overhead on the ESX host.

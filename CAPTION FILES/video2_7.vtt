@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.070 --> 00:06.360
+In this video I'll demonstrate how to install ESX I 6.5 from an ISO image.
+
+00:06.360 --> 00:08.940
+Now there's a few different ways you can do this in real life.
+
+00:08.940 --> 00:09.150
+Right.
+
+00:09.150 --> 00:14.960
+You could use a DVD or you could use auto deploy or a scripted installation.
+
+00:15.000 --> 00:21.450
+In this case I've simply downloaded the ISO switch from VM Moore's website and I'm actually going to
+
+00:21.450 --> 00:27.790
+install ESX II on a virtual machine and I'm going to do this using VM Ware workstation.
+
+00:27.870 --> 00:34.020
+I'm going to create a new virtual machine and I'm going to actually install ESX I'm on this virtual
+
+00:34.020 --> 00:40.470
+machine so I'm going to go ahead and hit Next here and I'm going to tell it I'll install the operating
+
+00:40.470 --> 00:41.270
+system later.
+
+00:41.280 --> 00:43.810
+I'm going to do that using my iso image.
+
+00:44.370 --> 00:50.810
+And in this case I'm just going to choose ESX I 6 but we're actually going to install ESX I top five
+
+00:50.880 --> 00:59.820
+so I'm going to call it ESX I 6:5 demo and I'm going to choose the appropriate disk where I have some
+
+00:59.940 --> 01:02.370
+extra room to put this VM
+
+01:09.560 --> 01:10.880
+in I'll hit next.
+
+01:10.960 --> 01:13.980
+I'll choose the number of processor cores we'll stick with two.
+
+01:14.230 --> 01:17.650
+I'm going to give it a gigs of memory.
+
+01:18.220 --> 01:25.600
+I'm going to use network address translation to provide my virtual machine with a IP address and I'm
+
+01:25.600 --> 01:30.940
+going to choose a new virtual disk I'm going to make it 20 gigs in this case just to keep it a little
+
+01:30.940 --> 01:32.810
+smaller.
+
+01:33.160 --> 01:38.760
+And here's my VM DK It's going to exist for this virtual machine.
+
+01:38.950 --> 01:40.180
+I'll choose customize hardware.
+
+01:40.180 --> 01:42.010
+Here's the important part right.
+
+01:42.030 --> 01:50.640
+I've got a CD DVD drive for this VM and I'm going to go ahead and use an ISO image file.
+
+01:50.650 --> 01:55.410
+All right so I'm going to browse to my ESX host ISO image.
+
+01:55.420 --> 01:56.560
+Let's see where it is.
+
+01:56.560 --> 01:59.420
+VM visor installer 65.
+
+01:59.460 --> 02:05.760
+I'll go hit open here and I'll make sure that I've selected connected power on.
+
+02:05.770 --> 02:11.680
+All right so when I power on this new virtual machine it will boot from the iso image that I've specified
+
+02:12.010 --> 02:14.120
+and I'll go ahead and have finish.
+
+02:14.760 --> 02:15.230
+OK.
+
+02:15.370 --> 02:20.470
+So in real life you're probably going to have a physical host or you're probably going to have some
+
+02:20.470 --> 02:25.920
+sort of media like a DVD or US B media that you're actually going to boot from.
+
+02:26.050 --> 02:27.760
+In this case it's a little bit different.
+
+02:27.790 --> 02:28.120
+Right.
+
+02:28.130 --> 02:35.250
+I'm booting up a virtual machine and installing ESX high on it now isn't powering up this virtual machine.
+
+02:35.250 --> 02:38.370
+It's telling these are some very movable devices that I can get rid of.
+
+02:38.370 --> 02:39.260
+I'm just going to go ahead.
+
+02:39.290 --> 02:40.310
+OK here.
+
+02:40.840 --> 02:47.410
+And so here we see that we actually have ESX II being installed right.
+
+02:47.590 --> 02:54.280
+So this virtual machine is booting from my ESX high ISO image and now it's going to go ahead and take
+
+02:54.280 --> 02:57.110
+us through the ESX eye installation process.
+
+02:57.550 --> 02:59.890
+So I don't really need VM or workstation anymore.
+
+02:59.890 --> 03:05.860
+I'm just going to go ahead and bring this full screen and this part is going to actually take a little
+
+03:05.860 --> 03:06.330
+while.
+
+03:06.640 --> 03:11.430
+It's going to go through and load up everything it needs to install ESX.
+
+03:11.740 --> 03:14.860
+So I'm going to speed up this recording here.
+
+03:15.070 --> 03:20.290
+And so when it comes back we'll take a look at what we need to do to actually complete the installation
+
+03:20.290 --> 03:21.200
+process.
+
+03:23.570 --> 03:29.930
+OK so here we are at the first prompt of our ESX installation wizard I'm going to go ahead hit enter
+
+03:30.560 --> 03:37.130
+to continue and that's 11 to accept the licensing agreement.
+
+03:37.250 --> 03:37.780
+OK.
+
+03:37.970 --> 03:41.840
+And in this screen it's just asking me what virtual disk I want to install.
+
+03:41.840 --> 03:42.940
+ESX I can't.
+
+03:43.430 --> 03:48.110
+So I'm going to go ahead and choose the only virtual this that I have all choose my keyboard layout
+
+03:48.230 --> 03:54.280
+which in my case is U.S. default and I'll choose a root password.
+
+03:54.380 --> 03:55.780
+I'll go hide and hit enter.
+
+03:56.000 --> 04:00.000
+And now it's going to scan my system gather some additional information.
+
+04:00.000 --> 04:05.870
+It's going to confirm that I actually want to install ESX I on that partition that I've selected.
+
+04:05.870 --> 04:10.400
+So I'll go ahead and hit F 11 to continue the installation process.
+
+04:12.980 --> 04:17.660
+OK so now we can see that our installation has been completed.
+
+04:17.650 --> 04:22.440
+We've gone ahead and successfully installed the ESX operating system on the host.
+
+04:22.550 --> 04:28.220
+So I'm going to go ahead and hit enter to reboot the ESX I.
+
+04:28.790 --> 04:32.690
+And then I'm going to take you through the direct console user interface.
+
+04:32.690 --> 04:42.580
+So let's enter I'm also going to take a moment here to disconnect the CD drive from this virtual machine.
+
+04:43.130 --> 04:50.990
+So on this VM I'm going to go ahead and right click it and edit the settings of the virtual machine
+
+04:51.050 --> 04:53.270
+and essentially just remove the ISO image
+
+04:56.090 --> 04:59.800
+that will allow the ESX host to boot up now.
+
+05:00.270 --> 05:08.600
+OK so now that we have successfully installed ESX I I'm going to head off to and log in with the root
+
+05:08.600 --> 05:12.120
+credentials that we established during the installation.
+
+05:12.230 --> 05:15.640
+And here I am at the direct console user interface.
+
+05:15.750 --> 05:22.880
+So now at the DC UI direct console user interface I can go ahead and do things like change my password
+
+05:23.450 --> 05:27.620
+I can configure my management network for this particular host.
+
+05:27.770 --> 05:30.410
+I can restart the management network.
+
+05:30.410 --> 05:37.130
+I can look at logs I can do management network tasks things like that just to make sure that the host
+
+05:37.130 --> 05:39.830
+is actually working properly.
+
+05:39.860 --> 05:47.480
+So this is where you'll do kind of the very basic initial configuration of your ESX host.
+
+05:47.480 --> 05:53.150
+And once that's done you can go ahead and log into the center and add this host to your vse and our
+
+05:53.150 --> 05:54.570
+inventory.
+
+05:55.520 --> 05:57.550
+But that's as far as I'm going to go right now.
+
+05:57.560 --> 06:00.560
+So this is how we go ahead and install ESX II.
+
+06:00.570 --> 06:01.760
+Pretty straightforward right.
+
+06:01.760 --> 06:04.070
+The installation process is pretty easy.
+
+06:04.070 --> 06:11.450
+If you ever want to wipe out your configuration and reset it to like the factory default configuration
+
+06:11.840 --> 06:15.410
+that's what this final menu option of the DCU I can do.

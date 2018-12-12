@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00.530 --> 00:08.470
+In this video I'll explain Fiber Channel 1 masking So all the vices in a fiber channel network are identified
+
+00:08.470 --> 00:17.470
+by a address called the Worldwide name and we can mask which Lund's will be presented to each host based
+
+00:17.470 --> 00:19.540
+on this worldwide name.
+
+00:19.540 --> 00:28.240
+So for example let's take a look on the left hand side at our production ESX host and we want to give
+
+00:28.600 --> 00:32.880
+this Prod. ESX host access to the Prod. lun.
+
+00:33.070 --> 00:39.770
+But we don't want to give it access to the D'Evelyn and these loans are on the same storage array.
+
+00:39.770 --> 00:42.170
+So zoning will not help us here.
+
+00:43.610 --> 00:49.940
+So here we see we want to give this production ESX host access to the production line and we can do
+
+00:49.940 --> 00:56.570
+so based on the worldwide name we can configure that in the fiber channel storage array which worldwide
+
+00:56.570 --> 01:03.140
+names should have access to which lungs and whether they should have read write Read-Only or no access
+
+01:04.610 --> 01:12.040
+so I could grant that particular World-Wide name no access on the Devlin and forbit it from accessing
+
+01:12.040 --> 01:13.430
+that particular volume.

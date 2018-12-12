@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00.620 --> 00:05.840
+In this video I'll explain in independent hardware I scuzzy initiator.
+
+00:06.020 --> 00:14.270
+This is a solution that we can utilize in our ESX host to provide connectivity to an ice cold storage
+
+00:14.270 --> 00:15.940
+array over an Internet network.
+
+00:16.840 --> 00:18.630
+So let's take a look at how this works.
+
+00:18.640 --> 00:23.250
+Here we have a Windows virtual machine on the left with a virtual scuzzy controller.
+
+00:23.380 --> 00:29.500
+And as that virtual machine generates storage commands they flow out of the virtual scuzzy controller
+
+00:30.070 --> 00:33.400
+and they hit a physical storage adapter.
+
+00:33.400 --> 00:41.590
+Now in this case the physical storage adapter is an independent hardware Gazi initiator that has built
+
+00:41.590 --> 00:49.280
+in Ethernet ports so we don't require any sort of VM kernel port in this situation.
+
+00:50.490 --> 00:55.110
+The independent hardware I suppose the initiator is a complete hardware solution.
+
+00:55.110 --> 01:00.110
+We don't need a software I suppose the initiator identified we don't need VM kernel ports.
+
+01:00.120 --> 01:07.710
+It's got its built in Ethernet ports that we can use to connect directly to the storage network and
+
+01:07.710 --> 01:13.260
+the big benefit of the independent hardware I suppose the initiator is that it really leaves a lot of
+
+01:13.260 --> 01:21.360
+the storage workload from the ESX host it makes many of these storage operations independent of the
+
+01:21.360 --> 01:25.120
+current performance of the use of the ESX host.
+
+01:25.140 --> 01:31.670
+Now my storage has its own independent hardware that handles that workload.

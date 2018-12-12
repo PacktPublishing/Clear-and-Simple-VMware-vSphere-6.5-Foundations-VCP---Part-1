@@ -1,0 +1,337 @@
+WEBVTT
+
+00:01.040 --> 00:08.990
+So here you can see I've downloaded the center server appliance ISO and I got this from my VM where
+
+00:08.990 --> 00:09.800
+dot com.
+
+00:09.920 --> 00:12.040
+And so I've downloaded the ISO.
+
+00:12.200 --> 00:17.450
+I've already actually extracted the files to a folder here called VSE.
+
+00:18.050 --> 00:26.930
+And within this folder I'm just going to browse to the CSA UI installer go to Win32 and I'm going to
+
+00:26.960 --> 00:33.730
+go ahead and launch the installer make full screen and I'm going to install I'm going to install a new
+
+00:33.730 --> 00:38.310
+V Center server appliance.
+
+00:38.540 --> 00:44.090
+Now before I even go on here let's close the installer and go back real quick because there's a number
+
+00:44.090 --> 00:46.410
+of different options that are presented here.
+
+00:46.430 --> 00:46.940
+Right.
+
+00:46.940 --> 00:52.970
+Like I could migrate from an existing center server for Windows to visit our server appliance I could
+
+00:53.000 --> 00:56.210
+upgrade an existing V Center server appliance.
+
+00:56.210 --> 00:58.640
+I'm going to choose to do a fresh install here.
+
+00:58.670 --> 01:01.370
+That's the process that I want to demonstrate.
+
+01:01.600 --> 01:04.360
+And so I'm going to deploy a new virtual appliance.
+
+01:04.360 --> 01:08.020
+So I'll go ahead and choose next I'll accept the license agreement.
+
+01:08.170 --> 01:11.900
+You know basic stuff here and then I'll choose the deployment type.
+
+01:12.010 --> 01:21.160
+And in this case I don't believe I'm going to have multiple Center instances that I want to use a shared
+
+01:21.200 --> 01:25.750
+a platform services controller for I'm only going to have one V Center server.
+
+01:26.080 --> 01:30.520
+And so for me it makes sense to go with an embedded platform services controller.
+
+01:30.520 --> 01:37.300
+But if you were to have multiple Center instances then you might want to consider going with an external
+
+01:37.300 --> 01:39.290
+platform services controller.
+
+01:39.310 --> 01:49.270
+So I'll go with the embedded I'll choose next and I'm going to put in the IP address or the end of my
+
+01:49.270 --> 01:50.490
+ESX host.
+
+01:50.500 --> 01:55.490
+So let's grab that.
+
+01:55.490 --> 02:01.580
+So here I am in my VM or workstation environment and you can see here I've got a bunch of virtual machines
+
+02:01.580 --> 02:06.070
+running one of which is a virtual ESX I host.
+
+02:06.140 --> 02:12.320
+So I'm going to go ahead and grab the IP address of that ESX I host so that I have a target to send
+
+02:12.320 --> 02:14.920
+this Vee's center virtual appliance too.
+
+02:15.120 --> 02:17.450
+I mean this is going to be a virtual machine.
+
+02:17.600 --> 02:21.460
+So it needs to run on some yes Exide host.
+
+02:21.590 --> 02:27.800
+So my ESX host is going to be 192 168 dot 199 dot 11
+
+02:32.190 --> 02:33.760
+so I put my IP address.
+
+02:33.810 --> 02:39.660
+I'll put in my username which is Route my password go hadn't hit next.
+
+02:39.670 --> 02:41.990
+That's probably going to kick out a certificate warning.
+
+02:41.990 --> 02:45.170
+Yup I'm going to go ahead and just hit Jess here.
+
+02:48.450 --> 02:53.840
+And now I'm going to set up my appliance virtual machine so I'm going to name the virtual machine.
+
+02:53.850 --> 02:57.460
+V c s a dash lab.
+
+02:57.660 --> 03:03.440
+And I'm going to make my root password something that I can definitely easily remember.
+
+03:03.990 --> 03:06.360
+And now it's going to have me choose the deployment size.
+
+03:06.390 --> 03:09.680
+So how many ESX I hosts.
+
+03:09.690 --> 03:14.290
+Am I going to be dealing with how many ESX I host as is the center need to support.
+
+03:14.370 --> 03:16.870
+How many Reems how much.
+
+03:17.220 --> 03:23.250
+How much memory in s.p use are going to be assigned really depend on the amount of hosts and VAMC that
+
+03:23.250 --> 03:25.130
+this environment needs to support.
+
+03:25.260 --> 03:32.930
+So I'm going to go with the tiny deployment size and the default storage size and I'll hit next and
+
+03:32.930 --> 03:39.080
+you'll notice here that my installer Lague kicked out an error in saying I don't have enough memory
+
+03:39.080 --> 03:42.020
+on the host for the selected profile.
+
+03:42.020 --> 03:49.340
+So I'm guessing my virtualise ESX host doesn't actually have enough memory 10 gigs to support this virtual
+
+03:49.340 --> 03:49.840
+machine.
+
+03:49.880 --> 03:55.370
+So I'm going to go make a quick change there and then we'll come back here and we'll try it again.
+
+03:55.820 --> 04:03.140
+OK so I paused my recording and I actually changed the amount of memory on that ESX host and I also
+
+04:03.140 --> 04:09.460
+freed up some space in my storage to accommodate the swap file for this VM.
+
+04:09.500 --> 04:10.960
+So let's try it again.
+
+04:11.630 --> 04:18.480
+And on this screen I'll choose the data store that my visa under virtual machine will be stored on.
+
+04:18.710 --> 04:22.920
+And now we'll go ahead and assign it some addressing information.
+
+04:23.060 --> 04:30.200
+So I'm going to give it a static IP address and I'm going to provide it with a system name as well which
+
+04:30.200 --> 04:34.480
+is going to be the either the QTL or IP address of the system name.
+
+04:34.490 --> 04:44.320
+I'm going to call it the C as a lab is going to be the name of it.
+
+04:44.330 --> 04:51.270
+And I of course have to put in the fully qualified domain name so I'll call it VC I say dash lab dot
+
+04:51.360 --> 05:04.700
+lab local and I'll go ahead and put in the IP address that I'm going to use 9 2 1 6 8 1 9 9 21 and my
+
+05:04.700 --> 05:10.580
+subnet mask will be 2 5 5 5 5 2 5 5 0.
+
+05:10.580 --> 05:17.810
+It's throwing a warning here basically telling me that the key d'Ayen of the system name is not resolvable
+
+05:17.810 --> 05:19.800
+to this IP address.
+
+05:19.850 --> 05:20.650
+That's OK.
+
+05:20.670 --> 05:34.470
+I'm going to go with 1 9 2 1 6 8 8 1 9 9 1 for the default gateway and DNS server 1 2 2 1 6 8 1 9 9
+
+05:34.950 --> 05:35.500
+4.
+
+05:35.510 --> 05:40.310
+Now of course in your environment you know these addresses are all going to be different.
+
+05:40.340 --> 05:45.030
+And even if you've built your own home lab you're probably going to have some different addresses.
+
+05:45.260 --> 05:50.620
+Some of the problems that I'm having with DNS and stuff like that is because the DNS server set up in
+
+05:50.630 --> 05:56.170
+my lab environment not on this particular PC that I'm recording this class.
+
+05:56.180 --> 06:01.770
+So when I deployed as we sent our share replied into the lab it should work just fine.
+
+06:02.120 --> 06:07.500
+And here gives me all of the details of the configuration that I've created.
+
+06:07.580 --> 06:09.880
+So I'm going to go ahead and hit finish.
+
+06:10.100 --> 06:15.740
+And this is the part that's going to take a pretty long time especially because in my environment my
+
+06:16.070 --> 06:19.470
+large data store that I'm storing this in is very slow.
+
+06:19.700 --> 06:26.160
+So I'm going to pause the recording and allow this suppliants to complete the point.
+
+06:29.870 --> 06:30.630
+All right.
+
+06:30.890 --> 06:33.940
+So that took about 15 minutes in my live environment.
+
+06:34.190 --> 06:40.480
+But my installation of my V Center server appliance is complete.
+
+06:40.580 --> 06:48.110
+So I'm going to go ahead and close the installer here and what it's telling me is to complete the installation
+
+06:48.110 --> 06:48.860
+process.
+
+06:48.860 --> 06:56.060
+Stage 2 I need to go to the web interface the V Center server appliance itself.
+
+06:56.090 --> 07:04.940
+So here we can see I've used the web browser to successfully go ahead and open up the web interface
+
+07:04.940 --> 07:07.390
+to my new Wii center server appliance.
+
+07:07.610 --> 07:11.810
+And now from here I need to continue on with my configuration.
+
+07:12.080 --> 07:18.320
+So I'm going to choose to set up a V Center server appliance and I'll go ahead and I'll put in my my
+
+07:18.320 --> 07:20.580
+route credentials here.
+
+07:21.520 --> 07:26.290
+Log in and I'll begin stage two or actually set up the central server appliance.
+
+07:26.290 --> 07:30.500
+So here's all the configuration settings that I currently have.
+
+07:31.330 --> 07:38.060
+In this case I'm going to use synchronize with the ESX I host for the time synchronization method.
+
+07:39.090 --> 07:43.060
+Just because I don't have an A.P. server set up in my lab environment.
+
+07:43.200 --> 07:46.710
+So I'll just go with that and then I'll go ahead and hit next.
+
+07:50.110 --> 07:52.620
+And it's saving some of the configuration changes.
+
+07:52.640 --> 07:58.100
+If you run into any errors here make sure that you know your DNS server is up and running and working
+
+07:58.100 --> 07:59.360
+properly.
+
+07:59.360 --> 08:05.240
+That's usually the most common cause of problems here is that the Sanish I was unable to communicate
+
+08:05.240 --> 08:15.040
+with DNS now will create my single sign on administrator I don't want to join the customer experience
+
+08:15.040 --> 08:20.740
+improvement programs so I'm going to check that out next and I'll just validate all of my settings here
+
+08:20.740 --> 08:24.130
+which all look great and I'll go ahead and finish.
+
+08:24.370 --> 08:27.030
+And once this process starts you can't stop it.
+
+08:27.040 --> 08:31.360
+Essentially what that message there was is telling me.
+
+08:31.470 --> 08:36.930
+All right so we can see it now I have successfully deployed my center server appliance.
+
+08:37.380 --> 08:39.780
+And at this point it's ready to go.
+
+08:39.780 --> 08:46.770
+So for all of you home lab users out there what I'm going to do now kind of behind the scenes here is
+
+08:46.770 --> 08:52.590
+I've created this new Wii center server appliance I'm actually going to use it to replace my existing
+
+08:52.860 --> 08:55.180
+windows V Center in my home lab.
+
+08:55.350 --> 09:02.670
+So I'm going to do is I'm going to actually deploy this new virtual machine as an overlay and then import
+
+09:02.670 --> 09:04.890
+it into my VM or workstation inventory.
+
+09:05.040 --> 09:11.700
+And that's a pretty straightforward way to allow you to kind of build this VM on one of your lab ESX
+
+09:11.700 --> 09:19.320
+I hosts but then kind of take it out of that lab environment and run the center virtual machine directly
+
+09:19.320 --> 09:21.020
+on VM or workstation.

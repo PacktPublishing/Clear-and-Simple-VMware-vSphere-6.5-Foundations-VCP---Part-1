@@ -1,0 +1,331 @@
+WEBVTT
+
+00:03.230 --> 00:10.370
+In this video we'll take a look at Update Manager and vse fair 6.5 and in my lab environment here I've
+
+00:10.370 --> 00:16.520
+actually deployed the recentre server appliance which comes with Update Manager built right in.
+
+00:17.180 --> 00:25.280
+So I'm going to start by going to hosts and Klosters and here you can see I've won ESX I host that is
+
+00:25.280 --> 00:28.570
+currently being managed by this vse center server.
+
+00:28.730 --> 00:33.570
+And when we go to our ESX host we have a series of tabs here on the right.
+
+00:34.100 --> 00:37.760
+And one of those tabs is the update manager tab.
+
+00:37.880 --> 00:46.140
+And so here we can see the status of update manager as it relates to this specific host.
+
+00:46.240 --> 00:53.640
+I can click on the go to admin view on and manage update manager as a whole.
+
+00:53.640 --> 00:55.310
+Right so that's what I'm going to do here.
+
+00:56.230 --> 00:57.820
+So I'm going to click on manage.
+
+00:57.820 --> 01:01.000
+And here we can see all of the settings for Update Manager.
+
+01:01.000 --> 01:01.570
+Right.
+
+01:01.690 --> 01:07.740
+Like for example where are we going to store the patches for ESX II hosts.
+
+01:07.750 --> 01:15.460
+We can modify our download settings like for example where are we going to download new patches and
+
+01:15.460 --> 01:22.990
+updates and do we want to edit these download sources and add additional downloads sources for maybe
+
+01:22.990 --> 01:26.230
+third party solutions.
+
+01:26.290 --> 01:30.370
+How often do we want to download new patches.
+
+01:30.460 --> 01:37.510
+So do we want to enable a scheduled download and you can see here the next time that my patch downloads
+
+01:37.510 --> 01:45.820
+are going to run is it 4:29 but we can change those scheduling options if we want to.
+
+01:46.030 --> 01:54.290
+We can also set up our notification checks like how often is Update Manager going to check for recalled
+
+01:54.310 --> 01:59.110
+patches or that's what notification checks are.
+
+01:59.460 --> 02:06.690
+And then we can change some other settings like our VM settings do we want a snapshot VM prior to remediation
+
+02:06.720 --> 02:08.840
+so that we can roll back.
+
+02:09.240 --> 02:11.960
+Do we want to automatically turn off.
+
+02:11.970 --> 02:14.640
+Distributed power management.
+
+02:14.910 --> 02:16.780
+Do we want to turn off high availability.
+
+02:16.800 --> 02:21.200
+Mission Control where we've got all these different cluster settings that we can modify as well.
+
+02:24.120 --> 02:26.790
+And here we can see the current host baseline.
+
+02:26.820 --> 02:33.270
+And these are a couple of baselines that come built right in the noncritical host patches and the critical
+
+02:33.570 --> 02:36.360
+hosta patches.
+
+02:36.800 --> 02:43.750
+So what I want to do right now is download the very latest patches for both of these baselines.
+
+02:43.780 --> 02:46.170
+I can see right now they have no content.
+
+02:46.520 --> 02:53.940
+And so I want to go ahead and download all of the latest patches for both of these dynamic baselines.
+
+02:54.020 --> 03:02.740
+That way I have them and now I can go ahead and actually run these patches against my ESX host.
+
+03:03.210 --> 03:08.640
+So I'm going to go back to this download settings screen and I'm going to click on the download now
+
+03:08.640 --> 03:17.400
+button and allow these baselines these dynamic baselines to get updated in that way will know we have
+
+03:17.400 --> 03:19.430
+all of the latest patches here.
+
+03:19.480 --> 03:27.060
+I'm just going to pin this and unpinned this to give myself a little bit more space to work with and
+
+03:27.060 --> 03:34.190
+that I can look at recent tasks and monitor the progress of this patch and definition's download.
+
+03:36.360 --> 03:40.860
+So I'm going to pause my recording for a moment while this is completing.
+
+03:40.910 --> 03:48.290
+OK so I've just resumed my recording and now we can see here that I have a number of noncritical and
+
+03:48.290 --> 03:50.070
+critical patches.
+
+03:50.270 --> 03:57.050
+So my patch definition download worked and I was able to update these two baselines.
+
+03:57.410 --> 04:04.180
+So I'm going to go back to the hosts and cluster screen and from there I'm going to go ahead to this
+
+04:04.190 --> 04:12.940
+ESX I host and I'm going to attach a baseline to it so I'll just click on the attached baseline button
+
+04:14.440 --> 04:22.460
+and I'll go ahead and attach the critical and non-critical host patches baselines to this ESX I host
+
+04:22.940 --> 04:25.930
+and then I'm going to go ahead and scan for updates.
+
+04:26.170 --> 04:34.660
+So what we've basically done as I've said you know for these two hosts we want to figure out if there
+
+04:34.660 --> 04:39.490
+are patches included in these baselines that these hosts need.
+
+04:39.670 --> 04:44.980
+Right so we're going to attach the baselines to the hosts and then we're actually going to scan the
+
+04:44.980 --> 04:53.800
+ESX host to see which of these patches are required for this particular ESX host and what to expect
+
+04:53.800 --> 04:54.170
+we'll see.
+
+04:54.160 --> 05:02.260
+Here is the compliance status will come back as not compliant meaning there are some patches that need
+
+05:02.260 --> 05:04.920
+to be installed on this ESX host.
+
+05:04.930 --> 05:10.540
+So I've got a little bit of a problem here it's saying the host cannot download files from the update
+
+05:10.540 --> 05:17.410
+manager or patch store so there must be something wrong with the network connectivity here between my
+
+05:17.470 --> 05:24.130
+ESX I host and the patch store so I'm going to actually troubleshoot that issue and when I come back
+
+05:24.220 --> 05:27.670
+to the recording here I'll explain what I did to fix it.
+
+05:28.000 --> 05:28.560
+OK.
+
+05:28.660 --> 05:35.590
+So as it turned out my DNS server was down and I'll definitely do it because of the DNS server isn't
+
+05:35.590 --> 05:36.340
+working.
+
+05:36.340 --> 05:41.120
+The ESX I host will not be able to resolve this address.
+
+05:41.170 --> 05:44.790
+Right here we have an address defined for a Visa Center.
+
+05:44.830 --> 05:49.480
+And if my DNS server isn't working that address is going to be unresolvable.
+
+05:49.480 --> 05:56.890
+So I just booted my DNS server back up and now I'm going to try to scan for updates one more time just
+
+05:56.890 --> 06:01.870
+to make sure that it actually works and still presenting that error to me here.
+
+06:02.020 --> 06:09.520
+I'll just go ahead and hit OK and we'll give it a moment and hopefully now that the DNS server is back
+
+06:09.520 --> 06:12.590
+up and running this will work OK and we're all set.
+
+06:12.610 --> 06:13.570
+It's completed.
+
+06:13.570 --> 06:16.700
+So we have now scanned for remediation.
+
+06:16.870 --> 06:22.560
+And as you can actually see I've installed the latest version of ESX eye on this host.
+
+06:22.570 --> 06:25.500
+So it's actually compliant with all the latest patches.
+
+06:25.510 --> 06:25.720
+Right.
+
+06:25.720 --> 06:31.450
+If I go to the summary of the host I can see the build number here and we are on the current build at
+
+06:31.450 --> 06:32.590
+the moment.
+
+06:32.590 --> 06:39.300
+So that's what we would expect to see with Update Manager if we're scanning against a dynamic baseline
+
+06:39.400 --> 06:42.480
+like this and the hosts are already up to date.
+
+06:42.550 --> 06:49.790
+Now that being said I do want to actually remediate something during the course of this video.
+
+06:50.110 --> 06:56.700
+So let's walk through another situation in which we might use Update Manager Okay.
+
+06:56.750 --> 07:02.870
+So now what I want to actually do at this point is go back to my hosts and Klosters veel And what I'm
+
+07:02.870 --> 07:07.510
+going to do is actually go ahead and import a virtual machine.
+
+07:07.610 --> 07:08.300
+Right.
+
+07:08.300 --> 07:14.000
+And the reason I'm going to do this is because of the fact that you know we don't have to apply any
+
+07:14.000 --> 07:21.610
+patches to this host but host aren't the only place where we can use update manager to apply patches.
+
+07:21.860 --> 07:29.070
+OK so here we have an older virtual machine that's actually an old version of virtual hardware and so
+
+07:29.070 --> 07:35.720
+I'm going to go ahead and attach a baseline to it and I'm going to upgrade the virtual machine hardware
+
+07:36.340 --> 07:42.890
+to the latest version so that it will match the hardware version of the ESX I host and then I'm going
+
+07:42.890 --> 07:45.500
+to go ahead and scan this VM for updates.
+
+07:45.530 --> 07:50.480
+I'll go ahead and just ignore VM more tools and virtual appliance and I'm just going to scan it for
+
+07:50.480 --> 07:55.510
+VM hardware updates and see if it could use an update.
+
+07:55.790 --> 07:58.610
+And here's the status that I expected to see.
+
+07:58.840 --> 07:59.170
+Right.
+
+07:59.180 --> 08:00.590
+It's noncompliant.
+
+08:00.590 --> 08:03.840
+The current version of the virgin machine is 11.
+
+08:04.010 --> 08:06.980
+The target version is 13.
+
+08:06.980 --> 08:12.080
+So I'm going to go ahead and click on and remediate and resolve this issue.
+
+08:12.110 --> 08:19.040
+I get this virtual machine upgraded to the latest version of virtual hardware and if I want to I could
+
+08:19.040 --> 08:20.140
+run it right away.
+
+08:20.510 --> 08:23.710
+I could schedule that to happen later on tonight.
+
+08:23.780 --> 08:26.570
+I'm going to go ahead and let it happen right away.
+
+08:26.600 --> 08:29.550
+I could take a snapshot of the virtual machine.
+
+08:29.570 --> 08:31.310
+I'm not going to do this in this case.
+
+08:31.310 --> 08:39.470
+But the main recommendation I would have for you here is if you do decide to take a snapshot set this
+
+08:39.470 --> 08:42.640
+threshold to automatically delete the snapshot.
+
+08:42.840 --> 08:46.350
+Now you don't want to accidentally leave old snapshots hanging out.
+
+08:46.880 --> 08:50.930
+So I'm going to go ahead and leave that at the saying I don't want to take a snapshot there and I'll
+
+08:50.930 --> 08:57.890
+finish and I'll allow update manager to actually go ahead and remediate this virtual machine and it's
+
+08:57.890 --> 08:58.690
+done right.
+
+08:58.730 --> 09:02.920
+So now my virtual machine is on a hardware version 13 which was the target version.
+
+09:02.960 --> 09:06.500
+So I've upgraded this VM to the latest virtual hardware.

@@ -1,0 +1,280 @@
+WEBVTT
+
+00:00.390 --> 00:06.450
+In this video we'll look at some of the basic configuration for an ESX host and we really have two ways
+
+00:06.450 --> 00:09.110
+that we can go about configuring a host.
+
+00:09.120 --> 00:09.340
+Right.
+
+00:09.350 --> 00:15.180
+We can come into the these for web client go under the configure tab and set up all sorts of things
+
+00:15.180 --> 00:17.730
+like storage and virtual switches.
+
+00:17.730 --> 00:21.210
+We can do our licensing configuration.
+
+00:21.360 --> 00:25.460
+We can do time configuration and all of this sort of stuff.
+
+00:25.830 --> 00:34.220
+But what I think I'm actually going to do is demonstrate this using the host client.
+
+00:34.620 --> 00:41.190
+So here I've pointed my browser to the IP address for my ESX I host itself and I'm going to go ahead
+
+00:41.190 --> 00:46.530
+and log in directly to this host and we can do a lot of the basic settings here.
+
+00:46.530 --> 00:48.130
+So under manage.
+
+00:48.240 --> 00:51.360
+Let's take a look at what we can do for the system.
+
+00:51.510 --> 01:00.530
+We have settings like autostart do we want virtual machines to automatically start when the ESX host
+
+01:00.540 --> 01:01.410
+starts.
+
+01:01.410 --> 01:06.540
+And so I'm going to go ahead and use Yassar and I'm going to give it a certain amount of delay so maybe
+
+01:06.540 --> 01:12.680
+I'll say you know what let's wait a few minutes here before we actually start up for our machines and
+
+01:12.690 --> 01:14.250
+when this host starts up.
+
+01:14.940 --> 01:18.360
+And then if we're shutting down the host maybe we want them to stop.
+
+01:18.370 --> 01:21.610
+So I'm going to go ahead and enable auto start.
+
+01:21.990 --> 01:26.680
+And that's one option we can pick the host swap location.
+
+01:26.810 --> 01:27.180
+Right.
+
+01:27.180 --> 01:29.400
+So let's take a look at these configurations.
+
+01:29.400 --> 01:31.440
+Do we want to enable host swap.
+
+01:31.500 --> 01:34.730
+Do we want to pick a specific data store.
+
+01:35.430 --> 01:41.120
+And here's something that you'll probably want to configure the A.P. client right.
+
+01:41.150 --> 01:44.740
+So let's edit settings on our network time protocol.
+
+01:45.180 --> 01:52.590
+I'm going to set it up so that NTPC will automatically start when the ESX host starts and I'm going
+
+01:52.590 --> 01:57.170
+to put in the IP address of my anti-peace.
+
+01:57.870 --> 02:01.560
+And go ahead and hit save here.
+
+02:01.570 --> 02:08.770
+And so now I'm going to refresh the status and I'm going to actually go into actions and start the anti-peace
+
+02:08.770 --> 02:14.140
+service and make sure that this works successfully OK.
+
+02:14.250 --> 02:16.110
+So now a.p is enabled.
+
+02:16.110 --> 02:22.920
+It's running and this ESX host is going to get its time from this anti-peace server.
+
+02:23.090 --> 02:29.380
+So those are some of my basic system settings that we can configure under hardware.
+
+02:29.380 --> 02:34.530
+We can see all the devices we can also see the power management policy as well.
+
+02:34.530 --> 02:36.400
+We're using a balanced policy.
+
+02:36.400 --> 02:38.380
+We're going to just leave that at the defaults.
+
+02:38.380 --> 02:44.200
+Here's my enterprise plus license key if I want to assign a different license I can do that here by
+
+02:44.200 --> 02:46.680
+clicking on the sign license.
+
+02:46.900 --> 02:53.920
+You can see all of the features that are included with this license key down below the license key itself
+
+02:55.100 --> 02:56.850
+under packages.
+
+02:57.080 --> 03:03.200
+Here we can see all of the updates and packages that have been installed and their services we can stop
+
+03:03.230 --> 03:07.720
+and start the different services that are running on the ESX I host.
+
+03:08.090 --> 03:14.690
+So for example let's say that we wanted to disable or enable S-sh.
+
+03:14.990 --> 03:16.860
+Here's the S-sh service.
+
+03:17.420 --> 03:22.030
+I can go ahead and start that service or I can stop that service.
+
+03:22.820 --> 03:25.540
+So I have the ability to start and stop any of these services here.
+
+03:25.710 --> 03:30.290
+So you can see right now A.P. is running right I just started that service
+
+03:34.860 --> 03:37.570
+finally under security and users.
+
+03:37.590 --> 03:45.010
+Let's go to authentication at the moment my ESX host has not been joined to an Active Directory domain.
+
+03:45.060 --> 03:53.640
+I can do that if I'd like to and by joining the host to the domain I can now allow individuals to log
+
+03:53.640 --> 04:01.770
+in to the host and manage it using their domain credentials instead of the root password.
+
+04:01.770 --> 04:03.980
+So this is a security best practice for sure.
+
+04:05.480 --> 04:11.540
+Then under users we can see the users for this particular host if I'd like to I can add individual users
+
+04:11.540 --> 04:18.650
+like Mad Men or whatever the name I want to give it and I can add passwords here and that will allow
+
+04:18.650 --> 04:23.940
+me to have users locally authenticate to this particular ESX I host and manage it.
+
+04:24.220 --> 04:30.960
+And if I want to I can assign different levels of permission to those users.
+
+04:31.050 --> 04:33.460
+Well we can see that under rules.
+
+04:33.620 --> 04:38.440
+So here are the different roles that are available.
+
+04:38.690 --> 04:46.180
+And then I can also configure a lockdown mode so at the moment lockdown mode is disabled.
+
+04:46.580 --> 04:55.550
+If I choose to enable strict lockdown mode what that is going to do is it is going to force any management
+
+04:55.580 --> 04:58.690
+of this host to come through the center.
+
+04:58.880 --> 05:02.480
+I won't be able to launch this host client that we're using right now.
+
+05:02.480 --> 05:03.730
+That won't work.
+
+05:03.980 --> 05:10.760
+I won't be able to launch the direct console user interface or DC UI on this host that'll be locked
+
+05:10.760 --> 05:12.040
+down too.
+
+05:12.110 --> 05:20.090
+So if I enable strict lockdown mode the only way to manage this host is through the center.
+
+05:20.250 --> 05:26.190
+And if the sender has some sort of catastrophic failure or something like that I'm probably going to
+
+05:26.190 --> 05:34.800
+end up rebuilding this ESX host versus normal lockdown mode which enables management through the center
+
+05:35.220 --> 05:36.770
+and the DC UI.
+
+05:37.110 --> 05:43.050
+So I'll still be able to access the local console of those hosts and manage them that way.
+
+05:44.610 --> 05:50.890
+I'm going to leave lockdown mode disable now because at the moment I don't need that any.
+
+05:50.880 --> 05:55.840
+You can also use the host client to do things like add data stores and you can see a couple of data
+
+05:55.840 --> 06:02.020
+stores that we've added here I can create new data stores I can manage my storage adapters and do things
+
+06:02.020 --> 06:09.650
+like add a software I scuzz the initiator and I can see all the ones that my host has access to.
+
+06:09.910 --> 06:11.830
+And I can manage my networking as well.
+
+06:11.850 --> 06:16.580
+Right here we can see the different groups that are available to the host.
+
+06:16.600 --> 06:25.790
+I can see my virtual switches that are available physical Next all the VM kernel ports and I can even
+
+06:25.790 --> 06:30.470
+modify some firewall rules and this is an important security step here.
+
+06:30.470 --> 06:30.770
+Right.
+
+06:30.770 --> 06:43.010
+So I know that in my particular environment the only DNS server is on the 192 dot 168 that 199 address
+
+06:43.010 --> 06:44.380
+range.
+
+06:44.600 --> 06:50.090
+So if I'd like to I can come in here to the firewall and I can say the DNS client is only going to be
+
+06:50.090 --> 07:02.430
+allowed to connect to 1 9 2 1 6 8 1 9 9 0 slashed 24 and now I've created a firewall rule that is essentially
+
+07:02.430 --> 07:04.510
+securing DNS right.
+
+07:04.980 --> 07:11.520
+So this is definitely a security best practice to come in here modify all of these firewall settings
+
+07:12.240 --> 07:16.050
+to only allow the appropriate address ranges.
+
+07:17.410 --> 07:23.350
+And switched back to open wide because this is just my lab environment and I'm not too worried about
+
+07:23.350 --> 07:23.720
+it.
+
+07:26.950 --> 07:32.390
+And then finally the other thing that we can do in the host client is manage our virtual machines.
+
+07:32.500 --> 07:38.630
+So I can go find one of my VM I can right click it and edit the settings on the VM.
+
+07:38.650 --> 07:44.920
+I can power them off I can power them on I can change all of my VM options here so you can manage all
+
+07:44.920 --> 07:48.180
+your virtual machines from this individual host client as well.

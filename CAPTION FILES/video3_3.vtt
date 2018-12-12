@@ -1,0 +1,409 @@
+WEBVTT
+
+00:00.430 --> 00:05.490
+In this video we'll take a look at the Wii's fair distributed switch and talk about how it's different
+
+00:05.880 --> 00:11.800
+than the Wii's fair standards which we'll look at some scalability characteristics of the Wii's fair
+
+00:11.800 --> 00:18.610
+distributed switch and we'll also take some time to examine private villans Allaah ACP and Raut based
+
+00:18.610 --> 00:24.680
+on physical Nick load and some other features that are specific to the vees for distributed switch.
+
+00:26.580 --> 00:34.490
+Now the primary benefit of the VSE for distributed switch is scalability the VSE for distributed switches
+
+00:34.610 --> 00:41.070
+only available with the Enterprise plus licensing addition and it provides a lot of features that a
+
+00:41.070 --> 00:45.300
+standard virtual switch does not.
+
+00:45.330 --> 00:49.730
+Now for scalability here in the slide we see for ESX I hosts.
+
+00:50.010 --> 00:53.640
+And let's assume that we're using Avies first Daynard switch.
+
+00:53.640 --> 01:00.120
+Right so on the first host I'd create a virtual switch and I create a couple of Port groups and the
+
+01:00.120 --> 01:04.440
+process repeats itself every time I add a new ESX I host.
+
+01:04.650 --> 01:13.050
+So if I want a matching configuration on some new host I'm going to need to manually recreate that standard
+
+01:13.050 --> 01:16.510
+virtual switch configuration on each and every host.
+
+01:18.040 --> 01:24.310
+I mean in each house I'll also have to create VM kernel poor it's an associate physical adapters with
+
+01:24.310 --> 01:25.930
+the virtual switches as well.
+
+01:27.040 --> 01:35.320
+So this process can be time consuming and it's also prone to error if you're manually creating many
+
+01:35.380 --> 01:37.230
+standard virtual switches.
+
+01:37.300 --> 01:43.550
+The odds of you making a mistake somewhere along the line get increased as you create more and more.
+
+01:43.570 --> 01:51.070
+Now the goal of the VSE for distributed switch is to automate and centralize a lot of this process.
+
+01:52.270 --> 01:56.250
+So that we don't have the same likelihood of human error.
+
+01:58.720 --> 02:05.350
+So let's say that instead of a VSE fair standards which we decide to go with a distributed switch and
+
+02:05.360 --> 02:12.160
+what do I mean by this term distributed Well it really just means that the switch is created in one
+
+02:12.160 --> 02:21.060
+place and then copies of that virtual switch are going to be distributed to all of my ESX hosts and
+
+02:21.060 --> 02:29.880
+that centralized copy of the VSE for distributed switch is going to be contained in the center.
+
+02:29.940 --> 02:37.560
+So the center is the management plain for the distributed virtual switch and it essentially gives us
+
+02:37.560 --> 02:43.260
+the feel of owning having a single virtual switch to configure.
+
+02:43.320 --> 02:51.170
+Now just to make it very clear the center is the management plane and no traffic flows through the center.
+
+02:51.270 --> 02:54.940
+If the center fails are virtual machines don't lose connectivity.
+
+02:55.380 --> 03:01.950
+Our traffic is going to flow in the data plane which is actually made up of hidden virtual switches
+
+03:02.670 --> 03:07.810
+that V Center distributes to all of our ESX hosts.
+
+03:07.850 --> 03:15.710
+So now we can create a distributed port group in the center and it will be pushed out to all of those
+
+03:15.710 --> 03:22.220
+little hidden virtual switch instances that run on all of my hosts.
+
+03:22.220 --> 03:28.190
+Now when I create a distributed port group I can configure settings like villans like security settings
+
+03:28.220 --> 03:30.460
+like traffic shaping settings.
+
+03:30.710 --> 03:37.660
+And I only have to configure that once and those settings are distributed to all of my ESX I hosts.
+
+03:37.760 --> 03:44.510
+And again not only does this speed up the process of creating these configurations but it also greatly
+
+03:44.510 --> 03:46.750
+reduces the likelihood of human error.
+
+03:47.660 --> 03:55.400
+Another benefit is that if we have a specific security policy it's much easier now to ensure that all
+
+03:55.400 --> 04:01.580
+of our ESX hosts are compliant with whatever network security policy that we've identified.
+
+04:03.970 --> 04:12.130
+Now one side note VM kernel ports don't really change when you start using these very distributed switch.
+
+04:12.180 --> 04:17.280
+Those are still managed on a par ESX I host basis.
+
+04:17.280 --> 04:23.190
+So we still need to create a unique management VM kernel port for every host with its own unique IP
+
+04:23.190 --> 04:29.240
+address that part of the process doesn't really change much when we go from a VCR standard switch two
+
+04:29.270 --> 04:32.330
+of these four distributed switch.
+
+04:32.570 --> 04:39.140
+Now with a VSE fair distributed switch there is a huge list of features that are supported that are
+
+04:39.140 --> 04:41.440
+not supported on a viz for standard switch.
+
+04:41.540 --> 04:43.520
+So let's take a look at a few of these.
+
+04:43.760 --> 04:48.460
+And then the next video will take a look at some more.
+
+04:48.500 --> 04:55.520
+The first feature that I want to talk about is called The Private villans private villans are a feature
+
+04:55.610 --> 04:58.880
+that again is supported only on the vees fair distributed switch.
+
+05:00.140 --> 05:06.290
+And we can use a private VPN to isolate traffic within avellana.
+
+05:06.470 --> 05:09.680
+So let's break down our diagram here.
+
+05:09.680 --> 05:16.100
+Here we see a V for distributed switch and we've configured primary V LAN 10.
+
+05:16.160 --> 05:23.920
+Now within that Valene we've configured a number of secondary villans on the far left we see secondary
+
+05:23.920 --> 05:24.980
+veel and 110.
+
+05:25.030 --> 05:28.620
+That's an isolated Villon in the middle.
+
+05:28.620 --> 05:32.130
+We see secondary veel in 111 and 112.
+
+05:32.130 --> 05:40.650
+Those are community secondary villans and on the far right we see secondary Villalon 10 which is a promiscuous
+
+05:40.800 --> 05:45.500
+secondary Vilayat and down a little bit lower.
+
+05:45.720 --> 05:52.810
+If you look we have a bunch of IP addresses those represent my virtual machines and noticed something
+
+05:52.810 --> 05:54.820
+about those IP addresses.
+
+05:55.030 --> 05:58.250
+They're all in the same address range.
+
+05:58.340 --> 06:04.010
+All of these victims are still on the same primary veel and they can still all be part of the same IP
+
+06:04.010 --> 06:13.490
+address range what we're looking to accomplish here with these private villans is to create some controls
+
+06:13.850 --> 06:23.210
+within Velia and 10 to govern which virtual machines within that Villani are actually allowed to communicate.
+
+06:23.220 --> 06:29.040
+So maybe these virtual machines are owned by different departments or different tenants and we need
+
+06:29.040 --> 06:37.390
+to create some level of isolation while still maintaining a contiguous addressing scheme.
+
+06:37.400 --> 06:43.490
+So let's start by looking at my VM on the left and we have two victims that are in an isolated secondary
+
+06:43.500 --> 06:52.430
+villin any virtual machine that's in a secondary isolated LAN can only communicate with promiscuous
+
+06:52.450 --> 06:55.580
+ports if you notice that last animation.
+
+06:55.580 --> 06:57.740
+Let's watch that one more time.
+
+06:57.740 --> 07:03.140
+The virtual machine on the left attempts to communicate with 10.0 1.1 11.
+
+07:03.530 --> 07:04.790
+And that's not allowed.
+
+07:05.180 --> 07:08.480
+Even though they're on the same secondary V LAN.
+
+07:08.690 --> 07:10.340
+It's an isolated relay.
+
+07:10.670 --> 07:15.550
+And so therefore those virtual machines can't communicate with each other.
+
+07:15.630 --> 07:19.900
+They can only communicate with devices on the promiscuous VLAN.
+
+07:20.040 --> 07:23.610
+That's what an isolated villanous.
+
+07:23.850 --> 07:33.170
+Now in the middle we have a couple of community Valeant and so on the left we have 10 out 1.1 to 12
+
+07:33.200 --> 07:41.210
+and 10 got 1.1 about 13 that are in secondary veel and one 11 and in blue we have 10.0 1.1 got 14 and
+
+07:41.210 --> 07:50.450
+10 that one that one at 15 in secondary veel and 112 and the effect of a community plan is that members
+
+07:50.450 --> 07:57.870
+of the same community Villon are able to communicate with each other right so via SMS in secondary VPN
+
+07:57.920 --> 08:00.910
+what 11 can communicate with each other.
+
+08:01.880 --> 08:07.710
+But if they try to communicate with virtual machines in some other community that's not allowed.
+
+08:08.730 --> 08:14.220
+And of course the community villans can also communicate with any UVM connected to a permis skew is
+
+08:14.220 --> 08:17.930
+secondary via can't think of that almost like your default gateway.
+
+08:18.180 --> 08:25.390
+That's going to be a secondary VLA and that everything is allowed to communicate with another additional
+
+08:25.390 --> 08:32.440
+feature of the vse for distributed which is the NIC teaming method called route based on physical neck
+
+08:32.470 --> 08:37.720
+load or sometimes you'll hear a called load based teaming.
+
+08:37.720 --> 08:42.670
+Now when we were looking at the vees for standard switch lesson we looked at Nick teaming modes like
+
+08:42.730 --> 08:50.280
+originating virtual port ID source Mac patch and IP hash and all of those Nick teaching methods had
+
+08:50.280 --> 08:53.380
+something in common they're not very intelligent.
+
+08:53.580 --> 08:53.860
+Right.
+
+08:53.940 --> 09:01.620
+None of these methods can detect the fact that a physical neck is being overwhelmed and adjust accordingly.
+
+09:03.000 --> 09:09.610
+Load bass teaming or Raut based on physical Nick load is a little bit more complicated than those prior
+
+09:09.610 --> 09:11.050
+methods that we talked about.
+
+09:12.180 --> 09:17.040
+So here we see three virtual machines V.M. one VM to V.M. three.
+
+09:17.160 --> 09:23.690
+And each of those VMT is bound to a specific V.M. neck or physical adapter.
+
+09:23.700 --> 09:29.280
+Right so at the top V.M. one is flowing through the vehement kind of a top and V.M. to nvm three are
+
+09:29.280 --> 09:33.630
+both utilizing the same V.M. neck towards the bottom of the diagram.
+
+09:35.130 --> 09:40.890
+And let's assume that V.M. two and V.M. three generate a lot of traffic.
+
+09:43.330 --> 09:50.620
+The second V.M. neck is likely to be very busy significantly busier than the first V.M. Nick if that's
+
+09:50.620 --> 10:01.860
+the case if this physical neck exceeds 75 percent usage what will happen is virtual machines will be
+
+10:01.860 --> 10:11.440
+migrated to a less busy physical adapter with the goal of reducing that workload on the really busy
+
+10:11.440 --> 10:15.100
+physical neck.
+
+10:15.120 --> 10:21.090
+Now in this case each virtual machine will only be using a single physical adapter and this means that
+
+10:21.090 --> 10:28.400
+when we configure our physical switch we want to make sure not to enable either channel port channel
+
+10:28.850 --> 10:36.070
+LCP we don't want to enable any of those Nic teaming configurations in the actual physical switch.
+
+10:37.500 --> 10:42.950
+LA C.P is a feature that is only available within the Vee's fair distributed switch.
+
+10:42.950 --> 10:47.390
+It's kind of like either channel if you're familiar with Cisco switches.
+
+10:47.480 --> 10:49.960
+This is kind of similar to that.
+
+10:50.060 --> 10:58.130
+It's a way to bond together multiple physical adapters and make them essentially act like one big pipe.
+
+10:58.170 --> 11:03.470
+Right so here we see two V.M. next that are connected to a physical switch.
+
+11:05.090 --> 11:14.330
+And in order to enable LCP We'll start out by configuring link aggregation groups link aggregation groups
+
+11:14.360 --> 11:20.430
+is essentially a way to identify ports that are going to participate in LCP.
+
+11:20.660 --> 11:29.590
+And it's important that both sides match once this is configured the two physical adapters can act as
+
+11:29.590 --> 11:39.260
+one large pipe and we can take advantage of a huge number of Nick teaming methods that are built into
+
+11:39.300 --> 11:40.200
+L.A..
+
+11:40.430 --> 11:46.180
+And here on the right hand side we see a list of all of these different nic teaming algorithms.
+
+11:46.460 --> 11:51.790
+Look at all the different ways we can load balancing traffic.
+
+11:51.820 --> 11:58.240
+This gives us a ton of options and allows us to choose a method that's really ideally suited to the
+
+11:58.240 --> 12:04.690
+type of traffic that our virtual machines generate L.A. C.P. is an open standard.
+
+12:04.760 --> 12:09.810
+It's supported by a wide variety of physical switch vendors.
+
+12:09.900 --> 12:16.440
+So in review we learned about the Vee's for distributed switch we learned about how it's centrally managed
+
+12:16.440 --> 12:23.230
+by the center and how hidden virtual switches are distributed to all of the ESX hosts.
+
+12:23.370 --> 12:24.810
+And that's the data plan.
+
+12:25.200 --> 12:30.470
+So if the center fails there is no impact on traffic.
+
+12:30.720 --> 12:37.020
+We can create distributed port groups that span many ESX hosts and that have identical settings such
+
+12:37.020 --> 12:40.000
+as security settings or traffic shaping settings.
+
+12:42.590 --> 12:47.600
+VM kernel ports and uplink still need to be configured on a host by host basis.
+
+12:47.600 --> 12:54.050
+Those objects are unique to an individual host and then we also looked at private villans and how they
+
+12:54.050 --> 13:00.710
+can be used to create logical segmentation within a VPN.
+
+13:00.740 --> 13:07.260
+We learned about route based on physical neck load or load based teaming that can intelligently migrate
+
+13:07.260 --> 13:11.260
+traffic from one physical adapter to another based on workload.
+
+13:12.730 --> 13:18.160
+And then we learned about a nicknaming method called La C.P that can be used to bomb multiple Ethernet
+
+13:18.160 --> 13:23.940
+connections together and provides a wide variety of load balancing algorithms.

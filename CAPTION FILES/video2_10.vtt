@@ -1,0 +1,346 @@
+WEBVTT
+
+00:02.950 --> 00:10.410
+And this video we'll learn about the center update manager and how it can be used to keep ESX hosts
+
+00:10.500 --> 00:17.810
+virtual machines VM are tools virtual hardware versions and all of those sorts of via VM where vs fair
+
+00:17.820 --> 00:19.020
+specific components.
+
+00:19.020 --> 00:27.780
+Up to date that's the purpose of update manager is to perform patches and upgrades for VSE fair components.
+
+00:27.840 --> 00:30.860
+Automate Patchen version management for VSE fair.
+
+00:30.990 --> 00:37.460
+It supports ESX I host virtual machines and virtual appliances and it must be registered with the VSE
+
+00:37.460 --> 00:38.190
+center server.
+
+00:38.190 --> 00:44.240
+Now some of this is going to get a little bit different as we delve into these spheres 6.5.
+
+00:44.400 --> 00:49.470
+But if you're running the Windows version of the center you can go ahead and install update manager
+
+00:49.590 --> 00:51.640
+right on that same machine.
+
+00:51.870 --> 00:56.910
+So if you're running the center on a Windows virtual machine you can install update manager right on
+
+00:56.910 --> 00:58.430
+that same virtual machine.
+
+00:59.580 --> 01:08.190
+If you're deploying the center server appliance version 6.5 it's bundled directly with the center server
+
+01:08.190 --> 01:10.680
+appliance you don't have to install anything.
+
+01:11.070 --> 01:12.790
+So really easy to manage.
+
+01:12.810 --> 01:16.350
+Everything is manageable right through the web client and 6.5.
+
+01:16.560 --> 01:24.320
+So 6.5 is a big step forward for update manager versus prior versions that it's 100 percent web Klein
+
+01:24.330 --> 01:32.840
+integrated 100 percent bundled with the VSE center server appliance and of course keeping your environment
+
+01:32.840 --> 01:39.950
+properly updated and properly patched mitigates a number of risks by reducing vulnerabilities and by
+
+01:39.950 --> 01:41.710
+providing bug fixes.
+
+01:41.780 --> 01:47.480
+So let's take a look at how Vee's centers update manager works.
+
+01:47.480 --> 01:51.840
+And here we've got the V Center server appliance on the right.
+
+01:51.840 --> 01:59.510
+With Update Manager baked right into it it's built right in and then on the left we have our center
+
+01:59.510 --> 02:00.060
+inventory.
+
+02:00.080 --> 02:08.050
+They've got some ESX I hosts that are part of a cluster and we've got virtual machines.
+
+02:08.190 --> 02:13.970
+One of the first things that we need to establish with our center server is download sources and there's
+
+02:13.980 --> 02:16.510
+a couple that are built right into it by default.
+
+02:16.680 --> 02:22.800
+But just think of your download sources as anywhere that you need to download patches and updates from.
+
+02:22.920 --> 02:28.920
+For example you know we have critical host updates and non-critical host updates we need to get those
+
+02:28.920 --> 02:30.050
+from VM Ware.
+
+02:30.090 --> 02:38.710
+So that's our download source for those particular patches as VM were and those patches will become
+
+02:38.710 --> 02:41.210
+part of a baseline.
+
+02:41.280 --> 02:49.120
+Right so here we see the critical host updates baseline and that includes any patches that VM or deems
+
+02:49.140 --> 02:51.300
+are critical host updates.
+
+02:51.360 --> 02:58.680
+Right that's what we call a dynamic baseline a dynamic baseline is one that automatically gets updated
+
+02:58.680 --> 03:02.010
+with new patches or a fixed baseline.
+
+03:02.220 --> 03:07.610
+That's a specific set of patches that does not change unless we manually change it.
+
+03:09.720 --> 03:11.550
+So we've got our baseline right.
+
+03:11.540 --> 03:20.530
+Our critical host updates baseline and we now need to actually attach that baseline to objects.
+
+03:20.910 --> 03:25.350
+So we're going to attach it to our cluster of ESX hosts.
+
+03:25.530 --> 03:32.370
+I could attach it to my hosts individually or attach at once to the entire quarter and that will allow
+
+03:32.370 --> 03:35.850
+me to apply that baseline across the entire cluster.
+
+03:36.150 --> 03:39.540
+And at that point I have the ability to scan that cluster.
+
+03:39.620 --> 03:39.810
+Right.
+
+03:39.810 --> 03:48.900
+So when we scan it's going to expose which patches are already installed and what you're not and what
+
+03:48.900 --> 03:56.390
+you'll see an update manager is that we'll come back and say this host is not complying it it that means
+
+03:56.660 --> 04:00.540
+this host is missing some of the stuff that's in this baseline.
+
+04:00.580 --> 04:02.860
+It doesn't mean that they're not compatible.
+
+04:03.200 --> 04:10.520
+If they're not compatible it'll tell you that I will say not compatible not compliant means this host
+
+04:10.730 --> 04:13.170
+could use some of the stuff that's in the space line.
+
+04:13.450 --> 04:13.860
+Right.
+
+04:13.910 --> 04:20.150
+So after we scan our host to see which patches they have and which patches they don't we can then remediate
+
+04:20.570 --> 04:23.140
+and push out those updates.
+
+04:23.650 --> 04:27.100
+And like I mentioned there's a few different types of baselines right.
+
+04:27.110 --> 04:37.430
+We've got an upgrade baseline for example upgrading a host from ESX 5.5 to ESX a 6 or 6 to 6.5 we can
+
+04:37.430 --> 04:39.960
+upgrade virtual hardware or VM or tools.
+
+04:40.130 --> 04:48.050
+And then we've got dynamic in fixed patch baselines and like I mentioned on the previous slide those
+
+04:48.050 --> 04:55.160
+dynamic baselines will change on the fly as do patches come out whereas fix have to be manually modified
+
+04:56.540 --> 05:03.740
+and then if you've got additional drivers for example that you need to to install you can use an extension
+
+05:03.740 --> 05:04.470
+baseline.
+
+05:04.520 --> 05:04.720
+Right.
+
+05:04.730 --> 05:13.550
+So for example let's say you have a Cisco U.S.'s blade server that requires a specific storage Dr. I
+
+05:13.550 --> 05:20.190
+can't install that on a group of hosts using update manager and an extension baseline.
+
+05:20.270 --> 05:21.750
+It's an add on of six.
+
+05:21.860 --> 05:30.630
+It's an extension to the ESX I image.
+
+05:30.650 --> 05:31.580
+All right.
+
+05:31.900 --> 05:38.170
+So now we've learned a little bit about Update Manager and we understand that we can use update manager
+
+05:38.170 --> 05:47.620
+to update or even upgrade our ESX hosts but our ESX I host those are our physical servers and we have
+
+05:47.620 --> 05:51.830
+many virtual machines running on those ESX I hosts.
+
+05:51.850 --> 06:00.580
+And so if update manager starts working on performing some sort of upgrade or patching it might need
+
+06:00.580 --> 06:02.030
+to reboot those hosts.
+
+06:04.510 --> 06:06.400
+And we don't want this to be service impacting.
+
+06:06.440 --> 06:08.040
+We don't want our victims to go down.
+
+06:08.410 --> 06:16.130
+So one of the beautiful things about Update Manager is the fact that it is integrated with distributed
+
+06:16.220 --> 06:26.380
+resource scheduler or diarists So update manager will actually leverage Diyar diyas to ensure that there
+
+06:26.380 --> 06:29.800
+is no service impact during our updates.
+
+06:29.810 --> 06:38.390
+So for example here is our critical host updates baseline and I've attached that baseline to these hosts
+
+06:38.570 --> 06:45.410
+that are part of a cluster and I am now scanning those hosts for compliance with that baseline.
+
+06:45.410 --> 06:52.880
+And look at that both hosts are imaging missing patch to both hosts or missing patch 2.
+
+06:52.910 --> 06:56.790
+So these hosts are not compliant with my baseline.
+
+06:57.110 --> 07:01.230
+And at this point I can choose to remediate those hosts.
+
+07:01.250 --> 07:03.460
+I can choose to install those patches.
+
+07:03.890 --> 07:06.250
+And what you will do is this.
+
+07:06.410 --> 07:11.970
+Let's say that ESX 0 2 gets remediated first well is x.
+
+07:11.970 --> 07:18.730
+0 2 is going to have to get rebooted and before it can get rebooted it needs to enter what we call maintenance
+
+07:18.730 --> 07:19.240
+mode.
+
+07:21.380 --> 07:27.860
+If you put a host into maintenance mode what that essentially means is no virtual machines can run on
+
+07:27.860 --> 07:29.350
+this host.
+
+07:29.510 --> 07:34.660
+Its in maintenance mode it should be able to power it off without creating any problems.
+
+07:36.110 --> 07:43.130
+So if I have a host that currently has virtual machines running on it like ESX C02 does in this picture
+
+07:44.250 --> 07:51.210
+if I try to place that host into maintenance mode the IRS is going to recognize that thats going to
+
+07:51.210 --> 07:59.370
+say hey they're trying to put ESX C02 in maintenance mode lets evacuate all of these Reems migrate them
+
+07:59.400 --> 08:05.410
+to other hosts first then the host gets placed into maintenance mode.
+
+08:06.650 --> 08:11.180
+And then all of our patching and updates or whatever needs to get done can get done.
+
+08:11.180 --> 08:17.360
+It can reboot and it won't affect any virtual machines and when it's done the host simply will come
+
+08:17.360 --> 08:21.070
+out of maintenance mode and the next host will continue right.
+
+08:21.080 --> 08:23.920
+ESX 01 will get patched next.
+
+08:23.960 --> 08:29.300
+When that host is placed in maintenance mode the VMS will be evacuated back to ESX zero or two
+
+08:32.840 --> 08:37.310
+so that's pretty cool because it means that you can run updates even in the middle of the day if you
+
+08:37.310 --> 08:38.020
+want right.
+
+08:38.050 --> 08:43.700
+If you've got your Wii motion network solve all figured out and there's no incompatibilities and everything's
+
+08:43.860 --> 08:50.030
+like figured out in good shape you could run update manager in the middle of the day and go and let
+
+08:50.030 --> 08:52.420
+it update all your hosts with no downtime.
+
+08:52.760 --> 08:56.810
+Or you can also schedule remediation with an update manager.
+
+08:56.810 --> 08:59.440
+So if you want to happen at midnight you can do that right.
+
+08:59.450 --> 09:01.840
+It's no problem you can schedule remediation as well.
+
+09:04.110 --> 09:04.650
+All right.
+
+09:04.690 --> 09:12.460
+So Update Manager centralizes and automates patch and version management for VSE fair on ESX I host
+
+09:12.460 --> 09:18.550
+virtual machines and virtual appliances on your VM that can update VM our tools and I can update the
+
+09:18.550 --> 09:19.850
+virtual hardware version
+
+09:22.590 --> 09:29.460
+update manager uses baselines which are collections of patches or upgrades or possibly host extensions
+
+09:29.520 --> 09:31.650
+that can be applied.
+
+09:31.900 --> 09:39.540
+And then we can scan our objects for compliance with Update Manager update manager is built right into
+
+09:39.540 --> 09:46.860
+the V Center server appliance as of these fair 6.5 and we have are three different types of baselines.
+
+09:46.900 --> 09:54.210
+We have patches upgrades and extensions and patch baselines can be either fixed or dynamic.

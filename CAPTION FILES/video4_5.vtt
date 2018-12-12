@@ -1,0 +1,271 @@
+WEBVTT
+
+00:03.030 --> 00:07.430
+And this video will take a look at some of the basics of fiber channel storage.
+
+00:07.590 --> 00:11.690
+Look at how your ESX host connects to a fiber channel storage array.
+
+00:12.120 --> 00:17.940
+And we'll go through some of the basic terminology of Fiber Channel and how we can use it to create
+
+00:17.940 --> 00:19.870
+a VM EF-S data store.
+
+00:22.520 --> 00:27.050
+So Fiber Channel is one of the possible array options that we can choose from.
+
+00:27.050 --> 00:33.200
+We've got other options like I scuzzy or Fiber Channel over Ethan but just really think of the Fiber
+
+00:33.200 --> 00:44.510
+Channel aspect of this as a way to connect our ESX I host to storage and Fiber Channel is a VM FS storage
+
+00:44.510 --> 00:52.470
+option and that means we can do things like Buu and ESX I host from a Fiber Channel line or create Raud
+
+00:52.480 --> 00:54.210
+device mappings.
+
+00:55.200 --> 01:02.280
+So let's talk about some of the pieces that make up our fiber channel storage array and for the moment
+
+01:02.850 --> 01:07.950
+we're just going to focus on the network and the storage array itself.
+
+01:07.950 --> 01:13.890
+So here we see our fiber channel switch fabric and these are our switches are these are the switches
+
+01:14.310 --> 01:18.760
+that connect to the ESX host to the fiber channel storage array.
+
+01:19.050 --> 01:24.030
+And of course in this scenario these are fiber channel switches and so we're going to have fiber optic
+
+01:24.030 --> 01:31.180
+connectors establishing the networking connection between the fiber channel switch fabric and the storage
+
+01:31.180 --> 01:32.640
+array.
+
+01:32.860 --> 01:40.270
+And will they connect to the storage array on these storage processors here now much like I scuzzy know
+
+01:40.300 --> 01:46.270
+you'll hear these concepts repeated when we talk about scuzzy the storage processor is the brains of
+
+01:46.270 --> 01:47.250
+the operation.
+
+01:47.260 --> 01:53.680
+That's what actually provides the compute horsepower for the storage array.
+
+01:54.070 --> 02:01.150
+And it's also what allows the connectivity and it also includes the connectivity ports for our fiber
+
+02:01.210 --> 02:02.690
+optic connectors.
+
+02:04.020 --> 02:11.640
+And then within the storage array itself we have our physical disks maybe we have a shelf or multiple
+
+02:11.640 --> 02:13.960
+shelves of physical disks.
+
+02:13.980 --> 02:21.810
+That's our disk aggregate and the aggregate is all of the capacity the entire capacity of the storage
+
+02:21.810 --> 02:22.340
+array.
+
+02:22.620 --> 02:24.520
+And that's what we call our aggregate.
+
+02:24.540 --> 02:32.310
+And we can take that big aggregate and break it up into smaller chunks called logical unit numbers or
+
+02:32.310 --> 02:34.160
+Lunds.
+
+02:34.310 --> 02:36.040
+So that's what our Lund's are.
+
+02:36.080 --> 02:43.970
+They're essentially just simply a way to take that big chunk of an formatted disk space on across the
+
+02:43.970 --> 02:49.990
+entire raid array or across all of these multiple shelves of desks and break it up into smaller pieces.
+
+02:51.890 --> 02:57.740
+And we'll break it up into sizes that kind of match up with the size of the data stores that we want
+
+02:57.740 --> 02:58.530
+to create.
+
+03:03.290 --> 03:11.090
+So our ESX host connects to a fiber channel network using something called a host bus adapter or an
+
+03:11.250 --> 03:21.510
+HB You can think of the HBK as essentially like a network port specifically to connect to storage.
+
+03:21.560 --> 03:27.910
+So that's how my ESX I host is going to connect up to the fiber channel switch fabric.
+
+03:27.910 --> 03:28.920
+Right.
+
+03:29.120 --> 03:35.790
+And so what is essentially going to happen here in the background is I'm going to have a Windows virtual
+
+03:35.790 --> 03:43.020
+machine or Linux virtual machine doesn't really matter right as that virtual machine generates storage
+
+03:43.020 --> 03:48.910
+commands those storage commands are going to be in the format of scuzzy commands.
+
+03:48.970 --> 03:53.410
+Right so here comes a scuzzy command out of my virtual machine.
+
+03:53.520 --> 04:01.080
+It hits the virtual scuzzy controller on that virtual machine which essentially takes that storage command
+
+04:01.230 --> 04:06.070
+and dumps it into the appropriate storage adapter
+
+04:08.910 --> 04:19.470
+and the job of the storage adapter is to properly format that commands to flow over a network.
+
+04:19.530 --> 04:25.560
+In this case our network is fiber channel network so the network identifiers that we're going to use
+
+04:25.560 --> 04:34.990
+for Fiber Channel are called World Wide names or W.W. And that's what's going to govern the address's
+
+04:34.990 --> 04:38.250
+scheme within my fiber channel switch fabric.
+
+04:38.560 --> 04:46.380
+So the storage adapter receives just basically a regular old scuzzy command it properly formats it forwards
+
+04:46.380 --> 04:51.760
+it to one of these physical ports that connect up to the fiber channels switch fabric.
+
+04:51.910 --> 04:59.860
+And then my storage command traverses the switch fabric hits a storage processor and is directed towards
+
+04:59.860 --> 05:02.950
+the appropriate one.
+
+05:03.100 --> 05:03.530
+Right.
+
+05:03.700 --> 05:11.350
+So think about it every time your virtual machine wants to write to any of its virtual disks or read
+
+05:11.350 --> 05:13.400
+from any of its virtual disks.
+
+05:13.420 --> 05:20.340
+This is what is happening right there there's a data store created way over here on this line.
+
+05:20.650 --> 05:26.410
+Maybe our data store is right here and within that data store theres a folder and within that folder
+
+05:26.530 --> 05:29.060
+there is a VM decay for your virtual machine.
+
+05:29.080 --> 05:34.440
+So every storage command that your virtual machine generates flows over this network.
+
+05:34.450 --> 05:38.970
+So of course latency is a critical consideration here.
+
+05:39.070 --> 05:44.610
+Fiber Channel supports either 8 or 16 gig connections.
+
+05:45.760 --> 05:52.140
+And advice first 6.5 you can have and end full 16 gig connectivity to fiber channel storage array
+
+05:55.390 --> 05:58.680
+multipath thing is another important consideration.
+
+05:58.720 --> 06:03.490
+We want to think about where we want multipath thing for a couple of reasons.
+
+06:03.490 --> 06:08.310
+Number one we have to be able to tolerate the failure of a component.
+
+06:08.320 --> 06:14.800
+Right so if we lose one of these fiber channel switch fabrics to a failure we need to be able to gracefully
+
+06:14.800 --> 06:21.520
+fail over to the surviving fiber channel switch fabric or you know one of my fiber channel ports fails
+
+06:21.520 --> 06:25.860
+or if one of my storage processors fail we need multipath.
+
+06:25.960 --> 06:28.900
+So that we can tolerate those sorts of failures.
+
+06:28.900 --> 06:33.940
+We also want multipath thing for bandwidth purposes as well.
+
+06:33.940 --> 06:41.310
+We want to be able to use multiple paths to send storage commands towards our storage array.
+
+06:41.320 --> 06:49.770
+So in this case we have a fiber channel host bus adapter or HBK that has two physical ports.
+
+06:50.410 --> 06:54.210
+And it's fairly simple multipath thing with fiber channel right.
+
+06:54.240 --> 07:01.480
+We install a physical HBO and HBO has two physical ports which we have connected to fiber channel switch
+
+07:01.480 --> 07:09.550
+fabrics and we've connected those fiber channel switch fabrics to storage processors and now given this
+
+07:09.550 --> 07:19.180
+typology if we lose a component like for example let's say that we lose one of our fiber channel switch
+
+07:19.180 --> 07:20.540
+ports fails.
+
+07:20.850 --> 07:27.880
+Well this fiber channel switch port is now down but as you can see here I still have one port up with
+
+07:27.880 --> 07:31.370
+an active connection to the fiber channel switch fabric.
+
+07:31.540 --> 07:37.870
+So my network is still good and I can still pass all of those storage commands and you know same thing
+
+07:37.870 --> 07:46.270
+if I lose one of my switches or same thing if I lose one of my storage processors I can lose any physical
+
+07:46.270 --> 07:47.440
+component.
+
+07:47.680 --> 07:55.240
+And as long as I don't lose more than one of the same physical component I'm not going to have a storage
+
+07:55.240 --> 07:56.560
+failure.
+
+07:56.780 --> 07:57.040
+Right.
+
+07:57.050 --> 08:04.790
+And the ESX host comes with different what are called espies and S-A teepees.
+
+08:04.860 --> 08:11.020
+We don't need to get too deep into that but past selection plugins and storage array type plug ins that
+
+08:11.020 --> 08:14.350
+do things like path's selection and load balancing.
+
+08:14.410 --> 08:21.370
+So it's going to automatically detect these failures with built in SATB and PSP.
+
+08:21.370 --> 08:24.810
+Is that a baked right into the ESX II image.

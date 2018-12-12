@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00.210 --> 00:06.870
+In this video I'll explain a dependent hardware scuzzy initiator and how it can be used by the ESX host
+
+00:06.870 --> 00:10.220
+to communicate with an ice scuzzy storage array.
+
+00:11.280 --> 00:17.550
+So here we see in our diagram a virtual machine on the left with a virtual scuzzy controller as that
+
+00:17.550 --> 00:19.980
+virtual machine issue storage commands.
+
+00:20.010 --> 00:27.030
+They flow through the virtual scuzzy controller and hit a storage adapter that prepares them for transmission
+
+00:27.120 --> 00:28.810
+over a network.
+
+00:28.920 --> 00:32.400
+In this case we have a physical storage adapter.
+
+00:32.400 --> 00:38.250
+This is different than software I scuzzy where the storage adapter is based on software.
+
+00:38.370 --> 00:44.660
+Here we have purchased some actual hardware that's going to handle that workload.
+
+00:44.830 --> 00:47.890
+Now with a dependent hardware I suppose the initiator.
+
+00:47.980 --> 00:51.450
+It's not a complete hardware solution right.
+
+00:51.580 --> 00:53.650
+It's a physical storage adapter.
+
+00:53.650 --> 00:59.140
+However it still needs to be bound to VM kernel ports that are created in software.
+
+00:59.740 --> 01:06.790
+So while the dependent hardware I suppose the initiator eliminates some of the CPQ overhead that's present
+
+01:06.820 --> 01:09.340
+with a software I see as the initiator.
+
+01:09.340 --> 01:17.890
+It doesn't eliminate all of the overhead from the ESX host entirely to do that we would need an independent
+
+01:17.890 --> 01:22.810
+hardware ice the initiator that includes its own physical ethernet adapters.

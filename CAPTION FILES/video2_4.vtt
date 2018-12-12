@@ -1,0 +1,427 @@
+WEBVTT
+
+00:00.990 --> 00:06.650
+In this video we'll take a look at some of the new V Center features that are available with these first
+
+00:06.840 --> 00:13.500
+five and the first big feature that I want to take some time to examine is called the center server
+
+00:13.500 --> 00:16.400
+high availability.
+
+00:16.430 --> 00:22.610
+This is a really important new feature because what it does is it gives you the ability to protect the
+
+00:22.610 --> 00:26.460
+center server with just native built in tools.
+
+00:26.480 --> 00:26.710
+Right.
+
+00:26.710 --> 00:33.800
+So this takes away a lot of the requirements that we've had in the past for things like V Center heartbeat
+
+00:34.400 --> 00:35.350
+and stuff like that.
+
+00:35.360 --> 00:35.540
+Right.
+
+00:35.540 --> 00:43.860
+This is a really great system that we can use to just use integrated availability for the center server.
+
+00:43.880 --> 00:46.630
+So let's start by breaking down our diagram here.
+
+00:46.640 --> 00:51.280
+So on the far left we have our active V Center server.
+
+00:51.560 --> 00:55.740
+This is the center server that's running right now.
+
+00:55.760 --> 01:02.120
+And let's assume that it's got an embedded platform services controller and we're using the V Center
+
+01:02.120 --> 01:03.220
+share of our appliance.
+
+01:03.290 --> 01:03.720
+Right.
+
+01:04.490 --> 01:11.410
+So we've got our activity center instance it's got the embedded postscripts sequel database.
+
+01:11.480 --> 01:16.250
+It's got the IP address of the V-sign or instance present on it.
+
+01:16.310 --> 01:24.750
+And then we've also got a passive v. center and a witness appliance and the role of the witness is to
+
+01:24.750 --> 01:26.950
+provide quorum.
+
+01:26.960 --> 01:33.160
+So what I mean by that is if there is some sort of scenario where we have a failure.
+
+01:33.620 --> 01:35.150
+And so a failure occurs.
+
+01:35.150 --> 01:39.190
+Well we could have all kinds of different failures.
+
+01:39.290 --> 01:45.230
+There could be all sorts of different failures that could occur and it might not be apparent as to which
+
+01:45.230 --> 01:46.820
+recentre is actually working.
+
+01:48.010 --> 01:53.890
+For example let's say that if something were to break the network connection between the active and
+
+01:53.890 --> 02:00.810
+passive the center well that point the witness will basically provide quorum right I'll say I can reach
+
+02:00.810 --> 02:06.060
+this via sender but I can't reach this other Center.
+
+02:06.100 --> 02:08.530
+It's almost like a voting system.
+
+02:08.530 --> 02:11.280
+So the majority rules in this case right.
+
+02:11.290 --> 02:17.110
+So if the witness and the passivist owner can talk to each other at that point the passivist is going
+
+02:17.110 --> 02:24.620
+to take over and that's the role of the witness in this case is to essentially provide a tiebreaker
+
+02:26.270 --> 02:28.130
+between the active and passive the center
+
+02:32.610 --> 02:37.850
+so it's going to happen in this scenario is the active the center and the passivist center.
+
+02:37.860 --> 02:42.080
+They are going to synchronously replicate their database.
+
+02:42.300 --> 02:46.280
+And what that means is they're going to replicate in real time.
+
+02:46.280 --> 02:46.470
+Right.
+
+02:46.470 --> 02:50.020
+They're going to be constantly kept exactly the same.
+
+02:50.190 --> 02:57.130
+So any time you hear the term synchronous replication that's what that means it's just simply real time
+
+02:57.140 --> 02:58.760
+a replication of data.
+
+02:58.830 --> 03:02.580
+We need to keep these two centers exactly the same.
+
+03:02.580 --> 03:11.930
+So we're going to replicate the database from the act of the center to the paths of the center.
+
+03:11.930 --> 03:15.760
+All right so now let's assume some sort of failure has occurred.
+
+03:15.770 --> 03:16.010
+Right.
+
+03:16.010 --> 03:24.190
+Maybe the ESX I host that the activity center was running on has failed or maybe the data store that
+
+03:24.220 --> 03:27.790
+that active V Center had its files stored on has failed.
+
+03:29.460 --> 03:35.090
+That's one of the beautiful things about this system is it does not assume that we have shared storage.
+
+03:35.100 --> 03:41.530
+It assumes that the active data center could potentially be housed on local storage.
+
+03:41.530 --> 03:48.000
+All right so if that's the case if the activity center was on the local disks of 7 ESX I host and those
+
+03:48.000 --> 03:57.280
+disks failed or the scuzzy controller failed or something like that we it would go out but that's okay
+
+03:57.310 --> 04:04.380
+because we've been constantly replicating this database from our primary center to our passively center.
+
+04:04.390 --> 04:08.260
+So it has an up to date copy of all of the data that it needs.
+
+04:08.260 --> 04:13.360
+And at this point the passive Center and the witness have a quorum.
+
+04:13.570 --> 04:18.640
+They know that the primary Senator the one that was active was now down.
+
+04:18.670 --> 04:20.950
+So there's a fail over that that occurs.
+
+04:20.950 --> 04:30.220
+And at that point the passive sender becomes the active the center it takes over the IP address of the
+
+04:30.280 --> 04:37.360
+active center and it's got a current copy of the database on both of these instances.
+
+04:37.540 --> 04:40.110
+So it has a current copy of all of the data.
+
+04:40.160 --> 04:43.930
+Right it also has a set of files that need to be replicated.
+
+04:43.990 --> 04:49.480
+So every virtual machine has a set of files like VM X Files and things like that.
+
+04:50.640 --> 04:55.860
+Those files also need to get replicated and those happen once every five minutes.
+
+04:58.680 --> 05:01.240
+OK so now the passivist Center has taken over.
+
+05:01.270 --> 05:07.260
+It's now running the databases now got the current IP address the fail over time here is five minutes.
+
+05:07.260 --> 05:08.840
+The recovery time objective.
+
+05:09.030 --> 05:17.160
+So any time you hear that term r t o r t o means recovery time objective and that's simply the amount
+
+05:17.160 --> 05:18.780
+of acceptable downtime.
+
+05:18.950 --> 05:25.290
+So visitors are going to be down for about five minutes for this fail fail over to occur.
+
+05:25.400 --> 05:35.480
+The RPO or recovery point objective is zero recovery point objective specifies how much data can we
+
+05:35.480 --> 05:38.510
+lose how much data loss is acceptable.
+
+05:38.510 --> 05:42.990
+How many minutes of data can we tolerate losing.
+
+05:43.330 --> 05:48.080
+And in this case it's zero because the database is being replicated synchronously.
+
+05:48.080 --> 05:52.680
+So there is no data loss.
+
+05:52.800 --> 05:58.380
+So that's the biggest new feature of the center in these first 6.5.
+
+05:58.440 --> 06:01.080
+It's fairly straightforward to configure this.
+
+06:01.080 --> 06:06.780
+You can go through what's called the Basic workflow and that makes it very easy to set up the basic
+
+06:06.780 --> 06:10.540
+workflow is just like it sounds it's extremely basic.
+
+06:10.560 --> 06:13.030
+It's basically a point and click tool.
+
+06:13.560 --> 06:20.790
+It's automatically going to create those passive nodes in the witness nodes it's automatically going
+
+06:20.790 --> 06:24.840
+to create distress anti affinity rules.
+
+06:24.840 --> 06:32.340
+So you don't have to worry about any of that but if you want to do something more specific to your particular
+
+06:32.340 --> 06:39.780
+needs like spread nodes across multiple host clusters spread nodes across multiple physical locations
+
+06:40.320 --> 06:44.480
+then you need to use the advanced deployment workflow.
+
+06:44.730 --> 06:46.700
+And that's a little bit more complicated.
+
+06:49.270 --> 06:55.500
+It's also more complicated if you're using an external platform services controller.
+
+06:55.500 --> 07:02.450
+Right because we need to provide high availability for the platform services controller as well.
+
+07:03.290 --> 07:11.960
+So we'll provide ha for the platform services controller using a load balancer maybe from you know F5.
+
+07:12.050 --> 07:18.530
+They have a big IP as their big load balancer or if you have the more NSX there's a load balancer included
+
+07:18.530 --> 07:20.360
+with that that you can use as well.
+
+07:20.810 --> 07:26.570
+But regardless if you decide to do an external platform services controller and usually you're only
+
+07:26.570 --> 07:29.380
+going to do that if you have multiple The center server.
+
+07:29.750 --> 07:35.180
+But if you decide to go that route setting up the center server ha becomes a little bit more complicated
+
+07:35.570 --> 07:37.520
+because we need to utilize a load balancer
+
+07:41.760 --> 07:48.790
+Another new feature in for six top five is the native backup and restore of the center.
+
+07:48.810 --> 07:50.120
+Great new feature.
+
+07:50.130 --> 07:57.060
+It allows us to back up the center and the platform services controller from the center appliance management
+
+07:57.060 --> 07:59.420
+interface or VME.
+
+07:59.730 --> 08:06.030
+So the center appliance management interface is simply that little web address on port 54 80 that you
+
+08:06.030 --> 08:09.710
+connect to that allows you to manage the center server appliance.
+
+08:09.920 --> 08:10.360
+Right.
+
+08:10.440 --> 08:16.380
+Or we can also kind of go the new direction here with all of these vees fair tools and use the API to
+
+08:16.380 --> 08:28.850
+set up a native backup that we can send these backups using Sep using FCP or SFP are using HDP or GDP.
+
+08:29.080 --> 08:36.210
+So we can use secure encrypted methods and you can also encrypt the backup as well if you want.
+
+08:36.230 --> 08:38.290
+And then finally what about our clients.
+
+08:38.310 --> 08:45.620
+Well many of you will be sad to find out that there is no more C-Sharp client support than the old thick
+
+08:45.650 --> 08:49.210
+client is no longer supported.
+
+08:49.250 --> 08:51.760
+That's a little bit of bad news for you.
+
+08:51.830 --> 08:59.180
+We still have the VSE faire web client which is the flash based the sphere web client and you can access
+
+08:59.180 --> 09:03.830
+using a web browser but there is some big improvements here.
+
+09:03.830 --> 09:06.140
+And number one it's faster.
+
+09:06.240 --> 09:10.490
+And number two you don't need that client integration plug in anymore.
+
+09:10.620 --> 09:19.320
+So in VSE for sex you had to install a client integration plug in if you wanted to do things like deploy
+
+09:19.740 --> 09:29.340
+virtual appliances IVF or over a virtual appliances You need of the client integration plug in to upload
+
+09:29.340 --> 09:35.380
+a file to a data store or to import or export items from a content library.
+
+09:35.520 --> 09:40.230
+So basically if you were going to run the Vee's for web quite you probably were going to need that client
+
+09:40.230 --> 09:43.990
+integration plug in that's no longer required.
+
+09:44.130 --> 09:53.170
+There is still a plugin available called the Enhanced plugin and the enhanced plug in is specifically
+
+09:53.170 --> 09:56.380
+for Windows pass through authentication.
+
+09:56.650 --> 10:02.410
+So if you're logging into the vees for a web client and you want it to automatically grab your current
+
+10:02.410 --> 10:03.760
+Windows credentials.
+
+10:03.910 --> 10:05.400
+You still need to plug in for that.
+
+10:05.470 --> 10:10.500
+And that's called the Enhanced plug in.
+
+10:10.520 --> 10:14.810
+We also have the T.M. L5 V-Star climb.
+
+10:15.050 --> 10:17.280
+They simply call this the VSE for our client.
+
+10:17.280 --> 10:22.980
+Now the age Tim L5 version of the he's very quiet and that's definitely the future direction.
+
+10:23.010 --> 10:29.360
+You know that and the API the future direction that we're headed here at some point the flash based
+
+10:29.360 --> 10:31.560
+web client is going to be deprecated.
+
+10:31.580 --> 10:38.450
+We're not there yet because the HVM L5 client still doesn't have all the features that the Flash version
+
+10:38.450 --> 10:39.140
+does.
+
+10:39.140 --> 10:45.910
+So we're not quite to the point where we can completely abandon that flash HVM quiet.
+
+10:46.220 --> 10:50.050
+But the future direction is definitely this HMO L5 client.
+
+10:50.390 --> 10:53.820
+We've also got the V Center appliance management interface.
+
+10:53.840 --> 11:01.070
+So if you connect to the V Center server appliance over port 54 80 This will give you some of the basic
+
+11:01.190 --> 11:07.430
+administrative tools for the VSE that are server appliance things like you know network settings and
+
+11:07.460 --> 11:09.630
+updates and stuff like that.
+
+11:09.650 --> 11:17.230
+We also have the VM where host client this is used to connect to individual ESX hosts and it's an eight
+
+11:17.230 --> 11:19.100
+team L5 tool.
+
+11:19.490 --> 11:26.320
+So this replaces that C-Sharp client that we use to use to connect to individual ESX hosts.
+
+11:26.310 --> 11:33.410
+We're now transitioning to an HDMI five based tool called VM or host client.
+
+11:33.530 --> 11:36.630
+And then finally we've got rest API eyes right.
+
+11:36.680 --> 11:43.540
+And these rest API is our programmatic interfaces that we can use integrate with VSE fair.
+
+11:43.550 --> 11:52.580
+This is definitely the long term future direction here is both the best API and HVM L5 based tools that
+
+11:52.580 --> 11:58.300
+don't require flash or any kind of browser specific considerations.

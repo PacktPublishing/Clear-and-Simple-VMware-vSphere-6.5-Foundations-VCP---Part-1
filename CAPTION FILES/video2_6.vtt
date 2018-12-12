@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.690 --> 00:06.960
+In this video I'll demonstrate how to assign license keys to a fair sex environment using the Vee's
+
+00:06.960 --> 00:08.790
+for web client.
+
+00:08.900 --> 00:14.450
+So here you can see I've already logged into the vees faire web quiet and I'm going to go ahead and
+
+00:14.450 --> 00:20.630
+click on hosts and questers and one of the first things you'll notice when we get into the hosts and
+
+00:20.630 --> 00:25.260
+Klosters view is that my host is currently disconnected.
+
+00:25.430 --> 00:29.360
+I haven't ESX I host but but it's disconnected at the moment.
+
+00:29.360 --> 00:35.390
+And if we click on the summary for this host we can see the reason this host is disconnected from the
+
+00:35.390 --> 00:40.830
+center is the fact that the host license is expired.
+
+00:41.060 --> 00:49.910
+So when your host licenses expire and if using an evaluation license for example you will no longer
+
+00:49.910 --> 00:55.340
+be able to use the center to manage those ESX hosts.
+
+00:55.340 --> 01:02.840
+So what I'm going to do is I'm going to actually go to my administration screen and under administration
+
+01:03.020 --> 01:06.040
+I can go ahead and apply some license keys.
+
+01:06.050 --> 01:13.700
+So under administration I will click on license's and you can see here from IVI center Sharra.
+
+01:13.830 --> 01:17.240
+I've got a license that is currently expired.
+
+01:17.340 --> 01:23.280
+You can see from my hosts I've got a license that is currently expired.
+
+01:23.420 --> 01:27.740
+And so what I'm going to actually do is I'll start with the center.
+
+01:27.740 --> 01:31.490
+I'm going to Right-Click my V Center server and I'm going to sign a license.
+
+01:31.970 --> 01:35.420
+And here's my current license key that is expired.
+
+01:35.420 --> 01:39.970
+I'm going to go ahead and hit the plus button and add a new license key
+
+01:43.020 --> 01:48.560
+OK so I'm going to paste in my license key and you'll see this blurred out because I don't want to share
+
+01:48.560 --> 01:54.980
+my license with everybody and I'm going to simply call it the center six is the name of my license key
+
+01:55.950 --> 01:59.230
+and I'll finish.
+
+01:59.320 --> 02:06.490
+And now all apply this license key this new license key to my visa under sever so I'll choose the new
+
+02:06.490 --> 02:08.310
+V Center license key.
+
+02:08.350 --> 02:10.320
+Go ahead and head ok there.
+
+02:10.450 --> 02:15.820
+And now I can see that these are six is successfully license that the license expires in about a month
+
+02:15.820 --> 02:23.530
+or so and then I'm going to go to my hosts and I'm going to perform a similar process and I'll go to
+
+02:23.530 --> 02:26.100
+my host or click on to sign license.
+
+02:26.200 --> 02:29.440
+I'm going to click on the plus button to assign a new license key
+
+02:33.870 --> 02:36.950
+and I'll go ahead and paste my license key in.
+
+02:37.350 --> 02:47.490
+Next call it the sphere and our price plus that's my enterprise plus licensing key and I'll just call
+
+02:47.490 --> 02:52.900
+it licens 1 next and finish.
+
+02:53.000 --> 02:59.240
+And now I've got an appropriate license key that I can actually assign to this ESX I host that is not
+
+02:59.240 --> 03:00.860
+expired.
+
+03:00.860 --> 03:08.960
+I can also go to my licenses find the licenses that have currently expired Selecta those and had X to
+
+03:08.960 --> 03:12.930
+get rid of them just to keep my license inventory nice and clean.
+
+03:13.220 --> 03:23.040
+And now if I go back to hosts and Klosters my host is still disconnected and I can right click it and
+
+03:23.040 --> 03:28.960
+under connection go to connect and it should allow me to reconnect this host.
+
+03:29.090 --> 03:29.880
+And there we go.
+
+03:29.900 --> 03:32.420
+Now my ESX host has been reconnected.
+
+03:32.420 --> 03:34.120
+I can see my virtual machines.
+
+03:34.250 --> 03:37.940
+And now I can start to to this host because he has a valid license key.

@@ -1,0 +1,313 @@
+WEBVTT
+
+00:01.330 --> 00:08.410
+In this video we'll learn about storage virtualization and how storage resources are presented to your
+
+00:08.410 --> 00:09.660
+virtual machines.
+
+00:11.580 --> 00:15.970
+So a virtual machine is similar to a physical machine.
+
+00:16.020 --> 00:20.190
+In many ways it's got an operating system installed on it.
+
+00:20.280 --> 00:26.760
+And in this particular case it's got Windows installed on it and it needs access to you memory network
+
+00:26.760 --> 00:33.320
+storage and the operating system does not know that it's running within a virtual machine.
+
+00:33.330 --> 00:41.600
+So our goal here is to basically trick the guest operating system into thinking that it has real hardware
+
+00:43.010 --> 00:54.200
+so will provide access to memory CPQ storage and networking resources and essentially the goal here
+
+00:54.200 --> 01:00.680
+is to trick the virtual machine into thinking that these are just normal physical resources.
+
+01:01.400 --> 01:11.030
+So from the perspective of the virtual machine and windows in this case Windows needs to see drives.
+
+01:11.340 --> 01:17.100
+When I'm working in the Windows operating system and I'm saving a file or making some sort of change
+
+01:17.580 --> 01:25.090
+those changes need to be written to a drive via a scuzzy command.
+
+01:25.160 --> 01:31.820
+And so as far as the Windows operating system is concerned it needs to see just regular old desks and
+
+01:31.840 --> 01:38.470
+a scuzzy controller just like a physical Windows machine with see.
+
+01:38.490 --> 01:44.340
+So here on the far left we see in our little purple box we've got a Windows VM and the Windows virtual
+
+01:44.340 --> 01:48.010
+machine executes some sort of scuzzy command.
+
+01:50.050 --> 01:53.770
+And we see here it's got a virtual scuzzy controller.
+
+01:54.840 --> 02:01.880
+So Windows has drivers and it appears to Windows like there's a physical hardware scuzzy controller.
+
+02:01.890 --> 02:08.730
+So when Windows has a scuzzy command that needs to be written to the C-Drive it'll send that scuzzy
+
+02:08.730 --> 02:11.670
+command to the Scace controller.
+
+02:11.830 --> 02:17.100
+And if this were to be a physical system that's because the controller would communicate with the local
+
+02:17.100 --> 02:19.650
+physical disks.
+
+02:19.770 --> 02:23.070
+But this isn't a physical machine.
+
+02:23.100 --> 02:24.900
+This is a virtual machine.
+
+02:25.380 --> 02:34.420
+And so when those scuzzy commands are generated and sent to this virtual scuzzy controller they're actually
+
+02:34.420 --> 02:44.230
+being pumped into our hypervisor and our hypervisor is what presents all of the virtual hardware to
+
+02:44.230 --> 02:45.590
+our virtual machine.
+
+02:45.970 --> 02:51.330
+It's this layer of abstraction between the virtual machine and the actual hardware.
+
+02:52.270 --> 02:58.610
+And what it essentially does is it decouples the virtual machine from the hardware.
+
+02:58.820 --> 03:05.650
+Right here we see we have one storage adapter shown on the screen here but there might be multiple storage
+
+03:05.650 --> 03:06.910
+adapters as well.
+
+03:06.990 --> 03:07.520
+Right.
+
+03:07.570 --> 03:12.930
+And there might be multiple physical storage systems that they communicate with.
+
+03:13.090 --> 03:15.510
+None of this really matters to the virtual machine.
+
+03:15.570 --> 03:15.840
+Right.
+
+03:15.840 --> 03:21.130
+The hypervisor can redirect those storage operations to different areas but the virtual machine will
+
+03:21.130 --> 03:26.710
+never be any the wiser and will have no idea where those storage commands are actually going.
+
+03:26.710 --> 03:32.530
+It doesn't know if this is a fiber channel storage or it doesn't know if this is I scuzzy Windows has
+
+03:32.530 --> 03:34.860
+no awareness of any of that.
+
+03:35.860 --> 03:42.910
+So we're decoupling the physical storage from the virtual machine and all the virtual machine sees is
+
+03:42.910 --> 03:50.240
+a virtual scuzzy controller in a C drive or a D drive or whatever drive it happens to be writing to.
+
+03:50.370 --> 03:56.460
+So those scuzzy commands flow out of the operating system through that virtual scuzzy controller and
+
+03:56.460 --> 04:01.510
+the hypervisor takes over from there and directs them to the appropriate storage location
+
+04:05.430 --> 04:06.770
+and the storage location.
+
+04:06.770 --> 04:09.100
+In this case is a VMT OK.
+
+04:09.330 --> 04:11.530
+That's a virtual disk.
+
+04:11.550 --> 04:19.650
+So for every C drive and D drive and drive and every virtual device that a VM has it's backed by a VM
+
+04:19.650 --> 04:22.450
+decay file stored on a data store somewhere.
+
+04:26.080 --> 04:35.010
+So as those scuzzy commands get issued by Windows this virtual machine has a VM decay file that the
+
+04:35.010 --> 04:40.830
+ESX host is aware of and that the ESX I host knows where that VM decay file resides.
+
+04:41.130 --> 04:47.400
+And so those changes those scuzzy commands are going to be pumped over some sort of storage network
+
+04:48.780 --> 04:50.890
+towards that VM DK file.
+
+04:55.400 --> 05:01.460
+And in that manner the changes made by the guest operating system are relate to the virtual disk of
+
+05:01.460 --> 05:02.680
+that virtual machine.
+
+05:06.670 --> 05:12.250
+Now when it comes to our VMT KS And we have a couple options right.
+
+05:12.790 --> 05:19.210
+And let's say that we've created this Windows virtual machine and when you're configuring your VM and
+
+05:19.210 --> 05:25.210
+setting it up you can choose how big you want the virtual desk to be and you can choose whether you
+
+05:25.210 --> 05:29.950
+want that virtual desk to be thin or thick provisioned.
+
+05:30.170 --> 05:37.770
+So in this case let's assume that when we are creating our VM we gave it an 80 gig virtual this right
+
+05:38.430 --> 05:43.580
+but so far we're only actually storing 40 gigs of data right.
+
+05:43.590 --> 05:47.010
+So it's just like any other Windows machine.
+
+05:47.010 --> 05:53.220
+It might have an 80 gig disk but windows and whatever else we're storing on that desk might not add
+
+05:53.220 --> 05:54.570
+up to 80 gigs.
+
+05:54.760 --> 05:55.870
+It might be less.
+
+05:55.920 --> 06:03.060
+So the actual data that's being stored by this VM is only 40 gigs or even though we've given an 80 gig
+
+06:03.060 --> 06:04.430
+desk.
+
+06:04.540 --> 06:13.500
+If we're using a thin previsions disk that gives us some efficiency here because there is 40 gigs of
+
+06:13.500 --> 06:18.120
+actual data Well that's the only space that will actually get consumed on the data store.
+
+06:20.890 --> 06:26.820
+So we don't immediately consume all of the space that's allocated to this VM on the data store.
+
+06:27.710 --> 06:34.780
+It's a much more efficient way to operate if Windows only needs to store 40 gigs of data that's all
+
+06:34.780 --> 06:37.080
+the space that will be consumed on the data store.
+
+06:38.510 --> 06:44.850
+And that's what a thin previsions desk is a thick provision desk is a little bit different.
+
+06:45.230 --> 06:52.150
+If I create an 80 gig thick provision desk it is immediately going to consume 80 gigs of space.
+
+06:52.190 --> 06:53.780
+The data store.
+
+06:53.900 --> 06:58.240
+So why would I ever go with a thick previsions desk.
+
+06:59.040 --> 07:06.090
+Well we now know that a thin provision desk saves space it's very efficient whereas a thick provision
+
+07:06.090 --> 07:10.210
+desk allocates 100 percent of the space upfront.
+
+07:10.350 --> 07:12.900
+And before that space can be used.
+
+07:12.970 --> 07:13.210
+Right.
+
+07:13.230 --> 07:19.650
+Whether we're talking about thin or thick provisioned disks before any of this space can be used the
+
+07:19.650 --> 07:25.760
+blocks that make up that space have to have zeros written to them.
+
+07:25.790 --> 07:33.890
+So if my Virtu machine is about to write some new data to this VMT K and it's about to send some sort
+
+07:33.890 --> 07:40.220
+of you know new new data here the blocks that it's going to right to have to have all zeros written
+
+07:40.220 --> 07:42.970
+to them first.
+
+07:43.220 --> 07:45.170
+And this can take a little time.
+
+07:45.340 --> 07:48.230
+This is going to consume some storage resources.
+
+07:48.230 --> 07:53.470
+The actual process of writing out those zeros.
+
+07:53.550 --> 08:01.200
+So if we are working with the thin provisioned disk none of those blocks are zeroed when the disk is
+
+08:01.200 --> 08:02.030
+created.
+
+08:04.180 --> 08:11.860
+So every time we need to write to a new block of a thin provision to disk there's going to be a little
+
+08:11.860 --> 08:19.480
+bit of a delay there as that block is zeroed out but thick provision desks have all zeros written upfront
+
+08:20.050 --> 08:21.040
+when they're created.
+
+08:21.160 --> 08:26.320
+So they're not going to have to complete that zeroing operation when new data is going to be run.
+
+08:26.320 --> 08:35.050
+So for this reason thick provisioned eager zeroed virtual disks are recommended for VM with write intensive
+
+08:35.050 --> 08:44.570
+work load things like sequel virtual machines or Sharepoint via apps.
+
+08:44.570 --> 08:50.930
+OK so in this lesson we learned that virtual machines are presented virtual hardware and the guest OS
+
+08:50.930 --> 08:53.840
+is not aware that it's running on a virtual machine.
+
+08:53.930 --> 09:00.520
+The guest OS just sees a virtualise versions of hardware that it thinks are real.
+
+09:00.530 --> 09:06.440
+We learned that thin provision disks are space efficient but they don't have the same performance characteristics
+
+09:06.830 --> 09:10.150
+of a thick provisioned eager zero desk.
+
+09:10.160 --> 09:17.760
+So those thin pervasion disks are useful in many cases and their performance is fine in most situations.
+
+09:17.840 --> 09:26.480
+But if you have like a sequel database or a share point or an exchange database availability group those
+
+09:26.480 --> 09:33.500
+sorts of applications write a lot of new blocks and should be configured with thick provisioned eager
+
+09:33.500 --> 09:34.460
+0 or disks.

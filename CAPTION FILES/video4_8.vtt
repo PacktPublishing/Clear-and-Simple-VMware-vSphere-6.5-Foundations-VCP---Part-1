@@ -1,0 +1,226 @@
+WEBVTT
+
+00:00.630 --> 00:08.340
+In this video I'll explain Fiber Channel over Ethan storage Fiber Channel over Internet is one of the
+
+00:08.340 --> 00:15.230
+possible storage array options that we can choose from with VSE for sex Fiber Channel everything is
+
+00:15.240 --> 00:17.950
+very similar to Fiber Channel.
+
+00:17.970 --> 00:26.360
+The only thing that really changes is the network our ESX hosts can boot from a Fiber Channel over ethernet
+
+00:26.360 --> 00:30.310
+storage array and we can create device mappings on it.
+
+00:32.150 --> 00:39.280
+Now we're going to create VM FS five data stores on fiber channel over Ethan at a rate.
+
+00:39.290 --> 00:44.710
+This is a file system that's created by the ESX host.
+
+00:44.730 --> 00:51.660
+So let's talk about the pieces that make up the Fiber Channel over ethernet Sam and for the moment we're
+
+00:51.660 --> 00:58.100
+just going to focus on the storage array components and the network.
+
+00:58.200 --> 01:00.870
+So let's remove everything else from our picture here.
+
+01:02.670 --> 01:08.740
+The fiber channel switch fabric is not used with fiber channel over Ethernet.
+
+01:08.820 --> 01:18.050
+So instead we're going to use ethernet switches and now we have this storage array where we have our
+
+01:18.170 --> 01:21.130
+FCL switches that provide connectivity.
+
+01:21.150 --> 01:26.690
+We have two storage processors shown storage processor one in storage processor or two.
+
+01:26.880 --> 01:34.870
+And the purpose of storage processor one and two is to number one provide connectivity to the network.
+
+01:34.890 --> 01:45.030
+Number two they provide the CPE resources for the storage array and then within the storage array self
+
+01:45.060 --> 01:47.720
+we have an aggregate of disks.
+
+01:47.970 --> 01:53.120
+Maybe its one shelf or two who knows how many shelves of disks that might be.
+
+01:53.490 --> 01:59.460
+But when you add all that space up together that's what we call our aggregate and the storage administrator
+
+01:59.460 --> 02:06.660
+can break up the aggregate into smaller chunks of space called LUNs that's where we'll create our data
+
+02:06.680 --> 02:13.840
+stores the converged network adapter is a hardware interface that is specifically used for Fiber Channel
+
+02:13.840 --> 02:15.650
+over Ethan storage.
+
+02:15.730 --> 02:23.010
+It has the ability to carry our storage traffic as well as standard network traffic over the same interface.
+
+02:23.790 --> 02:25.740
+So let's walk through this process.
+
+02:25.760 --> 02:31.120
+Now here we see a virtual machine a Windows VM on the left with a virtual scuzzy controller.
+
+02:31.590 --> 02:38.220
+And so as the guest operating system generates scuzzy commands they flow out of the virtual machine
+
+02:39.150 --> 02:41.330
+through the virtual scuzzy controller.
+
+02:41.430 --> 02:44.690
+And where do these scuzzy commands go.
+
+02:44.690 --> 02:46.740
+Once they flow out of the virtual machine
+
+02:49.990 --> 02:52.580
+while they hit a storage adapter.
+
+02:53.140 --> 03:00.340
+In this case our storage adapter is the Fiber Channel over ethernet CNA or converged network adapter
+
+03:02.170 --> 03:09.520
+and the job of the storage adapter is to prepare those scuzzy commands that the virtual machine is sending
+
+03:10.240 --> 03:17.110
+so that they can traverse the network as a storage traffic leaves this host.
+
+03:17.180 --> 03:23.910
+It will be assigned a VPN ID and that way the storage traffic can be distinguished from the network
+
+03:23.910 --> 03:28.260
+traffic as it leaves the host.
+
+03:28.370 --> 03:33.110
+So if we look at our virtual machine again notice it's got a virtual scuzzy controller and it's got
+
+03:33.110 --> 03:40.200
+a virtual Nic the virtual Nic as for its network traffic so as that network traffic flows out of the
+
+03:40.200 --> 03:43.120
+virtual machine it'll hit a virtual switch.
+
+03:43.960 --> 03:49.420
+And eventually if it needs to get to some sort of external destination it will hit a VM.
+
+03:49.420 --> 03:59.230
+Nick on the virtual switch and in this case that's the same physical interface on the converged network
+
+03:59.230 --> 04:06.880
+adapter that we're using for storage traffic and the network traffic is on one VPN and the storage traffic
+
+04:06.880 --> 04:08.110
+is on another.
+
+04:08.110 --> 04:14.020
+So that when it hits the switch it can be pushed towards the appropriate network whether it's the storage
+
+04:14.020 --> 04:18.830
+network or our regular data network traffic.
+
+04:18.850 --> 04:23.020
+So here in purple we see a virtual machine with a virtual SCSI controller.
+
+04:23.200 --> 04:30.430
+And as Windows or whatever our guest operating system happens to be as the guest OS generates scuzzy
+
+04:30.430 --> 04:36.300
+commands they flow out of the VM through the virtual scuzzy controller and hit our storage adapter.
+
+04:37.150 --> 04:45.010
+In this case the storage adapter is a software fiber channel over ethernet adapter and this acts as
+
+04:45.010 --> 04:54.390
+an entry point into the ether net network the software fiber channel over either the adapter is bound
+
+04:54.510 --> 04:57.100
+to a VM kernel port.
+
+04:57.160 --> 05:02.890
+So as these scuzzy commands are prepared for transmission across the network by the storage adapter
+
+05:03.370 --> 05:10.000
+they hit that VM kernel port and that gets him into a virtual switch where they can reach the physical
+
+05:10.000 --> 05:13.700
+network through a VM Nic.
+
+05:13.710 --> 05:18.570
+So in this case we have two software constructs that we've created.
+
+05:18.580 --> 05:26.440
+Right we have a software Fiber Channel over Ethan and adapter and a VM kernel port on a virtual switch.
+
+05:27.130 --> 05:34.150
+And by using these software objects to complete the storage roles we're going to introduce some overhead
+
+05:34.440 --> 05:37.680
+and the C.P of the ESX host.
+
+05:37.680 --> 05:42.960
+Now one other important consideration we have to bear in mind when we're designing a storage network
+
+05:43.020 --> 05:44.670
+is redundancy.
+
+05:45.090 --> 05:48.900
+So we have to make sure that we don't have any single points of failure.
+
+05:48.900 --> 05:56.890
+So to address the single point of failure that a VM kernel port can introduce We can create another
+
+05:56.890 --> 06:05.350
+VM kernel port on another virtual switch and we can bind our software Fiber Channel over ethernet adapter
+
+06:05.800 --> 06:13.060
+to both VM kernel ports and have it use round robin load balancing to distribute that storage traffic
+
+06:13.180 --> 06:15.040
+evenly.
+
+06:15.100 --> 06:23.320
+So now even if one of our V.M. next fails or one of our fiber channel over Ethan that switch fails or
+
+06:23.320 --> 06:32.370
+one of our storage processor fails we still have a valid path between the ESX host and the storage array.
+
+06:35.020 --> 06:40.700
+So in summary in this lesson we learned about software Fiber Channel over either net.
+
+06:40.840 --> 06:45.050
+We learned that it uses an Ethernet switch for communication.
+
+06:45.440 --> 06:51.560
+We learned that the ESX hosts can boot from sand with fiber channel over the net and that raw device
+
+06:51.560 --> 06:53.810
+mappings are also supported.
+
+06:53.840 --> 06:59.960
+We learned about a converged network adapter and how it's a specific type of storage adapter for Fiber
+
+06:59.960 --> 07:07.070
+Channel over Ethernet that is used to transmit both storage and network traffic over the same hardware
+
+07:07.070 --> 07:07.870
+device.
+
+07:09.520 --> 07:15.670
+And we also learned about software Fiber Channel over Ethan and adapters that will use a VM kernel port
+
+07:15.940 --> 07:18.330
+to get storage traffic out to the physical network.

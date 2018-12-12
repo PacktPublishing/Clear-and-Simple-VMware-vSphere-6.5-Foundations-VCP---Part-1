@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.630 --> 00:07.330
+In this video I'll explain the role of the center the platform services controller and how they are
+
+00:07.330 --> 00:11.320
+used to manage our ESX I host.
+
+00:11.450 --> 00:13.190
+So here we see a little diagram.
+
+00:13.220 --> 00:20.150
+And basically the point of this diagram is to illustrate that the center is used to manage our entire
+
+00:20.240 --> 00:22.240
+vse fair environment.
+
+00:22.410 --> 00:28.850
+So in the big green box here that represented the center and then within it I might have multiple virtual
+
+00:28.850 --> 00:38.210
+data centers that include ESX hosts virtual machines data stores virtual switches and all of these different
+
+00:38.210 --> 00:44.640
+components that make up my virtual data center but the center is the top level of administration or
+
+00:44.650 --> 00:53.400
+I can use it to manage many ESX I host at once and resetter also hosts my Vee's for web client as well.
+
+00:54.900 --> 01:01.560
+So technically we could actually manage individual ESX I hosts using the Vee's for our client.
+
+01:01.860 --> 01:08.300
+But as the environment continues to grow this starts to become really impractical.
+
+01:08.790 --> 01:15.090
+So the center gives us that central management system so that we can control everything at once from
+
+01:15.090 --> 01:24.630
+one unified web client and not only does V Center give us our central management capability but it also
+
+01:24.630 --> 01:26.910
+makes certain features possible.
+
+01:27.150 --> 01:33.780
+You can't do commotions storage Wii motion high availability fault tolerance depress storage device
+
+01:34.290 --> 01:43.950
+and many other features require V Center to be available so visitors not just a management platform
+
+01:44.190 --> 01:48.230
+it unlocks a lot of capabilities that are not possible.
+
+01:48.360 --> 01:50.520
+If we choose to not deploy center
+
+01:55.310 --> 02:01.550
+so we have a few different options of how we can actually create our V Center server.
+
+02:01.570 --> 02:10.650
+There's the center server appliance or we can deploy the center on a Windows machine and the first option
+
+02:10.920 --> 02:17.850
+is to set up a Windows virtual machine and install the Center on it so we can install the center on
+
+02:17.850 --> 02:22.160
+top of any of the supported versions of Windows.
+
+02:22.170 --> 02:25.230
+This does require a Windows license of course.
+
+02:26.310 --> 02:33.480
+And because it's running on a virtual machine we can protect the center with either high availability
+
+02:33.480 --> 02:34.740
+or fault tolerance.
+
+02:34.740 --> 02:41.890
+So we can give ourselves the ability to recover from a failure of an ESX I host.
+
+02:42.040 --> 02:50.540
+Now we could also potentially deploy the center on a physical server running Windows.
+
+02:50.690 --> 02:54.560
+And this gives us complete segmentation of management.
+
+02:54.680 --> 03:02.180
+We've got our management server running on a separate physical device and this might be required for
+
+03:02.180 --> 03:08.600
+compliance purposes but it's usually not recommended because we can't protect the physical server with
+
+03:08.600 --> 03:10.780
+high availability or fault tolerance.
+
+03:10.850 --> 03:15.270
+So it doesn't have the same level of redundancy that a virtual machine would give us.
+
+03:18.490 --> 03:25.630
+Now an option that's becoming more and more popular is to configure a V Center server appliance and
+
+03:25.630 --> 03:33.630
+the center server appliance is a pre-built preconfigured virtual appliance that's designed to run V
+
+03:33.640 --> 03:34.510
+Center.
+
+03:34.510 --> 03:43.830
+Basically you download it you important to run on an ESX I host and you immediately have a complete
+
+03:43.850 --> 03:45.440
+the center configuration.
+
+03:45.570 --> 03:51.120
+That's very easy to install very easy to upgrade and it's a virtual machine that can be protected with
+
+03:51.120 --> 03:54.260
+high availability or fault tolerance.
+
+03:54.480 --> 04:02.790
+And we don't require a Windows license so traditionally the windows V Center has been more popular because
+
+04:02.790 --> 04:11.280
+it had a higher set of features it was compatible with additional databases it could support more virtual
+
+04:11.280 --> 04:17.250
+machines more ESX I host but now we have feature parity between the two.

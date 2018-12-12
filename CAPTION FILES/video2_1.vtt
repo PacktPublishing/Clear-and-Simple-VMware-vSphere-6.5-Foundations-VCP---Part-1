@@ -1,0 +1,106 @@
+WEBVTT
+
+00:02.330 --> 00:07.860
+This video I'll give you a basic explanation of the different licensing editions that are available
+
+00:08.340 --> 00:14.590
+with Vee's for and I'm just on the via my web site to take a look at the different licensing editions
+
+00:14.590 --> 00:16.000
+available here.
+
+00:16.000 --> 00:18.320
+So let's scroll down a little bit.
+
+00:18.370 --> 00:24.280
+And by the way if you want to find this web site just go to Google and type in Vee's for licensing editions
+
+00:24.610 --> 00:26.210
+and you'll find this.
+
+00:26.290 --> 00:28.300
+And here we have the different licensing editions.
+
+00:28.300 --> 00:34.280
+We've got Wiis first standard and vse for enterprise Plus are the two that I really want to focus on.
+
+00:34.870 --> 00:41.980
+So with these first standard and Vee's for enterprise Plus there are different features supported with
+
+00:42.010 --> 00:50.070
+each of these additions like for example both additions support storage Wii motion these very data protection.
+
+00:50.470 --> 00:52.490
+Here's a good example of a difference.
+
+00:52.600 --> 00:58.920
+This first standard only supports fault lines for virtual machines with two virtual C-p use whereas
+
+00:58.930 --> 01:02.800
+enterprise plus supports virtual machines with four virtual use.
+
+01:02.920 --> 01:08.470
+And so there's a number of these little differences here virtual machine encryption is not supported
+
+01:08.470 --> 01:09.690
+by vse for standard.
+
+01:10.030 --> 01:18.520
+And a lot of these resource control type tools like Diyar ass storage depress storage IO control network
+
+01:18.520 --> 01:26.680
+IO control these things are not supported by the VSE standard licensing edition.
+
+01:26.780 --> 01:33.080
+So you need to be aware of some of the basic features that are not supported by Standard and some of
+
+01:33.080 --> 01:39.860
+the critical ones are distributed switches host profiles and the two or three that I just mentioned
+
+01:39.860 --> 01:46.310
+up here Diyar ass and storage DRM storage are cultural and network IO control.
+
+01:46.310 --> 01:54.350
+Those are some really important ones to understand are not supported by vse for standard.
+
+01:54.460 --> 01:59.450
+And if we keep on scrolling down there's a couple of other licensing additions as well.
+
+02:00.720 --> 02:02.240
+We've got the.
+
+02:02.340 --> 02:07.350
+And there's also some other features like if you want to see the business continuity features of each
+
+02:07.350 --> 02:11.340
+licensing edition we can see those in availability.
+
+02:11.340 --> 02:14.280
+We've also got these for essentials.
+
+02:14.280 --> 02:23.610
+Licensing model so essentials supports a maximum of three ESX I hosts essentially Plus again a maximum
+
+02:23.610 --> 02:31.490
+of three ESX I host with two processors each essential Plus does come with a number of features though
+
+02:32.010 --> 02:39.960
+provided by the center like the motion high availability for data protection endpoint and these for
+
+02:39.960 --> 02:41.370
+replication.
+
+02:41.400 --> 02:43.560
+So those are different licensing options.
+
+02:43.560 --> 02:51.360
+And if you scroll a little further down it starts to break down the cost per processor of each.
+
+02:51.360 --> 02:58.590
+And there's also of course going to be no pricing required for maintenance as well.
+
+02:58.620 --> 03:05.040
+So always bear that in mind as well in real life if you're purchasing these for licensing you're probably
+
+03:05.040 --> 03:07.920
+going to have to purchase a support contract as well.

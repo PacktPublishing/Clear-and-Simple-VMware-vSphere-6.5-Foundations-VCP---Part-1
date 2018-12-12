@@ -1,0 +1,142 @@
+WEBVTT
+
+00:03.150 --> 00:10.300
+In this video I'll demonstrate how to import a virtual appliance and have it run on one of our ESX hosts.
+
+00:10.370 --> 00:17.420
+So I'm just going to grab this first hosts here and I will right click and I'm going to choose deploy
+
+00:17.460 --> 00:25.330
+OVL template and now I just have to browse to wherever I've stored this virtual appliance.
+
+00:25.350 --> 00:25.950
+Right.
+
+00:26.020 --> 00:31.850
+I may just browse to my vendors you Arel and grab the virtual appliance from there.
+
+00:31.960 --> 00:36.620
+Or I may have downloaded a virtual appliance and stored it directly on my computer.
+
+00:36.760 --> 00:41.480
+So let's do that I'm going to go local file and I'm going to hit browse.
+
+00:42.190 --> 00:49.120
+And here I see I've got an OVL file that I can import so I'm going to go out and grab this and I'll
+
+00:49.270 --> 00:57.810
+open and next and what it's going to do is it's going to use those files that OVL files is basically
+
+00:57.810 --> 01:02.030
+a complete virtual machine right now with an OVL.
+
+01:02.040 --> 01:06.110
+You might actually have multiple files associated with that via.
+
+01:06.240 --> 01:09.360
+In that case you need to select all of those files.
+
+01:09.780 --> 01:18.130
+If you're dealing with an old vi a that's a single file format so it's only one file to grab.
+
+01:18.500 --> 01:27.300
+But call this VM demo Rick Creasey Oh we have.
+
+01:27.440 --> 01:31.680
+This is a virtual machine that I'm going to deploy from my OVL template.
+
+01:31.790 --> 01:35.770
+I'll pick an ESX host for it to run on.
+
+01:36.360 --> 01:42.710
+I'll pick a data store to store it on and it's going to give me the details of the V.F..
+
+01:42.710 --> 01:48.950
+Right so what essentially the V.F. is is a pre-built preconfigured a virtual machine.
+
+01:48.950 --> 01:55.750
+It's got settings like how many virtual C.P. use and how much memory and all of that sort of stuff.
+
+01:55.850 --> 01:57.050
+I'll show me the vendor right.
+
+01:57.050 --> 02:01.640
+This happens to be a V Center server appliance so it'll show me the vendor.
+
+02:01.960 --> 02:07.750
+It will wow me to accept any licensing agreements that they've put in there.
+
+02:07.750 --> 02:09.520
+I'll go ahead and accept those.
+
+02:09.530 --> 02:15.770
+Next I'm going to do a tiny V Center and these options are all dependent on the type of app that you're
+
+02:15.770 --> 02:16.410
+deploying.
+
+02:16.460 --> 02:16.770
+Right.
+
+02:16.790 --> 02:22.600
+So some of the stuff you're seeing here is specific to the center.
+
+02:22.860 --> 02:28.590
+I'm going to do a thin provisioned virtual desk I'm going to put it on my big data store and I'm going
+
+02:28.590 --> 02:31.230
+to connect my virtual Piet's to some networks.
+
+02:31.320 --> 02:34.650
+I'm just going to drop it in an isolated network here.
+
+02:35.070 --> 02:36.470
+And that's really about it.
+
+02:36.520 --> 02:40.560
+Right now I've got some other options I can set up like do I want to change.
+
+02:40.830 --> 02:47.220
+Do I want to choose the customer improvement program from VM Where do I want to change the networking
+
+02:47.220 --> 02:51.260
+configuration all the IP addresses all that sort of stuff.
+
+02:51.270 --> 02:52.090
+Right.
+
+02:52.200 --> 02:56.250
+So I should go ahead and configure those options.
+
+02:56.250 --> 03:01.170
+I was just going to kind of gloss over those for the purposes of this recording but depending on what
+
+03:01.170 --> 03:08.280
+type of virtual appliance you're going to configure right different vendors will have different options
+
+03:08.460 --> 03:11.040
+for different virtual appliances.
+
+03:11.310 --> 03:13.730
+So I'll just go ahead and hit Next here and finish.
+
+03:13.890 --> 03:21.090
+And what it's going to do is it's going to pull that over Yeff template into my data store and deploy
+
+03:21.090 --> 03:22.840
+a new virtual machine based on it.
+
+03:22.920 --> 03:25.500
+And look at how quickly that happened.
+
+03:26.040 --> 03:31.350
+So now if I wanted to I can go ahead and power this VM on and make it work.
+
+03:31.380 --> 03:36.420
+But when I'm actually going to do in this case since I do not want this virtual machine I'm going to
+
+03:36.420 --> 03:38.060
+wait for this to finish.
+
+03:38.170 --> 03:43.620
+It's still in the process of being deployed and once it's done I'm just going to delete it from desk.

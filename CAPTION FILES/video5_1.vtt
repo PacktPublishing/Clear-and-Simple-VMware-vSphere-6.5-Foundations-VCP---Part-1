@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00.790 --> 00:05.020
+In this video I'll demonstrate how to clone a virtual machine.
+
+00:05.960 --> 00:14.540
+So I'm going to start by simply grabbing this app VM and right clicking it and under the app VM I have
+
+00:14.540 --> 00:20.440
+the option to clone this virtual machine either to a template or to another virtual machine.
+
+00:20.450 --> 00:23.230
+So I'm going to clone it to another virtual machine.
+
+00:23.390 --> 00:25.780
+I'm going to call it a wreck.
+
+00:25.870 --> 00:26.350
+The
+
+00:29.040 --> 00:33.000
+quote the name of my virtual machine.
+
+00:33.270 --> 00:34.820
+I'll go ahead and hit next.
+
+00:36.140 --> 00:40.860
+And I'm going to pick an ESX host for this clone to run on it.
+
+00:40.890 --> 00:47.570
+Next one more time I'll choose the virtual desk format which is going to be thin provision.
+
+00:47.610 --> 00:53.330
+In this case I'm going to put up my big data store I'll hit next.
+
+00:53.510 --> 00:57.740
+And at this point I'm going to choose a couple options here or I'm going to choose to customize the
+
+00:57.740 --> 00:59.330
+guest operating system.
+
+00:59.750 --> 01:03.830
+I'm going to choose to customize the virtual machines hardware and I'm going to choose the power on
+
+01:03.830 --> 01:07.050
+this VM after it's done being created.
+
+01:07.220 --> 01:16.520
+So to customize the guest operating system I can now choose one of my customisations specs.
+
+01:16.520 --> 01:24.730
+And if you watched my video on templates you saw me create this customization spec all of the Windows
+
+01:24.730 --> 01:32.320
+settings that need to be unique like Exidy like the computer name like the IP address they're all specified
+
+01:32.320 --> 01:34.240
+within this customisation spec.
+
+01:34.570 --> 01:42.850
+So when I clone this VM all of its settings are going to be scrubbed within windows and made unique
+
+01:45.770 --> 01:49.580
+and the virtual machine will actually automatically join the domain as well.
+
+01:49.580 --> 01:50.550
+The new virtual machine.
+
+01:50.550 --> 01:56.060
+Well as long as my customization spec has those domain credentials.
+
+01:56.060 --> 01:58.700
+And then they can change the virtual hardware right on my clone.
+
+01:58.700 --> 02:04.550
+So if I want my clone to have more memory or if I want my clone to have to sleep use instead of one
+
+02:05.000 --> 02:09.410
+and maybe I want to give it less virtual disk space I can change all these options.
+
+02:09.410 --> 02:12.850
+Actually I can't give it less virtual desk space and give it more.
+
+02:13.100 --> 02:16.870
+I can't make the virtual disks smaller.
+
+02:17.020 --> 02:19.760
+And at that point I can just hit next and I'm ready to complete.
+
+02:19.930 --> 02:25.570
+And if I hit finish we can monitor the progress and recent tasks actually have some other cloning operations
+
+02:25.570 --> 02:27.310
+going on right now as well.
+
+02:27.340 --> 02:31.750
+But here you can see the cloning operations that have just kicked off.
+
+02:31.870 --> 02:37.570
+And so I'm going to have another virtual machine call the rick Creasey app clone that's exactly the
+
+02:37.570 --> 02:44.050
+same as app except for it's going to go through the windows customization process.
+
+02:44.290 --> 02:48.490
+So it will have a unique ID and unique computer name and an all that good stuff.

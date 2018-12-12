@@ -1,0 +1,406 @@
+WEBVTT
+
+00:02.400 --> 00:07.020
+In this diagram we see that we have created a Sam cluster.
+
+00:07.130 --> 00:15.320
+We have three ESX I host is like size 0 1 0 2 0 3 and we've created our hand network and we've established
+
+00:15.350 --> 00:17.090
+a VSE and closter.
+
+00:17.090 --> 00:26.660
+So within a sand cluster we've got all of these local disk groups that comprise the actual storage capacity
+
+00:27.170 --> 00:28.780
+of VSAN.
+
+00:29.000 --> 00:36.680
+So in order to allow all of these hosts to communicate with each other and to leverage storage space
+
+00:37.010 --> 00:42.800
+that is on the other hosts we need a fast network and that's what we have pictured here.
+
+00:42.800 --> 00:49.110
+So first off we've got redundant 10 gig physical networks right.
+
+00:49.130 --> 00:52.550
+This is the ideal configuration we want.
+
+00:52.550 --> 00:54.600
+Number one we definitely want redundancy.
+
+00:54.890 --> 01:00.890
+And number two we definitely want a 10 gig network because what we could have is you know VMI that are
+
+01:00.950 --> 01:09.170
+running on one ESX host maybe over here but some of those VM files might be stored on another other
+
+01:09.170 --> 01:10.520
+ESX I host.
+
+01:10.790 --> 01:19.430
+So this needs to be fast like a storage network and all of the Vee's San traffic is going to flow over
+
+01:19.460 --> 01:24.420
+a VM kernel port that has been specifically marked for VSE and traffic.
+
+01:24.770 --> 01:34.160
+So if my VM is running on a host ESX size 0 1 and it needs to read or write to or from storage those
+
+01:34.160 --> 01:41.310
+storage commands are going to hit my VCM VM kernel port there are going to flow over one of these adapters.
+
+01:42.100 --> 01:48.880
+Through the physical network back up through a physical adapter on the destination host hit the vse
+
+01:48.880 --> 01:57.710
+and VM kernel poor and then flow through to the destination object thats being stored in VCM.
+
+01:58.130 --> 02:00.560
+And so that network needs to be fast.
+
+02:00.610 --> 02:05.510
+Right you think about this is a virtual machine interacting with its virtual desk interacting with its
+
+02:05.510 --> 02:09.980
+C-Drive that needs to be really low latency.
+
+02:10.070 --> 02:11.840
+So we need a 10 gig network.
+
+02:12.440 --> 02:17.390
+And in this scenario theres no load balancing across the two networks.
+
+02:17.390 --> 02:23.460
+All right we're not going to be able to leverage no VM neck wan and VM Nicktoons simultaneously.
+
+02:23.690 --> 02:25.380
+That's not the way it works.
+
+02:25.460 --> 02:28.100
+So we're not going to be able to leverage both networks.
+
+02:28.100 --> 02:34.160
+The second network connection is simply for redundancy purposes.
+
+02:34.160 --> 02:34.450
+Right.
+
+02:34.460 --> 02:39.960
+So now we have a physical switch failure or a VM neck failure.
+
+02:40.160 --> 02:45.890
+We can tolerate those failures and our and our storage network will continue to function.
+
+02:45.990 --> 02:54.330
+By the way if you're not aware of VM neck that's a physical ethernet adapter on an ESX host so you can
+
+02:54.330 --> 03:03.140
+see on ESX Hiser one we've got one VM kernel port marked for VSE and and it is utilizing VM next zero
+
+03:03.380 --> 03:06.650
+as its active adapter VM like one.
+
+03:06.710 --> 03:11.990
+Maybe we set that up as a standby physical adapter in case VM like zero fails.
+
+03:14.660 --> 03:20.360
+So let's take a look under the under the hood here and see how virtual machine objects are actually
+
+03:20.360 --> 03:22.670
+stored on virtual sand.
+
+03:23.180 --> 03:28.250
+The data that makes up a virtual machine is actually broken down into different objects.
+
+03:28.250 --> 03:32.590
+One of those objects is going to be a VM DK.
+
+03:32.690 --> 03:38.840
+Other objects include the swap file the whole namespace snapshots things like that there's multiple
+
+03:38.840 --> 03:41.260
+objects that make up an individual VM.
+
+03:41.570 --> 03:44.830
+And if you're interested in more on this feel free to reach out.
+
+03:44.990 --> 03:52.370
+I teach Lively's and classes frequently there anyways so my virtual machine is broken down into multiple
+
+03:52.460 --> 04:02.900
+objects and San then takes those objects and mirrors them across multiple ESX I hostes based on the
+
+04:02.900 --> 04:06.390
+policies that we have defined right.
+
+04:06.440 --> 04:11.870
+So maybe for example for VM one we're just going to get into the basics of how this works and I could
+
+04:11.930 --> 04:13.250
+go super deep.
+
+04:13.370 --> 04:20.810
+But for V.M. one maybe we have specified you know what VM one needs to tolerate one host failure.
+
+04:21.060 --> 04:29.650
+So we are going to store VM one VM DK file here on ESX 02 and maybe that's the active VM DK file and
+
+04:29.650 --> 04:33.870
+any time VM one needs to read or write from that desk it's using that VMT OK.
+
+04:34.080 --> 04:39.750
+But then we're going to store a second copy of it over here on ESX Hiser or three.
+
+04:39.740 --> 04:40.150
+All right.
+
+04:40.290 --> 04:42.920
+And this is purely a mirror copy.
+
+04:42.960 --> 04:53.280
+It's not used under normal circumstances but if ESX C02 were to if somebody were to spill a cup of coffee
+
+04:53.400 --> 05:00.760
+directly on top of it and completely destroy that host Well the good news is we've still got a copy
+
+05:00.760 --> 05:09.320
+of VM ones VM DK over here on ESX 0 3 and therefore that VM can continue to function.
+
+05:09.340 --> 05:16.600
+So that's the that's the system of the San file system or it's a different file system is not VM fast
+
+05:17.260 --> 05:22.450
+and it's called an object oriented file system where these objects are going to be striped and mirrored
+
+05:22.450 --> 05:29.600
+across multiple hosts so that we can have a host failure without a massive impact.
+
+05:29.600 --> 05:29.800
+Right.
+
+05:29.800 --> 05:38.470
+It's actually called if you're familiar with a raid which is a Dundon array of inexpensive disks This
+
+05:38.470 --> 05:46.240
+is called a rain array or redundant array of inexpensive notes and essentially doing the same thing
+
+05:46.960 --> 05:48.940
+that you would do across a RAID array of disks.
+
+05:48.970 --> 05:54.230
+We're doing that across a array of ESX hosts.
+
+05:54.250 --> 05:54.680
+All right.
+
+05:54.700 --> 06:01.070
+So let's take a little bit of a look at at how the Flash Player impacts operations right.
+
+06:01.110 --> 06:08.090
+So we're going to assume in this scenario that we are using a hybrid configuration.
+
+06:08.350 --> 06:17.320
+Again what the hybrid configuration means we're using one SSD per disk group that has our Flash Player.
+
+06:17.710 --> 06:20.170
+Here's my SSD for a disk group.
+
+06:20.200 --> 06:21.300
+ESX I there were two.
+
+06:21.400 --> 06:24.070
+And another SS DE-ANNE ESX 0 3.
+
+06:24.070 --> 06:26.880
+We've got a disk group on each of those hosts right.
+
+06:26.950 --> 06:29.050
+And this is a hybrid configuration.
+
+06:29.050 --> 06:36.240
+So the capacity devices are traditional magnetic hard disks.
+
+06:36.280 --> 06:38.770
+So that's our configuration we're in a hybrid.
+
+06:38.860 --> 06:44.710
+We're using SSD which we have to for the reader cache and write buffer.
+
+06:44.860 --> 06:48.020
+And our capacity devices are hard disk drives.
+
+06:48.070 --> 06:57.370
+So what's going to happen by default here is those SS DS 70 percent of their capacity is going to be
+
+06:57.370 --> 07:06.700
+used as a read cache and the read cache houses all of the most frequently read data.
+
+07:06.740 --> 07:15.500
+So if a virtual machine is to read some data and that data is served up by the read cache latency is
+
+07:15.500 --> 07:17.650
+going to be very very low.
+
+07:18.500 --> 07:24.020
+There's a directory service that runs in the cluster to track all of the data that's stored in the read
+
+07:24.020 --> 07:25.010
+cache.
+
+07:25.010 --> 07:31.870
+So for example let's say that VM one needs to read some data from disk.
+
+07:31.910 --> 07:41.060
+So here comes a read operation from VM one the read request hits the host where the data is stored and
+
+07:41.150 --> 07:48.710
+if the data is stored on the SSD device that data is very quickly read and returned to the virtual machine.
+
+07:48.710 --> 07:49.760
+Let's watch that again.
+
+07:49.760 --> 07:57.980
+Here comes the read out of ESX 0 1 hits ESX 0 2 and is very rapidly returned.
+
+07:57.980 --> 08:05.170
+Now if that data is not present in the read cache the process is going to be much much slower.
+
+08:05.270 --> 08:09.440
+Because when the read hits Yes excise 0 2 it's going to hit the SSD.
+
+08:09.590 --> 08:11.330
+It's not there.
+
+08:11.330 --> 08:16.580
+So it has to retrieve that data from the much slower hard disk drive.
+
+08:18.280 --> 08:21.930
+And therefore that read operation is going to be much slower.
+
+08:21.970 --> 08:25.990
+So let's take a moment to think about this from an architectural perspective.
+
+08:27.210 --> 08:34.950
+We know now that the hybrid configuration of virtual sand has a very high performance recap.
+
+08:36.410 --> 08:43.190
+If the data that my virtual machines read is very consistent if all of my virtual machines are reading
+
+08:43.190 --> 08:51.620
+some sort of common data like for example a parent virtual disk for a length clone or something like
+
+08:51.620 --> 09:00.290
+that then this is a great use case because if we have a very consistent set of data that is frequently
+
+09:00.290 --> 09:04.950
+read our read cache is going to be really high value.
+
+09:05.240 --> 09:08.010
+We're going to satisfy a lot of reads from that cache.
+
+09:08.330 --> 09:16.880
+And by the way the recommendation here is you should have at least 10 percent of your persistent storage.
+
+09:16.880 --> 09:18.290
+You should have that much SSD.
+
+09:18.320 --> 09:24.860
+Right so if we have a terabyte of hard disks we should have at least 100 gigabytes of SSD should and
+
+09:24.860 --> 09:28.970
+should have at least 10 percent if you can get that ratio better than 10 percent.
+
+09:28.970 --> 09:35.080
+Like maybe you have 200 gigs of SSD and one terabyte of physical storage.
+
+09:35.250 --> 09:37.620
+Then your performance is only going to improve.
+
+09:37.640 --> 09:37.900
+Right.
+
+09:37.920 --> 09:40.170
+Anything you can do to push that.
+
+09:40.170 --> 09:46.260
+That SSD percentage up higher is obviously a good thing with right operations.
+
+09:46.260 --> 09:52.370
+We have 30 percent of the SSD set aside as a write buffer.
+
+09:52.430 --> 09:52.960
+Right.
+
+09:52.980 --> 09:57.520
+So all right operations are always going to hit the SSD.
+
+09:57.870 --> 10:00.660
+That's what 30 percent of the SSD is set aside for that.
+
+10:01.080 --> 10:06.270
+And it's kind of like I always compare it to like a library and whose shelves zero books for you.
+
+10:06.330 --> 10:06.980
+Right.
+
+10:06.990 --> 10:13.290
+So if you go into a library and you need to return a book you don't have to go into the library find
+
+10:13.290 --> 10:20.520
+the shelf find the exact spot on the shelf and read shelf every book individually for yourself.
+
+10:20.550 --> 10:24.990
+You can take a whole stack of books drop them off at the front desk and the library and I'll take care
+
+10:24.990 --> 10:25.990
+of it.
+
+10:26.160 --> 10:32.060
+So she acts as a write buffer or he or the librarian acts as a write buffer for us.
+
+10:32.250 --> 10:36.420
+We can simply drop off the books and get out of there.
+
+10:36.480 --> 10:39.320
+That's kind of like a write buffer for storage right.
+
+10:39.330 --> 10:45.550
+Those right operations get dropped off at the SSD and that's it.
+
+10:45.690 --> 10:48.370
+Right as far as our virtual machine is concerned.
+
+10:48.510 --> 10:51.390
+Those right operations are complete.
+
+10:51.390 --> 10:58.420
+The moment they hit that SSD now in the background the SSD has to reshelve those books right it's got
+
+10:58.420 --> 11:05.460
+to actually write them to hard disk but our Vergine machine is unaware that that process has to occur.
+
+11:05.890 --> 11:14.890
+So the write buffer basically makes all right operations act as if they're just a right to SSD.
+
+11:14.890 --> 11:20.680
+OK so now you know some of the basics for these first six foundations exam.
+
+11:21.170 --> 11:27.640
+And also this will spill well into the V V are certified professional exam as well.
+
+11:27.850 --> 11:34.390
+So you know some of the basics and I wouldn't really expect the test to get any more deep than we have
+
+11:34.390 --> 11:35.740
+gotten here.
+
+11:35.770 --> 11:40.750
+So if you understand you know that you create a cluster of homes you enable the sand on it that you
+
+11:40.750 --> 11:47.350
+can use flash devices as read cash and a write buffer that you can do it all flash configuration as
+
+11:47.350 --> 11:50.600
+well if you want you should be in pretty good shape for the exam.

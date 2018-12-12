@@ -1,0 +1,139 @@
+WEBVTT
+
+00:00.290 --> 00:09.710
+In this video I'll demonstrate how to create a V-Amp so V-Amp is simply a container for a group of related
+
+00:09.710 --> 00:10.780
+virtual machine.
+
+00:11.910 --> 00:17.310
+So I'm going to click on this ESX host I should say I'm going to right click on this ESX I host and
+
+00:17.310 --> 00:21.540
+I'm going to go to new Wii app and I'm going to create a new app.
+
+00:21.610 --> 00:21.920
+Right.
+
+00:22.000 --> 00:24.290
+So you get to create a new Wii app I'll hit next.
+
+00:24.550 --> 00:25.930
+And this is really straightforward.
+
+00:25.930 --> 00:30.620
+I'm going to call it trainer test dot com.
+
+00:30.830 --> 00:33.170
+Ty tier app.
+
+00:33.350 --> 00:40.200
+Right so we've got some kind of multi-tier application that requires multiple virtual machines.
+
+00:40.200 --> 00:42.650
+And I'll go hadn't hit next here.
+
+00:43.120 --> 00:50.920
+And what I'm going to do at this point is configure the resource allocation settings for this Wii app
+
+00:51.370 --> 00:53.850
+so the app is a container.
+
+00:54.160 --> 01:02.890
+I'm going to drag and drop multiple virtual machines into this app and they will all share the resources
+
+01:03.190 --> 01:11.710
+of the app so I may want to give this virtual appliance high number of shares or a high number of memory
+
+01:11.710 --> 01:19.210
+shares or maybe I want to do something different like maybe I say hey this app I need to set a memory
+
+01:19.210 --> 01:23.350
+limit on this thing just so it doesn't get completely out of control.
+
+01:23.350 --> 01:23.650
+Right.
+
+01:23.650 --> 01:30.790
+So I'll set up a 1 gig memory limit on this or I can configure these resources and they will be applied
+
+01:31.090 --> 01:35.950
+to the group of virtual machines that are contained within this V-Amp.
+
+01:36.220 --> 01:37.590
+Just like a resource pool.
+
+01:37.830 --> 01:38.500
+OK.
+
+01:38.590 --> 01:45.530
+So I had to get rid of that memory limit and I'll hit next and I'll finish.
+
+01:45.530 --> 01:52.250
+So those resource controls are very much the same as you would get with the resource pool.
+
+01:52.250 --> 01:57.890
+So now that I've successfully created my Wii app I'm going to start to drag and drop some of my virtual
+
+01:57.890 --> 02:02.350
+machines into the Wii app and you can simply drag and drop right.
+
+02:02.360 --> 02:08.740
+It's easy to do in the Wiis for web client just simply click on them and drag them up to the train or
+
+02:08.770 --> 02:11.640
+testate multi-tier app.
+
+02:11.760 --> 02:17.230
+And now I've got three virtual machines contained within the app.
+
+02:17.280 --> 02:19.990
+So now you can start to do the really cool stuff here.
+
+02:20.220 --> 02:28.160
+Right click this Wii app and I'm going to go to edit settings and let's say this is a multi-tier application
+
+02:28.170 --> 02:30.730
+so I need my database to start first.
+
+02:30.870 --> 02:32.420
+I need my app to start second.
+
+02:32.600 --> 02:36.690
+And indeed my web server to start Third while I can do that.
+
+02:36.920 --> 02:37.270
+Right.
+
+02:37.290 --> 02:39.680
+So you can see here the order that it's been put in.
+
+02:39.720 --> 02:45.450
+I'm actually going to change this order real quick of my app up move my web down and what's going to
+
+02:45.450 --> 02:57.620
+happen is Group 1 is going to boot up first and group 2 will only boot up once either 120 seconds have
+
+02:57.710 --> 03:05.450
+elapsed or when VM Ware tools are ready this virtual machine.
+
+03:05.550 --> 03:08.290
+So that's that's the configuration I'm going to do.
+
+03:08.520 --> 03:15.090
+And then group two will then start booting up and once group two has had 120 seconds or maybe I make
+
+03:15.090 --> 03:19.090
+it 240 seconds write whatever I need to do there.
+
+03:20.080 --> 03:25.500
+That group of virtual machines will be given some time to boot up and then group 3.
+
+03:25.540 --> 03:29.590
+And so that's really the biggest use case for a Wii app.
+
+03:30.030 --> 03:30.230
+Right.
+
+03:30.270 --> 03:36.850
+Is to control power on and power off order for a multi-tier application.

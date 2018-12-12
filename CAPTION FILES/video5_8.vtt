@@ -1,0 +1,220 @@
+WEBVTT
+
+00:01.820 --> 00:07.700
+In this video I'll explain snapshots and how we can successful use them and we'll also talk about some
+
+00:07.700 --> 00:12.420
+of the disadvantages of snapshots and potential issues that they can cause.
+
+00:12.730 --> 00:19.180
+But first and foremost what is a snapshot Well here we see a virtual machine.
+
+00:19.240 --> 00:25.120
+And at this moment this virtual machine has certain programs running it has contents of memory.
+
+00:25.120 --> 00:33.920
+It's also got a virtual disk and a snapshot is used to take a point in time picture of a virtual machine.
+
+00:34.150 --> 00:41.030
+So let's say for example on this virtual machine we need to perform some sort of update and we want
+
+00:41.030 --> 00:46.690
+to give ourselves a fallback point just in case something goes wrong with this update.
+
+00:46.980 --> 00:48.740
+And this virtual machine is powered on.
+
+00:48.870 --> 00:57.360
+So there's information currently in memory and also there's the contents of data that are stored on
+
+00:57.360 --> 00:59.690
+my virtual disk.
+
+00:59.790 --> 01:05.620
+Now when we take a snapshot a new file is created called the VM Mesan file.
+
+01:05.880 --> 01:11.980
+And in this file the current contents of memory are stored.
+
+01:12.020 --> 01:17.830
+So now we have half of our point and time picture of this virtual machine.
+
+01:17.900 --> 01:24.450
+The other thing that we need to capture is the current contents of the virtual disk the other thing
+
+01:24.450 --> 01:30.420
+that happens when we take a snapshot is that this virtual disk or VM decay is going to be marked as
+
+01:30.420 --> 01:40.170
+read only this ensures that no changes will be made to the data on this virtual disk and it will be
+
+01:40.170 --> 01:45.690
+preserved exactly as it was when we took our Snapshot.
+
+01:45.690 --> 01:51.830
+So when the original virtual disk is locked a new Delta disk is created.
+
+01:53.800 --> 01:55.700
+And remember this is a running VM.
+
+01:55.750 --> 02:01.640
+So now that the original disk is Read-Only we need somewhere to write changes to.
+
+02:01.930 --> 02:08.200
+So that Delta disk is going to be where all of our live data rights go moving forward.
+
+02:10.380 --> 02:14.970
+So those are the components that get introduced when you take a snapshot.
+
+02:15.270 --> 02:21.060
+And now we have our backout point right now we have a point and time picture of exactly what was going
+
+02:21.060 --> 02:24.150
+on in this virtual machine at a given moment in time.
+
+02:25.310 --> 02:28.640
+And let's say that our software update doesn't go so well you know.
+
+02:28.650 --> 02:34.010
+Now maybe we need to revert back to this snapshot we need to fall back to that fallback point that we
+
+02:34.010 --> 02:34.750
+created.
+
+02:35.730 --> 02:44.100
+If we decide to revert to a snapshot the contents of that VMA file are restored to memory now the contents
+
+02:44.100 --> 02:48.820
+of memory are exactly as they were when we took that snapshot.
+
+02:50.230 --> 02:56.440
+The Delta that VM decay is discarded because we don't need those changes that have been made since the
+
+02:56.440 --> 03:03.260
+snapshot we want to revert to our virtual disk the way that it was when that snapshot was taken.
+
+03:03.550 --> 03:09.510
+So the original VM decay is simply unlocked and is no longer read only.
+
+03:09.610 --> 03:15.520
+And now our virtual disk is exactly back to the way it was and our contents of memory are exactly as
+
+03:15.520 --> 03:17.530
+they were when we took that snapshot
+
+03:22.960 --> 03:27.370
+However snapshots are not without their limitations.
+
+03:27.370 --> 03:34.590
+So for example let's go back to this V.M. And again the virtual machine is running and it has a single
+
+03:34.590 --> 03:36.090
+virtual disk.
+
+03:36.210 --> 03:42.470
+And when we take our Snapshot the contents of memory are captured in that vehemence and file the VMT
+
+03:42.630 --> 03:48.910
+is marked as read only and the new Delta that VMT is created and moving forward.
+
+03:48.990 --> 03:53.070
+That's where all live right of data occur.
+
+03:54.480 --> 04:00.590
+Well what do you think will happen if we leave that snapshot in place for weeks and months.
+
+04:01.630 --> 04:08.890
+That Delta disk will get bigger and bigger and bigger and eventually we may decide that we don't actually
+
+04:08.890 --> 04:10.480
+need this snapshot anymore.
+
+04:10.480 --> 04:15.040
+Let's say it's been three months and we finally decided to delete this snapshot.
+
+04:16.330 --> 04:23.620
+This means that the last three months of changes are all located on that Delta disk and we can't just
+
+04:23.620 --> 04:25.280
+throw all that data away.
+
+04:26.170 --> 04:32.800
+When we delete the snapshot all of that data needs to get copied back to the original VM DK.
+
+04:35.570 --> 04:39.650
+So as we delete the snapshot the VM Ehsaan file is no longer needed.
+
+04:39.860 --> 04:45.530
+There's no point in hanging on to the contents of memory at the time of the snapshot so the VM isn't
+
+04:45.530 --> 04:47.380
+files simply perched.
+
+04:48.020 --> 04:56.480
+Then the original VM DK will be unlocked and all of the changes that have occurred since that snapshot
+
+04:56.480 --> 05:01.560
+was taken will now need to get committed to that original VM.
+
+05:01.560 --> 05:12.350
+DK This can be time consuming and it can also cause the size of this virtual disk to temporarily expand
+
+05:12.740 --> 05:15.710
+while that copy operation is in progress.
+
+05:15.710 --> 05:23.040
+It may actually consume more space on the data store than it normally does.
+
+05:23.050 --> 05:24.610
+One other side note.
+
+05:24.910 --> 05:28.660
+At times deleting a snapshot can take a very long time.
+
+05:28.810 --> 05:34.480
+If you've left the snapshot out there for an extended period it may take a long time for that snapshot
+
+05:34.480 --> 05:35.650
+to delete.
+
+05:35.650 --> 05:41.070
+Just be aware that once you start deleting a snapshot you cannot cancel that process.
+
+05:41.080 --> 05:47.170
+Also be aware that you cannot shut down a reboot that virtual machine while the snapshot deletion is
+
+05:47.170 --> 05:47.860
+occurring.
+
+05:51.650 --> 05:53.440
+So what do we take away from all of this.
+
+05:53.450 --> 05:56.780
+Well a snapshot is a point in time picture of a virtual machine.
+
+05:56.780 --> 06:02.570
+It captures the exact state of the VM at that moment but it is not a backup.
+
+06:02.570 --> 06:10.730
+It should not be retained long term when a snapshot is taken that original VM is now marked as read
+
+06:10.730 --> 06:18.770
+only to preserve the contents of the virtual disk exactly as they are and all live changes will now
+
+06:18.770 --> 06:24.780
+go to a Delta that VMT K when the snapshot is deleted.
+
+06:24.780 --> 06:31.630
+All of those changes that are in the doubt that VMT K must now be committed back to the original VM
+
+06:31.630 --> 06:40.030
+DK snapshots are useful for short term needs such as creating a fallback point before making a change.
+
+06:40.030 --> 06:45.880
+I personally have a policy that I will never leave a snapshot in my environment for more than one week
+
+06:46.330 --> 06:52.210
+because at that point the Delta file can become very large and it can become more and more difficult
+
+06:52.330 --> 06:53.500
+to delete that snapshot.

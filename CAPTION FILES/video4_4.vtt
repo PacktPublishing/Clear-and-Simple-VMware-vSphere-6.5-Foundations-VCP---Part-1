@@ -1,0 +1,181 @@
+WEBVTT
+
+00:03.150 --> 00:08.100
+In this video I'll demonstrate how to create and if has data store.
+
+00:08.330 --> 00:14.260
+So let's start by looking at my first host here hosts 12 I'll call it.
+
+00:14.630 --> 00:20.320
+And on the host I'm going to click on the datasource tab and you can see here I have a data store called
+
+00:20.360 --> 00:30.860
+Big and my big data store is an FS version 3 data store and it's got about 650 megs of available space
+
+00:31.020 --> 00:31.460
+right.
+
+00:31.640 --> 00:38.480
+So I've got this data store that's that's already open that's already created and available on my first
+
+00:38.540 --> 00:39.720
+ESX I host.
+
+00:39.840 --> 00:46.220
+And if I click on settings I can see some of the settings for this particular data store and I can take
+
+00:46.220 --> 00:52.470
+a look at specifically the device backing and this is what I want to show you.
+
+00:52.490 --> 01:03.350
+So the NFC server itself is one two dot 168 dot 1 1997 and there was a folder created on that and FS
+
+01:03.410 --> 01:06.740
+system that is being shared.
+
+01:06.880 --> 01:07.200
+Right.
+
+01:07.400 --> 01:14.240
+And that's the important thing that we always have to keep in mind with an FS right in this case we're
+
+01:14.240 --> 01:17.750
+not creating a VMA fast data store.
+
+01:17.830 --> 01:21.140
+There is no VMI fast file system when it comes to NFL.
+
+01:21.140 --> 01:30.180
+Right the NFL has its own file system and we're simply accessing a shared folder on that file system.
+
+01:33.270 --> 01:39.540
+So let's take a look at the second host host 13 and you can see that it does not have that data store
+
+01:39.540 --> 01:44.480
+called big.
+
+01:44.550 --> 01:50.160
+So I am now going to add a new data store to the second ESX I was going to call it an NFL data store
+
+01:51.090 --> 01:52.620
+because that's what it's going to be.
+
+01:52.740 --> 01:58.040
+And I want to make sure that I'm very careful here with this selection.
+
+01:58.110 --> 02:05.130
+I want to choose the same and a fast version across all of my ESX I hosts if some hosts are accessing
+
+02:05.130 --> 02:12.990
+NF as data store on has version 3 and other hosts are using N.F. as Version 4 not one we can potentially
+
+02:12.990 --> 02:16.080
+corrupt the contents of that data store.
+
+02:16.140 --> 02:23.190
+So we're going to be really careful here and make sure we're choosing the same version of FS consistently
+
+02:24.400 --> 02:26.540
+and I'm going to call this data store demo.
+
+02:26.690 --> 02:31.230
+It's going to be on the $192 168 199.
+
+02:31.620 --> 02:42.230
+Seven is my first device and now I'll put in the folder that is being shared by my and FS system.
+
+02:43.640 --> 02:47.130
+And I'll go ahead and hit next and finish.
+
+02:47.410 --> 02:48.720
+And that's really all there is to it.
+
+02:48.720 --> 02:53.440
+Right when you're saying I've been NFL data store it is basically Tallaght What's the address of the
+
+02:53.690 --> 02:55.420
+FS device.
+
+02:55.600 --> 03:00.850
+What's the folder that's being shared and do I want to access it in read only or read right.
+
+03:00.850 --> 03:02.310
+So go ahead and hit finish here.
+
+03:03.450 --> 03:08.530
+And we should see my data store appear almost instantaneously.
+
+03:08.670 --> 03:09.040
+Right.
+
+03:09.210 --> 03:14.720
+Because we're not dealing with VM FS that data store does not need to be formatted.
+
+03:14.730 --> 03:16.370
+We're not using a lawn.
+
+03:16.390 --> 03:20.970
+There is no raw disk space that needs to be formatted with the NFL.
+
+03:20.970 --> 03:24.710
+We're accessing a file system that has already been created.
+
+03:26.980 --> 03:27.430
+OK.
+
+03:27.520 --> 03:31.540
+So in host 13 I've got my demo data store I host 12.
+
+03:31.540 --> 03:33.240
+I've got my big data store.
+
+03:33.430 --> 03:35.950
+So the hosts don't really match up just yet.
+
+03:36.090 --> 03:36.270
+Right.
+
+03:36.280 --> 03:40.820
+Some of them have one data store while other hosts have a number.
+
+03:41.070 --> 03:41.720
+Right.
+
+03:41.740 --> 03:49.590
+So let's go ahead and go to my big data store here under storage and look at hosts.
+
+03:49.600 --> 03:57.320
+And here you can see this data store is available to host 192 dot 168 that won 99 out 12.
+
+03:57.610 --> 04:01.570
+This data store is available to host 13 right.
+
+04:01.720 --> 04:06.240
+And so that's what I have available on my hosts right.
+
+04:06.250 --> 04:11.110
+I've configured these data stores to be available on certain hosts.
+
+04:11.240 --> 04:15.740
+So what I can do here is I'm going to click on my big data store I'm actually going to right click it
+
+04:15.950 --> 04:19.580
+and I'm going to choose to mount it to additional hosts.
+
+04:19.580 --> 04:24.500
+And now I can make this data store that's already created available to other house.
+
+04:24.500 --> 04:26.480
+I'll do the same thing with demo.
+
+04:26.800 --> 04:27.940
+Right click it.
+
+04:27.950 --> 04:31.550
+Mount data store two additional hosts and choose host 12.
+
+04:31.910 --> 04:38.870
+And so now if I click on my demo data store it's available on both hosts if I click on my big data store
+
+04:39.260 --> 04:46.340
+it's available on both hosts and since I have shared storage that's available across my two ESX I host.

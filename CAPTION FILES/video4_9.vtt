@@ -1,0 +1,121 @@
+WEBVTT
+
+00:00.910 --> 00:07.100
+In this video we'll take a look at ice because the storage concepts and we'll learn how I scuzzy storage
+
+00:07.100 --> 00:12.320
+solutions can be used to deliver VMI fast data stores.
+
+00:12.360 --> 00:16.470
+So here we see the different components of an ice Gazi storage array.
+
+00:16.590 --> 00:23.370
+And I suppose he is really just one of the many options of storage arrays that we have available.
+
+00:23.400 --> 00:30.180
+We could do a fiber channel storage array or we could do and fast or Fiber Channel over ethernet but
+
+00:30.180 --> 00:36.360
+for the moment let's just focus in on I scuzzy specifically And let's take a look at the components
+
+00:36.390 --> 00:38.410
+of the storage array itself.
+
+00:38.530 --> 00:45.540
+And so let's get rid of the VSE fair side of our picture here and focus specifically on the network
+
+00:46.170 --> 00:47.540
+and the array components.
+
+00:47.610 --> 00:47.980
+Right.
+
+00:48.060 --> 00:55.200
+So here we see connecting to the storage array We've got anything to switch right and that's the type
+
+00:55.200 --> 01:00.600
+of network that we use for eyes because he is just a standard Ethernet network.
+
+01:00.960 --> 01:07.380
+So we've got this ethernet network connectivity here that we use to connect our ESX hosts to the storage
+
+01:07.380 --> 01:08.020
+array.
+
+01:08.430 --> 01:16.370
+And those ethernet switches connect to something called Storage processors on the storage array.
+
+01:17.880 --> 01:23.350
+And the storage processors are really the brains of the operation for the ice because the storage array
+
+01:23.940 --> 01:29.280
+right they provide processing horsepower as well as connectivity.
+
+01:29.380 --> 01:35.740
+That's how the scuzzy storage array connects to that Ethernet Network.
+
+01:35.830 --> 01:40.930
+And then of course within the ice the storage array you know we've got storage right we've got disk
+
+01:40.930 --> 01:41.920
+space.
+
+01:41.920 --> 01:44.140
+So here we see our disk aggregate.
+
+01:44.140 --> 01:50.650
+These are essentially just think of it as a shelf of physical disks and that's all of the disk space
+
+01:50.650 --> 01:53.870
+that we have available within that storage array.
+
+01:54.850 --> 02:01.750
+And if we want to take all of that aggregated disk space and carve it up into smaller chunks.
+
+02:01.930 --> 02:06.110
+That's the purpose of a logical unit number or lun.
+
+02:06.120 --> 02:14.650
+All right so Lund's are used to simply divide up that big aggregate of storage space into smaller chunks
+
+02:14.800 --> 02:22.140
+called Lunts and that's what we're really going to utilize to create our VM EF-S data stores.
+
+02:22.170 --> 02:28.500
+So if we go back a little bit in our slide and we take a look at the ESX host what we're eventually
+
+02:28.500 --> 02:32.570
+going to accomplish here through a variety of different options.
+
+02:32.910 --> 02:39.490
+Look at the different ways like software or hardware I scuzzy But what we want to accomplish is we want
+
+02:39.490 --> 02:48.110
+to allow the ESX host to get visibility to these Lunds we want to allow the ESX host to know that those
+
+02:48.110 --> 02:53.390
+loans exist and to be able to create VM EF-S data stores on them.
+
+02:53.460 --> 02:53.870
+Right.
+
+02:54.110 --> 02:57.150
+So the network is really just a means to an end.
+
+02:57.190 --> 02:57.490
+Right.
+
+02:57.500 --> 03:03.410
+And in this way I suppose the fiber channel fiber channel over ether net.
+
+03:03.570 --> 03:05.660
+They're all very similar.
+
+03:05.930 --> 03:11.480
+They just have different networks but they're essentially delivering the same service and that service
+
+03:11.480 --> 03:19.760
+is storage space in the form of ones that can be formatted with the VM afast file system and use to
+
+03:19.760 --> 03:21.480
+store virtual machine files.

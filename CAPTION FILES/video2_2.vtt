@@ -1,0 +1,655 @@
+WEBVTT
+
+00:00.320 --> 00:05.820
+In this video I'll provide you with an introduction to virtualization where we'll learn many of the
+
+00:05.820 --> 00:14.220
+basic concepts of what a virtual machine is what a hypervisor is and how we can provide resources to
+
+00:14.220 --> 00:19.880
+our virtual machines that are actually the shared physical resources of an ESX host.
+
+00:21.910 --> 00:23.540
+So what does a virtual machine.
+
+00:23.800 --> 00:32.320
+Well it's very similar to a physical server where you have a operating system and the operating system
+
+00:32.740 --> 00:35.870
+has no idea that it's going to be running on a virtual machine.
+
+00:36.340 --> 00:43.630
+So if I have Windows or Linux running on my VM that operating system is called the guest operating system
+
+00:44.020 --> 00:52.550
+and it has no awareness that it's running as a via now a virtual machine does not have its own dedicated
+
+00:52.550 --> 00:53.350
+hardware.
+
+00:53.420 --> 00:58.680
+But like I said the guest operating system doesn't know that.
+
+00:58.710 --> 01:05.580
+So a virtual machine will run on a physical server with many other virtual machines.
+
+01:05.730 --> 01:10.380
+They'll share the physical resources of the host.
+
+01:10.380 --> 01:14.280
+And this is the first big benefit of virtualization.
+
+01:14.550 --> 01:23.680
+We can run many machines on shared hardware each with their own independent guest operating system and
+
+01:23.680 --> 01:31.330
+those virtual machines can share a common set of physical resources like CPQ memory network storage
+
+01:33.370 --> 01:41.520
+so unlike a physical server the virtual machine does not truly have its own dedicated physical hardware.
+
+01:42.490 --> 01:47.650
+It's using the shared hardware of any OS X I host.
+
+01:47.820 --> 01:49.680
+And that's what the ESX host is.
+
+01:49.680 --> 01:54.720
+This is the actual physical server that are virtual machines will run on.
+
+01:55.150 --> 01:59.570
+So the virtual machine is almost like a program running on a computer.
+
+01:59.820 --> 02:05.780
+And we have different programs that consume different amounts of resources and we have different VAMC
+
+02:05.880 --> 02:07.800
+running on the same physical host.
+
+02:08.040 --> 02:13.100
+And some of the AMS may consume more CPQ some may consume less.
+
+02:13.260 --> 02:21.390
+Some might consume more memory or produce more storage traffic other virtual machines less so the ESX
+
+02:21.540 --> 02:23.950
+host is like our physical server.
+
+02:24.830 --> 02:30.710
+And ESX is the operating system that we install on that physical server.
+
+02:33.220 --> 02:37.630
+And ESX is what we refer to as a type 1 hypervisor.
+
+02:37.630 --> 02:40.710
+That means it runs right on the hardware.
+
+02:40.930 --> 02:44.680
+It doesn't require any other operating system.
+
+02:44.680 --> 02:50.900
+So if you're familiar with VM or workstation that's a hypervisor that runs on top of Windows.
+
+02:51.070 --> 02:55.140
+There's no underlying operating system on the ESX host.
+
+02:55.360 --> 03:02.980
+It's purely ESX by running on physical hardware and then the virtual machines run on top of VSX high
+
+03:03.370 --> 03:10.280
+and can utilize the physical resources of that host.
+
+03:10.280 --> 03:16.420
+So again here we see many virtual machines running on the same ESX host again utilizing the shared of
+
+03:16.420 --> 03:28.790
+physical resources provided by that host and in ESX I hosted is the rephrase now are ESX host is an
+
+03:28.790 --> 03:38.820
+example of a type 1 hypervisor in a hypervisor adds what we call a layer of abstraction.
+
+03:38.950 --> 03:46.900
+So there is a layer of abstraction between the virtual machines and the physical resources.
+
+03:47.110 --> 03:52.360
+Now what does this layer of abstraction mean what let's take a moment to think about this.
+
+03:53.710 --> 04:00.570
+So let's say for example I'm sitting on the couch and I have myself a bowl of Eminem's and I see my
+
+04:00.570 --> 04:08.370
+son coming towards the living room and I take a napkin and I cover up that bowl of Eminem's I've just
+
+04:08.370 --> 04:11.270
+created myself a layer of abstraction.
+
+04:11.600 --> 04:11.890
+Right.
+
+04:11.910 --> 04:19.620
+I've hidden those underlying physical resources from the people who want to consume those resources.
+
+04:19.620 --> 04:29.490
+My son and that's kind of like what a layer of abstraction does on the ESX host it creates this layer
+
+04:29.940 --> 04:38.420
+between the virtual machines and the physical hardware and it gives us this management capability where
+
+04:38.420 --> 04:41.790
+we can intelligently divide up those resources.
+
+04:44.480 --> 04:50.350
+So for example as a virtual machine is trying to access physical memory.
+
+04:50.480 --> 04:57.410
+It's going to access that memory through this hypervisor layer of abstraction and now we can intelligently
+
+04:57.410 --> 04:57.880
+decide.
+
+04:57.890 --> 05:04.490
+Well the first we might be able to access four gigs of memory and the second VM might be able to access
+
+05:04.490 --> 05:10.430
+two gigs of memory and maybe the third VM will take precedence over the other two victims and we can
+
+05:11.090 --> 05:19.550
+establish all of these controls because of this hypervisor layer that rides in-between the virtual machine
+
+05:19.940 --> 05:23.560
+and the physical resources.
+
+05:23.600 --> 05:28.540
+So my VM are not actually seeing the physical resources at all.
+
+05:28.610 --> 05:35.480
+They're seeing a virtual sized version of those physical resources that we can control because of this
+
+05:35.480 --> 05:38.000
+layer of abstraction that exists.
+
+05:40.060 --> 05:47.580
+And one of the most important resources that's shared across virtual machines are my CPA is.
+
+05:47.640 --> 05:55.480
+So in this slide we see and ESX I host and this ESX host has four physical seepages.
+
+05:55.540 --> 06:00.720
+Right let's assume that those are four processor of course on the same socket.
+
+06:01.050 --> 06:07.110
+So we've got a situation in which we've got four processor course and we've got a lot of virtual machines
+
+06:07.110 --> 06:07.520
+here.
+
+06:07.530 --> 06:11.900
+Here you can see we've got 12 virtual machines displayed.
+
+06:11.940 --> 06:17.570
+So we've got these 12 virtual machines that are sharing for physical processor of course.
+
+06:17.760 --> 06:20.610
+This is called oversubscription.
+
+06:20.610 --> 06:28.800
+We may only need four processor cores to meet the requirements of 12 virtual machines because odds are
+
+06:29.160 --> 06:36.350
+all of my Reems are not going to be consuming as much as they possibly can at all times.
+
+06:37.330 --> 06:40.750
+That's what the concept of oversubscription is all about.
+
+06:40.930 --> 06:49.070
+And that's how we efficiently utilize the resources of our ESX I host Think about it this way.
+
+06:49.410 --> 06:56.400
+Let's say that we have a restaurant and we know that we're going to have a certain number of people
+
+06:56.610 --> 06:58.930
+that visit our restaurant everyday.
+
+06:59.010 --> 07:04.810
+So maybe for example we'll know that we'll have 200 people who are going to come to our restaurant everyday.
+
+07:05.160 --> 07:11.820
+Well I may just simply build enough tables in this restaurant to see 50 people at any given moment so
+
+07:11.910 --> 07:15.190
+I'll build my restaurant for my normal usage.
+
+07:15.240 --> 07:20.460
+I might have 200 people per day but odds are I'm not going to have all of those people at the exact
+
+07:20.460 --> 07:21.190
+same moment.
+
+07:21.190 --> 07:24.860
+Someone come for lunch some will come for breakfast some for dinner.
+
+07:25.020 --> 07:31.680
+And so it would really be wasteful of me to size my restaurant big enough to seat 200 people.
+
+07:32.500 --> 07:36.630
+Because I'm probably not going to have that many people at once.
+
+07:36.730 --> 07:40.390
+The same concept applies to virtualization.
+
+07:40.390 --> 07:46.600
+I'm not going to size my physical C-p resources for my worst case scenario.
+
+07:46.600 --> 07:53.220
+Now there may be times where all 12 of these virtual machines have a CPQ intensive running task right.
+
+07:53.250 --> 08:01.330
+And that's just like 200 people showing up to my restaurant at once if all 12 of these VMs are carrying
+
+08:01.330 --> 08:05.200
+out some sort of CPQ intensive task.
+
+08:05.530 --> 08:07.100
+They're going to be waiting.
+
+08:07.090 --> 08:13.410
+There's going to be slowness just like the restaurant example of 200 people showing up at once.
+
+08:13.450 --> 08:18.390
+There's too many people and not enough physical resources not enough tables available.
+
+08:18.790 --> 08:24.490
+So it's always a balancing act when you're creating your ESX host because you don't want to purchase
+
+08:24.490 --> 08:27.460
+a bunch of unnecessary physical hardware.
+
+08:27.460 --> 08:30.250
+But on the other hand you don't want bad performance.
+
+08:30.280 --> 08:33.120
+So we always have to find that that sort of fine line.
+
+08:33.310 --> 08:39.700
+So as we go ahead and create our virtual machines we can size them individually so we could say maybe
+
+08:39.700 --> 08:45.910
+one VM will get four virtual C.P. use and one VM will get to virtual Seip use and one VM will get one
+
+08:45.910 --> 08:53.380
+virtual CPO and all that does is govern you know how many processor cores each VM is allowed to take
+
+08:53.380 --> 08:54.980
+advantage of.
+
+08:55.150 --> 09:03.340
+So our hypervisor Lehre or our layer of abstraction gives us the ability to have a shared set of physical
+
+09:03.340 --> 09:13.600
+C-p use that are used by a group of virtual machines and memory virtualization is a very similar concept.
+
+09:13.760 --> 09:21.180
+I'll probably have virtual machines running on any ESX I host that exceed the amount of memory that
+
+09:21.180 --> 09:23.510
+that host can actually deliver.
+
+09:23.520 --> 09:30.370
+So maybe if I add up all of my VMS over here the total memory that I'll allocate to them will be 48
+
+09:30.390 --> 09:38.040
+gigabytes but maybe in my host I'll actually have 24 gigabytes over subscribe just like we talked about
+
+09:38.250 --> 09:39.090
+with.
+
+09:41.130 --> 09:48.430
+And as these virtual machines need to utilize memory as they actually require those memory pages those
+
+09:48.430 --> 09:54.640
+memory pages will be mapped back to physical memory on the ESX host that's shared by all of my virtual
+
+09:54.640 --> 09:55.750
+machines.
+
+09:55.750 --> 09:58.140
+So I kind of call it the four food groups right.
+
+09:58.170 --> 10:06.910
+The ESX I host provides CPQ provides memory and it also provides network virtualization and storage
+
+10:06.910 --> 10:15.810
+virtualization and the network virtualization part of our picture looks a little bit different than
+
+10:15.820 --> 10:18.390
+the other resources that we've already looked at.
+
+10:18.580 --> 10:28.170
+So from a network virtualization perspective we now have this component here called a standard switch.
+
+10:28.240 --> 10:35.860
+This is a virtual switch and like I said in my VMS work pretty similarly to the way that a physical
+
+10:35.860 --> 10:37.530
+server works.
+
+10:37.540 --> 10:44.070
+So when I create a virtual machine I need to plug it into a network just as if I was putting a physical
+
+10:44.070 --> 10:50.460
+computer on the network I have to do the same thing with a VM and I have to plug it into a network and
+
+10:50.460 --> 10:54.210
+will take a little bit closer of a look at that later in this course.
+
+10:54.210 --> 11:01.320
+But essentially what I'm going to do is I'm going to establish a virtual connection from this VM to
+
+11:01.320 --> 11:04.160
+a port and a for a standard switch.
+
+11:04.260 --> 11:11.320
+And by the way my VMT that are running on this host they can all communicate via that VSE for standards
+
+11:11.340 --> 11:16.400
+which they can talk to each other and they can communicate without their traffic ever even leaving the
+
+11:16.400 --> 11:17.960
+ESX host.
+
+11:18.350 --> 11:23.250
+But if there's something out there that they need to communicate with like a physical server.
+
+11:24.170 --> 11:29.990
+They can do that through of these very standards which have a connection to a physical network and be
+
+11:29.990 --> 11:35.110
+able to talk to devices that are outside of that ESX host.
+
+11:35.480 --> 11:38.580
+So that's the purpose of the VSE standard switch.
+
+11:38.630 --> 11:47.140
+And of network virtualization is to provide network connectivity to our virtual machines and storage
+
+11:47.140 --> 11:55.210
+virtualization is very similar in my virtual machine is going to have virtual disks.
+
+11:55.380 --> 12:01.230
+Remember I've got a guest operating system running in each of these virtual machines like Windows or
+
+12:01.230 --> 12:02.790
+Linux.
+
+12:02.930 --> 12:11.090
+Both of those guest operating systems need to be able to access their C-Drive or their their files that
+
+12:11.090 --> 12:13.160
+make up that VM.
+
+12:13.250 --> 12:20.280
+And so as the virtual machine generates storage activity that storage activity in the form of scuzzy
+
+12:20.280 --> 12:30.590
+commands is captured by the hypervisor and are redirected to the appropriate storage location and that's
+
+12:30.590 --> 12:37.630
+the other purpose of the hypervisor is to provide access to a variety of different methods of storage.
+
+12:37.640 --> 12:46.910
+We'll talk about those later on in the course like virtual scene VM FS and FS virtual volumes but at
+
+12:46.910 --> 12:54.230
+this point what we really want to understand in this first lesson is simply the fact that I have multiple
+
+12:54.230 --> 13:02.880
+virtual machines running on a physical ESX I host and the physical ESX I host provides access to our
+
+13:02.880 --> 13:04.470
+four food groups.
+
+13:05.130 --> 13:07.800
+Memory network storage.
+
+13:07.980 --> 13:12.580
+Now one more thing about our virtual machines that's important to understand at this point.
+
+13:12.990 --> 13:17.150
+A virtual machine is made up of two major pieces.
+
+13:17.200 --> 13:21.510
+We have the virtual machine files and the live state of the virtual machine.
+
+13:23.140 --> 13:26.040
+So let's talk about the live state first.
+
+13:26.120 --> 13:31.660
+Every virtual machine that's running is going to have contents in memory.
+
+13:31.670 --> 13:37.110
+This is all the programs that are running in the current state of the virtual machine the virtual machine
+
+13:37.110 --> 13:40.720
+is going to be using time slots on processors.
+
+13:40.720 --> 13:47.440
+It's going to have a virtual neck that's connected to a port and a virtual switch and it's going to
+
+13:47.440 --> 13:54.360
+send scuzzy commands that are intercepted by the ESX I host and passed along to a storage adapter.
+
+13:54.400 --> 14:00.130
+So this is what's happening in my virtual machine right now at this given moment the virtual hardware
+
+14:00.760 --> 14:04.730
+that we're providing it and the contents of memory at any given moment.
+
+14:04.840 --> 14:08.670
+That's what's running on the ESX host.
+
+14:08.880 --> 14:12.460
+But the virtual machine is also made up of a set of files.
+
+14:12.570 --> 14:13.050
+Right.
+
+14:13.110 --> 14:20.700
+Some of these files include our VM decay file the virtual disk of our virtual machine the VM X-File
+
+14:21.180 --> 14:30.780
+our configuration file and those files are located on a data store and a data store is simply any storage
+
+14:30.780 --> 14:37.750
+technology that has been prepared to Houghs virtual machine files.
+
+14:37.860 --> 14:42.900
+When I shut down my VM there is no more contents of memory.
+
+14:42.900 --> 14:46.130
+The virtual machines not being schedule a lot of processor.
+
+14:46.160 --> 14:49.770
+It's not generating any network or storage traffic.
+
+14:49.770 --> 14:56.040
+When I shut down my VM it still register and do a host we still know which host it's going to run on.
+
+14:56.100 --> 14:57.570
+Next time we powered up.
+
+14:57.690 --> 15:03.720
+But basically when a VM is powered on all that really remains is the set of files that we're going to
+
+15:03.720 --> 15:06.820
+use to boot that virtual machine up next time.
+
+15:06.930 --> 15:10.380
+So our virtual machines are made up of the live state.
+
+15:10.530 --> 15:13.410
+That's the part that's running on the ESX host.
+
+15:13.590 --> 15:17.690
+That's the contents of memory the virtual hardware.
+
+15:17.860 --> 15:24.070
+And they're also made up of a set of files located on a data store.
+
+15:24.110 --> 15:29.990
+So that's what our virtual machines are and this is basically the building block of the software defined
+
+15:29.990 --> 15:31.050
+datacenter.
+
+15:31.050 --> 15:36.710
+All right so when we start taking physical servers and virtualizing them creating many VM is running
+
+15:36.710 --> 15:44.900
+on multiple ESX hosts and doing things like having virtualize networks having storage arrays that are
+
+15:44.900 --> 15:52.280
+virtual machines utilized for storage and things like that we've gone to a software defined datacenter
+
+15:52.550 --> 15:59.930
+and if I want to I can create multiple virtual data centers in the same building I can create a virtual
+
+15:59.930 --> 16:03.640
+data center that spans multiple physical locations.
+
+16:04.040 --> 16:11.420
+I have all kinds of options and that's the biggest difference between a physical data center and a software
+
+16:11.420 --> 16:19.160
+defined datacenter is the fact that a software defined datacenter is not defined by four walls and an
+
+16:19.190 --> 16:27.080
+air conditioning unit and power like a physical datacenter is a software defined datacenter can span
+
+16:27.100 --> 16:28.510
+physical locations.
+
+16:28.510 --> 16:29.680
+We can make it bigger.
+
+16:29.680 --> 16:31.190
+We can make it smaller.
+
+16:31.500 --> 16:34.660
+It's scalable and dynamic.
+
+16:34.660 --> 16:36.840
+Finally one last term I want to talk about.
+
+16:36.850 --> 16:38.140
+What is the cloud.
+
+16:38.350 --> 16:46.750
+While we're going to keep this very simple so a private cloud is essentially and a virtual arised environment.
+
+16:46.840 --> 16:49.260
+I've got a bunch of hosts.
+
+16:49.270 --> 16:51.300
+I've got virtual machines running on it.
+
+16:51.610 --> 16:56.290
+And that's my own little private cloud my own equipment.
+
+16:56.430 --> 17:01.580
+And there's no kind of third party hosting service or anything like that.
+
+17:01.590 --> 17:11.690
+Now if I decide to I can also utilize the public cloud and I like to think of the public cloud as like
+
+17:11.690 --> 17:13.220
+a utility company.
+
+17:13.220 --> 17:13.430
+Right.
+
+17:13.430 --> 17:20.640
+So if you're building a new house you can just call the power company and get your power turned on.
+
+17:20.780 --> 17:25.740
+You don't have to put generators in your basement or solar all over the roof.
+
+17:25.790 --> 17:28.650
+You can just call the power company and get power.
+
+17:29.120 --> 17:31.040
+That's kind of like the public cloud.
+
+17:31.160 --> 17:36.470
+You can just simply utilize their existing physical infrastructure.
+
+17:36.620 --> 17:44.260
+They have the servers they have the storage capacity the network capacity to run virtual machines.
+
+17:44.640 --> 17:46.850
+And that's what a public cloud provider is.
+
+17:46.850 --> 17:51.550
+It's sort of a utility provider for compute and storage capacity.
+
+17:52.630 --> 17:56.120
+AWOS is definitely the most well known example.
+
+17:56.500 --> 17:58.960
+And I also teach AWOS classes as well.
+
+17:58.960 --> 18:07.990
+They do a lot of live AWOS classes and AWOS and VM Ware are definitely getting more closely integrated
+
+18:08.230 --> 18:10.050
+as time goes on.
+
+18:10.630 --> 18:14.770
+So if you're ever curious about any of that stuff or you ever want to take a life class feel free to
+
+18:14.770 --> 18:18.200
+reach out to me LinkedIn and I'll be glad to help you out.
+
+18:18.410 --> 18:19.230
+But yeah that's right.
+
+18:19.230 --> 18:20.180
+That's what the cloud is.
+
+18:20.200 --> 18:29.140
+Right so public cloud think AWOS think you know Google think whoever a public cloud provider that's
+
+18:29.770 --> 18:35.200
+their physical hardware their computer and storage and then you can also do something called the hybrid
+
+18:35.200 --> 18:42.140
+cloud where you have some stuff running in a private cloud and some stuff running in the public cloud.
+
+18:42.160 --> 18:42.480
+All right.
+
+18:42.490 --> 18:43.800
+So let's review.
+
+18:43.930 --> 18:47.180
+A virtual machine has a guest operating system.
+
+18:47.380 --> 18:52.590
+It has virtual hardware doesn't actually have any physical hardware.
+
+18:52.600 --> 19:00.400
+That's that's truly dedicated to it and many virtual machines can run on a single hypervisor ESX is
+
+19:00.400 --> 19:08.290
+a type 1 hypervisor and that's our physical server and the resources of that ESX host are shared across
+
+19:08.290 --> 19:14.480
+multiple virtual machines and they're presented to virtual machines using what we call a layer of abstraction.
+
+19:14.830 --> 19:17.830
+We can have multiple virtual data centers in the same building.
+
+19:17.860 --> 19:25.300
+We can have virtual data centers that span multiple physical locations and we also briefly introduced
+
+19:25.300 --> 19:30.640
+what a cloud service provider is with the most common example being AWOS.

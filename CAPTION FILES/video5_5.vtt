@@ -1,0 +1,478 @@
+WEBVTT
+
+00:01.850 --> 00:05.430
+In this video I'll show you how to create a template.
+
+00:05.600 --> 00:10.830
+So we're going to use a template as essentially an image right.
+
+00:10.880 --> 00:18.920
+I want to create my perfect image of what a virtual machine should be like and all of my proper settings
+
+00:18.920 --> 00:21.630
+in windows all of the latest updates.
+
+00:21.660 --> 00:24.400
+Right nice clean virtual machine.
+
+00:24.590 --> 00:31.700
+And so let's pretend that this app VM is some virtual machine that I've installed the right operating
+
+00:31.700 --> 00:38.030
+system on maybe I've installed like certain applications that are required on all of my virtual machines
+
+00:38.420 --> 00:45.720
+and I've basically gone through and made this virtual machine as perfect as it can possibly be.
+
+00:45.880 --> 00:46.530
+Right.
+
+00:46.580 --> 00:53.660
+And so now I want to use this VM as the basis for future virtual machines.
+
+00:53.660 --> 00:58.430
+This makes it easy to make sure I always have a very nice compliant configuration.
+
+00:58.430 --> 01:00.900
+A lot of everything standardized right.
+
+01:01.400 --> 01:06.920
+So I'm going to write quick this VM and go to template and there's a couple of options that we can do
+
+01:06.920 --> 01:07.730
+here.
+
+01:07.730 --> 01:14.330
+Option one is greyed out at the moment but you do have the ability to convert this virtual machine to
+
+01:14.330 --> 01:20.960
+a template which basically means I'm going to take the VM the VM will cease to exist it will become
+
+01:21.680 --> 01:27.740
+a template and it's grayed out at the moment because I have some other cloning operations happening
+
+01:27.890 --> 01:28.850
+on this VM.
+
+01:28.850 --> 01:35.960
+So if the VM is powered on or if the VM is in the midst of other cloning operations you can't convert
+
+01:35.960 --> 01:40.600
+to a template but you can clone it to a template.
+
+01:40.700 --> 01:41.740
+So let's do that.
+
+01:42.020 --> 01:43.430
+I'm going to take the app VM.
+
+01:43.610 --> 01:46.780
+I'm going to call it app template.
+
+01:46.880 --> 01:53.150
+It's going to be the name of my template I'm going to drop it in my training data center I'll put it
+
+01:53.150 --> 01:58.610
+on host 13 the same host as the source VM.
+
+01:59.220 --> 02:01.830
+And now you can choose the virtual disk format.
+
+02:01.830 --> 02:08.610
+I'm going to choose same as source but if you want it to change over to thin provisioned or thick provisioned
+
+02:08.820 --> 02:14.400
+at this point you know you can choose all of these different options to choose the big data store.
+
+02:14.400 --> 02:15.940
+That's where I'm going to place it.
+
+02:17.210 --> 02:19.320
+And I'll go ahead and hit next here.
+
+02:20.510 --> 02:21.820
+And it's ready to complete.
+
+02:22.130 --> 02:26.090
+So now what's happening is a cloning operation is going on.
+
+02:26.090 --> 02:28.110
+You can see here this one that just started.
+
+02:28.100 --> 02:31.770
+I had a couple of the ones running for another video.
+
+02:31.920 --> 02:33.710
+That's part of this course.
+
+02:33.950 --> 02:40.330
+But this most recent clone job is basically taking this app VM creating another VM.
+
+02:40.330 --> 02:43.230
+That's exactly the same.
+
+02:43.260 --> 02:50.670
+And once that VM is created what you'll see is it'll actually disappear from this view because we are
+
+02:50.670 --> 02:53.730
+in the hosts and clusters via.
+
+02:53.770 --> 03:00.700
+So if we go over the venoms and templates view once this cloning operation completes you'll see that
+
+03:00.700 --> 03:08.210
+this app template will cease to be a virtual machine and it'll be converted over to a template.
+
+03:08.540 --> 03:10.240
+So that's what cloned a template does.
+
+03:10.240 --> 03:11.850
+It takes a virtual machine.
+
+03:11.860 --> 03:18.040
+It creates an exact copy of it then it converts that copy to a template and we can use that template
+
+03:18.280 --> 03:20.390
+to create new virtual machines.
+
+03:22.970 --> 03:27.820
+So while we're waiting on that process to complete Let's go back to the homescreen of our Vee's for
+
+03:27.860 --> 03:28.590
+web point.
+
+03:29.000 --> 03:31.000
+And there's something else I want to show you here.
+
+03:32.610 --> 03:38.510
+Right here we have our customisations specification manager.
+
+03:38.600 --> 03:41.730
+So let's think about what we're doing here.
+
+03:41.840 --> 03:52.880
+We're creating one VM and then we're going to use a template to create a bunch of copies of that VM.
+
+03:52.970 --> 03:53.220
+Right.
+
+03:53.220 --> 03:59.910
+So if we're creating a bunch of copies of the same virtual machine image we can have some problems right.
+
+03:59.910 --> 04:04.490
+We might have the same windows SDD and all of those victims.
+
+04:04.520 --> 04:09.110
+We might have the same Windows computer name on all of those VM.
+
+04:09.390 --> 04:14.520
+And so as I joined them to the domain I'm going to have a problem on my hands I won't have a duplicate
+
+04:14.520 --> 04:16.250
+computer names.
+
+04:16.440 --> 04:24.750
+So there's a bunch of operating system level stuff that can create some issues for us here.
+
+04:24.810 --> 04:31.590
+And so what we can do to make sure our templates work properly is we can create something called the
+
+04:31.590 --> 04:42.640
+customisation spec so I'm going to call this Rick Rishi custom spec then I'll hit next and what I'm
+
+04:42.640 --> 04:45.640
+going to do I'll call that name will be Rick
+
+04:49.610 --> 04:56.640
+Creasey and the organization will be trainer tests that come next.
+
+04:56.730 --> 05:04.020
+And now I'm going to enter a computer name so if I deploy a new virtual machine from template I'm going
+
+05:04.020 --> 05:05.460
+to give my new virtual machine.
+
+05:05.460 --> 05:17.100
+Rick Creasey demo from template are all limitation of character so I'll just call Rikishi demo right
+
+05:17.590 --> 05:18.770
+and I'll hit next.
+
+05:21.160 --> 05:23.750
+I will put in my Windows license key if I want to.
+
+05:23.850 --> 05:24.390
+Right.
+
+05:24.430 --> 05:29.590
+And so as I deploy victims from templates that's what the customization spec is going to do.
+
+05:29.590 --> 05:29.770
+Right.
+
+05:29.770 --> 05:36.820
+It's going to go into Windows give the windows a new computer name it's going to go into windows and
+
+05:36.820 --> 05:38.440
+establish the license key.
+
+05:38.590 --> 05:40.550
+And by the way let's go back to that computer name.
+
+05:40.810 --> 05:43.160
+We can just use the virtual machine name right.
+
+05:43.210 --> 05:49.650
+So if I'm deploying a new VM from template I have to specify a VM name at that time anyways.
+
+05:49.810 --> 05:52.690
+So why don't we just use that name for Windows.
+
+05:52.760 --> 05:58.710
+I can set the local windows administrator password to the local admin.
+
+05:58.920 --> 06:06.020
+I can configure the time zone anything that I want to run once commands that I want to on once and I
+
+06:06.020 --> 06:09.170
+can configure my network settings as well.
+
+06:09.170 --> 06:17.810
+So for my network settings do I want this to use DHC pee or do I want to manually specify an IP address.
+
+06:18.590 --> 06:24.170
+For this particular virtual machine running if I want to do that I can put in the IP the subnet mask
+
+06:24.170 --> 06:28.950
+default gateway all that good stuff my DNS servers as well.
+
+06:29.240 --> 06:37.640
+And then once my new virtual machine is completely deployed and this customisation spec has gone through
+
+06:37.640 --> 06:45.260
+and modified all of these windows settings I can also have my virtual machine automatically join my
+
+06:45.260 --> 06:45.990
+domain.
+
+06:46.040 --> 06:46.280
+Right.
+
+06:46.280 --> 06:56.880
+So if my domain for example is trayner tests dot com and use your name all color are creeky password.
+
+06:57.130 --> 06:59.880
+And this has to be a domain admin account.
+
+07:00.040 --> 07:05.380
+And now I can set it up so that when this virtual machine gets deployed it'll automatically join the
+
+07:05.380 --> 07:13.520
+domain and it'll automatically get Scrubbs and given a new Windows Exidy right.
+
+07:13.520 --> 07:14.570
+Really cool stuff.
+
+07:14.570 --> 07:22.670
+So what customisations Spack really is is it's just a bunch of stuff that's going to happen in Windows.
+
+07:22.730 --> 07:28.240
+When I deploy a new VM from template it's going to be given a computer name in Windows.
+
+07:28.280 --> 07:37.250
+It's going to be given a license key five five configured that it's going to be given a Windows administrator
+
+07:37.380 --> 07:41.750
+if I can figure that it's going to be given the network settings that I've configured it's going to
+
+07:41.750 --> 07:46.600
+join the domain that I have configured and it's going to get a new Windows as ID.
+
+07:46.640 --> 07:54.230
+So this way I can deploy as many VMS as I want from template and they'll all be unique for the settings
+
+07:54.230 --> 07:56.780
+that have to be unique in Windows.
+
+07:56.810 --> 08:01.330
+So I'm going to go ahead and finish here and now I've created my new customisation spec
+
+08:04.440 --> 08:10.410
+so the customisation spec is an absolutely essential part of templates right.
+
+08:10.500 --> 08:17.160
+If you're not using your customization spec you're probably spinning up a bunch of virtual machines
+
+08:17.220 --> 08:20.160
+with settings in windows that are duplicated.
+
+08:20.160 --> 08:28.000
+So not good so I'm going to pause my recording for a moment here and we're going to wait for this virtual
+
+08:28.000 --> 08:33.870
+machine to complete being cloned to a template and when it's done we'll pick it back up and watch you
+
+08:33.880 --> 08:37.710
+deploy a virtual machine based on that customisations spec.
+
+08:37.960 --> 08:38.650
+OK.
+
+08:38.770 --> 08:43.700
+So now my template has been created and it's completely created.
+
+08:43.840 --> 08:47.560
+And as you can see it is not visible here.
+
+08:47.560 --> 08:49.230
+And the hosts and Klosters view.
+
+08:49.420 --> 08:57.210
+But if I go to VMT and templates look at what we've got a new template called app template.
+
+08:57.210 --> 09:05.250
+So my virtual machine template has been successfully created and now I can utilize it to deploy new
+
+09:05.250 --> 09:06.460
+virtual machines.
+
+09:06.720 --> 09:08.000
+So that's what I'm going to do.
+
+09:08.060 --> 09:13.860
+I get to write it and I'm going to say new VM from this template.
+
+09:15.320 --> 09:23.390
+And so what I can now do is I'll create a new VM and my new VM is going to be called trainer tests one
+
+09:24.600 --> 09:31.660
+and remember I created a customization spec so whatever name I choose here that's also going to be the
+
+09:31.660 --> 09:32.950
+computer name in Windows
+
+09:35.690 --> 09:41.900
+I'm going to pick an ESX host to place my new virtual machine on and pick a data store to put it on
+
+09:41.930 --> 09:44.560
+as well and go with and provisioned.
+
+09:44.870 --> 09:53.320
+I'll choose next and do I want to customize the guest operating system customize the hardware and power
+
+09:53.320 --> 09:54.070
+the VMA.
+
+09:54.220 --> 10:01.680
+I'm going to choose yes to two of those three options and look at this I can choose my customization
+
+10:01.680 --> 10:04.880
+spec or remember that what I just created there.
+
+10:04.920 --> 10:11.220
+So this is going to go through windows set the local admin password join this machine to the domain
+
+10:11.650 --> 10:14.930
+create a new Windows SITD configure my network settings.
+
+10:14.940 --> 10:18.740
+All that good stuff that I'll hit next.
+
+10:18.750 --> 10:26.780
+I can customize my hardware this screen so I can give this new VM more memory or less memory or you
+
+10:26.780 --> 10:32.260
+know additional hard drives if I want to and I can give it a new hard disk.
+
+10:32.910 --> 10:39.690
+So it has multiple VM DKs I can make whatever changes I want to hear go ahead and head next.
+
+10:39.750 --> 10:40.820
+And that's really yeah.
+
+10:40.950 --> 10:41.560
+Right.
+
+10:41.580 --> 10:47.270
+So what's going to happen when I hit finish is a clone of this app template is going to be created.
+
+10:47.820 --> 10:52.580
+And when I power on the VM it's going to run through set up right.
+
+10:52.590 --> 10:57.660
+And so if you do this in real life when you power it on just be patient.
+
+10:57.720 --> 11:03.990
+You know give it a good solid 10 15 minutes walk away take a break or do something else for a little
+
+11:03.990 --> 11:09.510
+while because it's actually going to go through the process of booting up running through this prep
+
+11:09.720 --> 11:13.560
+rebooting at least once and all that's going to take a while.
+
+11:13.650 --> 11:17.920
+And if you interfere with any part of that you might run into some problems.
+
+11:17.940 --> 11:20.630
+So once I finish there that's what I'll do.
+
+11:20.660 --> 11:20.910
+Right.
+
+11:20.910 --> 11:26.320
+I'll just allow it to clone a powered on and then I'll let it run through this prep.
+
+11:26.650 --> 11:31.780
+But for the moment I'm actually going to cancel because there's one other thing I want to show you.
+
+11:32.760 --> 11:39.730
+So what I can also do here is I can always convert my template back to a virtual machine.
+
+11:39.780 --> 11:40.670
+Let's do that.
+
+11:40.800 --> 11:49.530
+Let's convert this app template back to a VM so I to pick my host and I'm going to finish and look at
+
+11:49.530 --> 11:51.410
+that it's back to being a VM.
+
+11:51.420 --> 11:53.280
+Now why would I do that.
+
+11:54.150 --> 11:56.900
+Well let's say I created my template six months ago.
+
+11:57.800 --> 12:02.870
+And now I need to run Windows Updates on it or I need to install some new application on it.
+
+12:03.020 --> 12:03.330
+Right.
+
+12:03.370 --> 12:05.120
+I can power it on now.
+
+12:05.300 --> 12:07.050
+I can do everything I need to do.
+
+12:07.220 --> 12:12.500
+I clean up everything I need to clean up update everything I need to update and when I'm done making
+
+12:12.500 --> 12:18.930
+all of those changes I can just go ahead and convert it back to a template.
+
+12:19.440 --> 12:25.590
+And so it's really easy to keep these templates updated because I can always just convert them back
+
+12:25.590 --> 12:32.140
+to a VM make whatever changes I need to and can refer them back to a template it can't power on a template.
+
+12:32.330 --> 12:34.460
+It can't make changes to a template.
+
+12:34.830 --> 12:42.170
+Right but what you can do is convert that template to a VM make whatever changes need to then and then
+
+12:42.170 --> 12:44.260
+convert it back to a template after the fact.

@@ -1,0 +1,130 @@
+WEBVTT
+
+00:01.390 --> 00:06.990
+In this video I'll demonstrate how to inflate a thin provisioned desk.
+
+00:07.050 --> 00:13.320
+So here you can see I have a virtual machine called test and if I click on the summary of this virtual
+
+00:13.320 --> 00:22.920
+machine we can see the VM hardware displayed here and this virtual machine has one hard disk a 40 gig
+
+00:22.920 --> 00:29.970
+hard disk and I can see to that that hard disk is currently in provision and it's located in my data
+
+00:29.970 --> 00:31.490
+store called big.
+
+00:31.770 --> 00:39.270
+So I'm going to go ahead and go to that data store called big and I'm going to look at the files that
+
+00:39.270 --> 00:45.490
+are present and you can see here for my virtual machine called test.
+
+00:45.500 --> 00:50.650
+There is a folder and within that virtual machines folder Here's my VMT OK.
+
+00:50.880 --> 00:54.610
+This is the actual virtual disk for this virtual machine.
+
+00:54.720 --> 01:02.070
+And it was a 40 gig virtual disk that is currently consuming 96 kilobytes of space.
+
+01:02.070 --> 01:06.120
+This is the beauty of the thin provision desk right.
+
+01:06.120 --> 01:11.200
+It consumes only the space that it actually needs.
+
+01:11.250 --> 01:11.370
+Right.
+
+01:11.490 --> 01:12.940
+And that's it.
+
+01:12.960 --> 01:19.220
+Now if I were to write quick this test at VMT K I could choose to inflate it.
+
+01:19.440 --> 01:20.150
+Right.
+
+01:20.220 --> 01:28.520
+And what the in-flight operation is going to do is it's actually going to take that VMT K and convert
+
+01:28.520 --> 01:32.280
+it to a thick provisioned V.M. decay.
+
+01:32.580 --> 01:36.400
+It's going to change it to a thick provisioned virtual disk.
+
+01:36.450 --> 01:41.270
+I'm just going to bring my recent tasks up here so we can see this happening.
+
+01:41.750 --> 01:44.840
+So it's good to change it to a thick provision desk.
+
+01:44.930 --> 01:46.740
+And this is going to take some time.
+
+01:46.790 --> 01:47.250
+Right.
+
+01:47.360 --> 01:55.810
+Because what it's basically doing is setting aside all of that disk space for that VMT OK.
+
+01:55.920 --> 01:56.160
+Right.
+
+01:56.160 --> 01:59.060
+Setting aside all of that physical disk space.
+
+01:59.160 --> 02:03.380
+So it's now going to chew up instead of you know 96 kilobytes.
+
+02:03.630 --> 02:10.530
+It's actually going to chew up something closer to 40 gigs which is the actual amount of disk space
+
+02:11.100 --> 02:13.570
+that we've granted to that virtual machine.
+
+02:14.360 --> 02:14.800
+Right.
+
+02:14.820 --> 02:18.810
+So again this operation is going to take a while you can see it's at 1 percent now.
+
+02:19.020 --> 02:24.720
+It's going to take a while to actually chew up and consume all that space and guarantee it to that VM.
+
+02:24.720 --> 02:32.490
+And as the inflate process is going you can see the results here that now we're consuming six hundred
+
+02:32.500 --> 02:38.030
+twenty five megs of space and as time goes on it will be consuming more and more.
+
+02:38.130 --> 02:42.230
+And so now we've lost the benefit of a thin provision.
+
+02:42.360 --> 02:49.110
+All right we're changing this virtual disk over to what's called the thick provisioned Eger zeroed disk.
+
+02:49.560 --> 02:53.940
+And you may be thinking at this point well why would I ever want to do that I'm wasting all of this
+
+02:53.940 --> 02:55.320
+space.
+
+02:55.320 --> 03:02.960
+Well the thing is a thick provisioned eager zero disk actually performs better for certain workloads.
+
+03:02.980 --> 03:03.210
+Right.
+
+03:03.210 --> 03:10.410
+So if you're running something like a sequel database or a Sharepoint server you may want to consider
+
+03:10.410 --> 03:17.640
+using a thick provisioned eager zero a desk because those really write intensive workloads work better
+
+03:18.510 --> 03:20.060
+on a disk that's eager Zira.

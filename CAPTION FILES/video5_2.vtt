@@ -1,0 +1,172 @@
+WEBVTT
+
+00:01.080 --> 00:04.070
+In this video I'll take a moment to explain.
+
+00:04.070 --> 00:07.290
+V.M. Where are tools and why it's so important.
+
+00:07.830 --> 00:12.600
+And some of the reasons why you want to make sure that it's running on every virtual machine that you
+
+00:12.600 --> 00:14.950
+can possibly run it on.
+
+00:14.970 --> 00:19.200
+Now before we get into some of the specific features that VMWare tools provides.
+
+00:19.200 --> 00:25.540
+Let's take a quick look at how you can install the tools on your virtual machines.
+
+00:26.280 --> 00:29.270
+So there's a couple ways that you can go about this.
+
+00:29.310 --> 00:36.060
+And there's also a couple of ways that you can ensure that VM or tools is kept consistently updated.
+
+00:36.630 --> 00:43.920
+My personal favorite way to do this is to just allow VM or tools to automatically update every time
+
+00:43.950 --> 00:45.940
+you reboot a virtual machine.
+
+00:46.290 --> 00:51.330
+So for example here we see a virtual machine called Rick creek she.
+
+00:51.960 --> 00:57.910
+If I want to I can right click this virtual machine and there's a number of options here.
+
+00:57.910 --> 01:07.250
+I'm going to go to edit settings and under edit settings what I can do is I can choose to allow VM or
+
+01:07.270 --> 01:09.950
+tools to automatically update upon reboot.
+
+01:10.390 --> 01:18.700
+The reason that I like to do this is because many V.M. were tools upgrades actually require a reboot.
+
+01:20.100 --> 01:27.720
+And so if I just check this option now I know that in the future whenever this virtual machine gets
+
+01:27.720 --> 01:33.570
+rebooted it's going to update at that time and I'm not going to have to do an extra reboot just to get
+
+01:33.570 --> 01:37.100
+VM or tools installed on this particular VM.
+
+01:38.370 --> 01:45.030
+So that's really one of the easiest ways to make sure that VM or tools is up to date on your virtual
+
+01:45.030 --> 01:51.690
+machines by allowing it to automatically upgrade every time the virtual machine is powered up and the
+
+01:51.690 --> 01:57.130
+way that VM or tools works is it actually mounts as an ISO image.
+
+01:57.150 --> 02:05.550
+So when you boot up your virtual machine it will mount an ISO image to this this virtual machine CD
+
+02:05.550 --> 02:12.590
+DVD drive and that's how the VM or tools installation will actually take place.
+
+02:14.850 --> 02:20.100
+Now why do we care if VM or tools is installed on your virtual machine.
+
+02:21.130 --> 02:23.570
+Well there's a couple really important reasons.
+
+02:23.770 --> 02:29.680
+So for this virtual machine if I go to the summary screen I have the ability to open a console to this
+
+02:29.680 --> 02:29.980
+VM.
+
+02:29.980 --> 02:32.200
+Now at the moment it's powered off.
+
+02:32.470 --> 02:38.260
+But if I want to I could open a console to this virtual machine and you can see right here via our tools
+
+02:38.260 --> 02:46.510
+is not running and has not installed my console isn't going to work as nicely as it would if I had VM
+
+02:46.510 --> 02:47.670
+or tools installed.
+
+02:47.680 --> 02:47.920
+Right.
+
+02:47.920 --> 02:51.130
+The mouse is going to be a little flaky.
+
+02:51.140 --> 02:55.980
+That's not going to work as smoothly as it would if I had VM or tools installed.
+
+02:56.050 --> 03:04.000
+That's one of the more glaring requirements for VM are tools but it's probably not one of the most important
+
+03:05.050 --> 03:09.810
+VMWare tools includes certain drivers.
+
+03:09.910 --> 03:17.060
+So for this VM for example if I go to edit settings for this VM I've chosen a certain type of virtual
+
+03:17.060 --> 03:18.350
+network interface card.
+
+03:19.920 --> 03:27.070
+I've chosen the VM x three virtual network interface card type and that requires VM Ware tools VM or
+
+03:27.090 --> 03:32.090
+tools has the drivers for the VM X that three virtual NEC bundled in.
+
+03:32.580 --> 03:36.750
+So that's one really important reason that I need VM are tools.
+
+03:36.810 --> 03:45.770
+The other really important reason is for memory VM where tools includes the balloon driver for memory
+
+03:46.230 --> 03:54.140
+and what that means is if my ESX I host that this VM is running on starts to run out of memory.
+
+03:55.290 --> 04:02.760
+It has a mechanism called ballooning that it can use to actually reclaim a memory that is no longer
+
+04:02.760 --> 04:07.390
+being used by the virtual machines running on that host.
+
+04:07.410 --> 04:15.150
+So if my host starts to run out of memory I'm going to have a really problematic situation here because
+
+04:15.150 --> 04:17.880
+I don't have more tools installed on my virtual machines.
+
+04:17.910 --> 04:22.450
+The host cannot get memory back from those via SMS.
+
+04:22.490 --> 04:28.950
+So it's definitely a performance best practice to have the more tools installed on all your VMS.
+
+04:28.970 --> 04:31.350
+And one final note.
+
+04:32.450 --> 04:41.780
+VM are tools also gives us the ability to perform a soft shut down and a soft restart of the guest operating
+
+04:41.780 --> 04:42.720
+system.
+
+04:42.720 --> 04:48.290
+Right so I can always you know reset or power off my virtual machines if I want to.
+
+04:48.590 --> 04:56.120
+But that's essentially the equivalent of pulling the power cord if I want to do a soft windows shutdown
+
+04:56.480 --> 04:59.470
+or a Windows restart.
+
+04:59.930 --> 05:05.720
+I need more tools installed on my virtual machine to be able to push those operations out from the Vee's
+
+05:05.720 --> 05:06.600
+for web client.

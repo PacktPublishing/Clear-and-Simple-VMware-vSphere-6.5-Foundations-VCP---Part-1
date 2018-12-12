@@ -1,0 +1,256 @@
+WEBVTT
+
+00:01.160 --> 00:09.140
+In this video we'll learn about V.M. Virtual SAN or VSAN product that leverages the local storage of
+
+00:09.200 --> 00:15.760
+ESX I hosts to present high performance shared storage across a cluster.
+
+00:15.760 --> 00:17.720
+Now that's a mouthful.
+
+00:17.720 --> 00:21.620
+So let's start with the very basics with Virtual SAN.
+
+00:21.650 --> 00:26.810
+We are going to allow local storage to be used as shared storage.
+
+00:27.080 --> 00:34.370
+And this is really important because for features like Wii motion or high availability or Diyar Ross
+
+00:34.670 --> 00:40.140
+we have to have shared storage required shared storage for any of those features.
+
+00:40.160 --> 00:46.280
+And so for the motion of VM from one host to another if we're going to enable H.A. across a cluster
+
+00:46.760 --> 00:53.630
+and allow virtual machines to fail over across that cluster if a single host fails or if multiple hosts
+
+00:53.630 --> 01:01.100
+fails we have to have shared storage enough or in order to enable those features and same thing with
+
+01:01.110 --> 01:07.580
+Diyar ass if we're going to enable distributed resource scheduler we have to use Wii motion for that
+
+01:07.940 --> 01:11.050
+and therefore we require shared storage.
+
+01:11.150 --> 01:17.340
+So if you're going to set up high availability or diarists you need to create a cluster.
+
+01:17.350 --> 01:23.950
+Same thing with these and it's graded on the cluster VSX by hosts and it can leverage the local storage
+
+01:24.160 --> 01:28.720
+of those ESX hosts in the form of what we call disk groups.
+
+01:28.750 --> 01:37.270
+These groups are local storage that is combined to form one large data store that's accessible to all
+
+01:37.270 --> 01:46.640
+the hosts in the cluster and that data store is going to have SSD caching capability.
+
+01:46.660 --> 01:55.440
+So I read cache and write buffer built right into it to give high performance.
+
+01:55.450 --> 01:55.780
+All right.
+
+01:55.840 --> 02:02.290
+So it started with the very basics here the sand needs to be enabled on an ESX host cluster.
+
+02:02.330 --> 02:06.660
+You can create clusters for a number of different purposes.
+
+02:06.940 --> 02:11.530
+It's essentially just a logical grouping of ESX host.
+
+02:11.740 --> 02:18.890
+So for example let's say you have these four ESX host we see here in a VM is running on Host 1.
+
+02:19.320 --> 02:27.100
+Well if we go ahead and we group those hosts available as a cluster we can enable high availability
+
+02:27.460 --> 02:32.300
+and if one of those hosts fails the VM will reboot on some other host.
+
+02:32.500 --> 02:41.770
+Or we can enable digress to have virtual machines automatically load balance across those hosts or we
+
+02:41.770 --> 02:45.360
+can enable virtual sent these in.
+
+02:45.850 --> 02:54.990
+So these are all different features that are available only on a cluster of ESX I host so the storage
+
+02:54.990 --> 03:00.220
+on our ESX I host is going to be organized into something called disk groups.
+
+03:00.270 --> 03:03.720
+That's the that's the logical unit of storage.
+
+03:03.720 --> 03:09.900
+That virtual scene is going to essentially consume and share out across the closter.
+
+03:09.930 --> 03:14.940
+So here on ESX 0 1 you can see we've got two disk groups.
+
+03:15.000 --> 03:19.840
+Each disk group in this case has six hard disk drives in one solid state drive.
+
+03:20.010 --> 03:29.340
+You know host 0 2 has one disk group 0 0 three has one disk group and you can set this up to automatically
+
+03:29.340 --> 03:29.930
+happen.
+
+03:29.950 --> 03:30.410
+All right.
+
+03:30.600 --> 03:34.810
+So it's called disk claim mode and Virtual SAN.
+
+03:35.040 --> 03:38.910
+And you can set up what's called automatic disk Kwei mode.
+
+03:38.910 --> 03:48.000
+So what that means is that as you install SSD and hard disk drives onto your ESX host they will be automatically
+
+03:48.000 --> 03:58.290
+claimed and allocated to the SAN disk groups or you can use what's called Manual claim mode and in manual
+
+03:58.340 --> 04:07.250
+claim mode you will manually create the disk groups and choose which storage devices go in which disk
+
+04:07.310 --> 04:12.190
+group is really only a few rules that you have to bear in mind.
+
+04:12.680 --> 04:21.920
+So for each disk group you have to have at least one SSD device and then you can either have a group
+
+04:21.920 --> 04:31.280
+of one or more magnetic devices like hard disk drives and those are called our capacity devices.
+
+04:31.920 --> 04:40.170
+And so the purpose of the SSD is purely to be used as a read cache and a write buffer.
+
+04:40.250 --> 04:47.000
+The purpose of the capacity devices which in this case are hard disk drives is the persistent storage
+
+04:47.000 --> 04:47.510
+of data.
+
+04:47.510 --> 04:55.490
+The long term persistent storage of data and these capacity devices we have a couple of options here.
+
+04:55.680 --> 04:56.110
+Right.
+
+04:56.150 --> 05:03.210
+In a hybrid configuration the capacity devices are going to be hard disk drives.
+
+05:03.440 --> 05:06.360
+That's our hybrid configuration right.
+
+05:06.380 --> 05:09.670
+It's part SSD part hard disk.
+
+05:09.980 --> 05:19.340
+Or we could go with an all flash configuration in which case our cached device will be SSD and all of
+
+05:19.340 --> 05:24.400
+these capacity devices will also be SSD.
+
+05:24.540 --> 05:30.520
+And I know my highlighted doesn't really make a great pain here but that says SSD.
+
+05:30.680 --> 05:40.380
+So that's the all flash configuration which obviously is going to outperform the hybrid configuration.
+
+05:40.380 --> 05:48.930
+Right so if you need extremely fast all flash performance then you should go with an all flash VCR configuration
+
+05:49.410 --> 05:56.250
+and there's features specifically that make the all Flash version a little bit more cost effective because
+
+05:56.250 --> 05:59.790
+we all know SSD storage really expensive right.
+
+05:59.820 --> 06:06.960
+The price you're going to pay per gigabyte is much higher than you would pay with traditional hard disk
+
+06:06.960 --> 06:07.660
+drives.
+
+06:08.960 --> 06:14.700
+So going with an all flash configuration can get really expensive really quickly.
+
+06:15.750 --> 06:24.530
+Now with that being said the current version of VCM supports features like RAID 6 and RAID 5 array or
+
+06:24.540 --> 06:36.890
+coding and other space reclamation techniques specifically on an all flash hand configuration.
+
+06:36.900 --> 06:38.970
+Those features are not supported on the hybrid.
+
+06:39.000 --> 06:40.710
+They're only supported on all flash.
+
+06:41.280 --> 06:47.230
+So if you're kind of thinking well which way should I go should I go all Flash should I go hybrid.
+
+06:47.250 --> 06:54.510
+Bear that in mind right that if you take advantage of some of the space saving techniques that are introduced
+
+06:54.510 --> 07:05.520
+in the current version of VSE San you can potentially get that all flash configuration to approximately
+
+07:05.760 --> 07:11.640
+somewhere near the price of your hybrid deployment because of the fact that you can reduce the amount
+
+07:11.640 --> 07:14.820
+of data that you need to store.
+
+07:14.860 --> 07:21.430
+So I know I kind of diverged off on a bit of a side topic there but back to the very basics right.
+
+07:21.430 --> 07:31.090
+So once we've created our ESX host cluster we can enable virtual San'a we can enable VSAN and at that
+
+07:31.090 --> 07:41.540
+point all of those disks in our disk group those centrally be combined to form one big data store call
+
+07:41.540 --> 07:48.160
+their vse and data store the data store will be comprised of all of the space provided by the disk groups
+
+07:48.160 --> 07:54.100
+on all of the ESX hosts and the hosts can be part of the cluster even if they don't actually contribute
+
+07:54.250 --> 08:00.040
+any storage which is kind of funny to think about but you could potentially add a fourth ESX I host
+
+08:00.040 --> 08:08.060
+with no local storage and let it just use the capacity of the vse and atest or both that being said
+
+08:08.120 --> 08:14.870
+you have to have storage on the first three hosts in the cluster and most of the time it is not really
+
+08:14.870 --> 08:21.950
+recommended to have a host with no local capacity as part of a VC and cluster.
+
+08:22.070 --> 08:26.130
+OK so the basic concepts of the San are what we've covered so far right.
+
+08:26.160 --> 08:32.350
+We know that number one we're going to leverage local storage to create a shared data store.
+
+08:32.370 --> 08:39.270
+We know that that local storage can either be 100 percent SSD or it can be a hybrid configuration where
+
+08:39.270 --> 08:42.760
+it's got an SSD read cache and write buffer.
+
+08:42.900 --> 08:48.660
+But on the back end all of the capacity devices are traditional physical hard disks.
