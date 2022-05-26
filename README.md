@@ -1,3 +1,7 @@
+## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/V13329?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
+-----
+For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
+
 # Clear-and-Simple-VMware-vSphere-6.5-Foundations-VCP---Part-1
 Code repository for Clear and Simple VMware vSphere 6.5 Foundations VCP - Part 1, Published by Packt
 # Clear and Simple VMware vSphere 6.5 Foundations VCP - Part 1
